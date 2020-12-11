@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.ProductionMapper">
+    
+    <resultMap type="Production" id="ProductionResult">
+        <result property="repoInfoId"    column="repo_info_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="suplCode"    column="supl_code"    />
+        <result property="prdtOrderNum"    column="prdt_order_num"    />
+        <result property="prdtInsidNum"    column="prdt_insid_num"    />
+        <result property="eqmtNum"    column="eqmt_num"    />
+        <result property="prdtBatchNum"    column="prdt_batch_num"    />
+        <result property="prcesName"    column="prces_name"    />
+        <result property="categCode"    column="categ_code"    />
+        <result property="typeCode"    column="type_code"    />
+        <result property="prcesCode"    column="prces_code"    />
+        <result property="prdtRouteCode"    column="prdt_route_code"    />
+        <result property="prdtShopId"    column="prdt_shop_id"    />
+        <result property="prdtShopCode"    column="prdt_shop_code"    />
+        <result property="prdtShopName"    column="prdt_shop_name"    />
+        <result property="prdtWorderNum"    column="prdt_worder_num"    />
+        <result property="pyscId"    column="pysc_id"    />
+        <result property="dataSour"    column="data_sour"    />
+        <result property="sourdataCretTime"    column="sourdata_cret_time"    />
+        <result property="planStartTime"    column="plan_start_time"    />
+        <result property="planEndTime"    column="plan_end_time"    />
+        <result property="actuStartTime"    column="actu_start_time"    />
+        <result property="actuEndTime"    column="actu_end_time"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="cstmProvince"    column="cstm_province"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectProductionVo">
+        select repo_info_id, buyer_hq_code, supl_code, prdt_order_num, prdt_insid_num, eqmt_num, prdt_batch_num, prces_name, categ_code, type_code, prces_code, prdt_route_code, prdt_shop_id, prdt_shop_code, prdt_shop_name, prdt_worder_num, pysc_id, data_sour, sourdata_cret_time, plan_start_time, plan_end_time, actu_start_time, actu_end_time, order_status, cstm_province, data_owner, data_visible, yl, yl2, yl3, yl4, yl5 from prdt_report_info
+    </sql>
+
+    <select id="selectProductionList" parameterType="Production" resultMap="ProductionResult">
+        <include refid="selectProductionVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="suplCode != null  and suplCode != ''"> and supl_code = #{suplCode}</if>
+            <if test="prdtOrderNum != null  and prdtOrderNum != ''"> and prdt_order_num = #{prdtOrderNum}</if>
+            <if test="prdtInsidNum != null  and prdtInsidNum != ''"> and prdt_insid_num = #{prdtInsidNum}</if>
+            <if test="eqmtNum != null  and eqmtNum != ''"> and eqmt_num = #{eqmtNum}</if>
+            <if test="prdtBatchNum != null  and prdtBatchNum != ''"> and prdt_batch_num = #{prdtBatchNum}</if>
+            <if test="prcesName != null  and prcesName != ''"> and prces_name like concat('%', #{prcesName}, '%')</if>
+            <if test="categCode != null  and categCode != ''"> and categ_code = #{categCode}</if>
+            <if test="typeCode != null  and typeCode != ''"> and type_code = #{typeCode}</if>
+            <if test="prcesCode != null  and prcesCode != ''"> and prces_code = #{prcesCode}</if>
+            <if test="prdtRouteCode != null  and prdtRouteCode != ''"> and prdt_route_code = #{prdtRouteCode}</if>
+            <if test="prdtShopId != null  and prdtShopId != ''"> and prdt_shop_id = #{prdtShopId}</if>
+            <if test="prdtShopCode != null  and prdtShopCode != ''"> and prdt_shop_code = #{prdtShopCode}</if>
+            <if test="prdtShopName != null  and prdtShopName != ''"> and prdt_shop_name like concat('%', #{prdtShopName}, '%')</if>
+            <if test="prdtWorderNum != null  and prdtWorderNum != ''"> and prdt_worder_num = #{prdtWorderNum}</if>
+            <if test="pyscId != null  and pyscId != ''"> and pysc_id = #{pyscId}</if>
+            <if test="dataSour != null  and dataSour != ''"> and data_sour = #{dataSour}</if>
+            <if test="sourdataCretTime != null "> and sourdata_cret_time = #{sourdataCretTime}</if>
+            <if test="planStartTime != null "> and plan_start_time = #{planStartTime}</if>
+            <if test="planEndTime != null "> and plan_end_time = #{planEndTime}</if>
+            <if test="actuStartTime != null "> and actu_start_time = #{actuStartTime}</if>
+            <if test="actuEndTime != null "> and actu_end_time = #{actuEndTime}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="cstmProvince != null  and cstmProvince != ''"> and cstm_province = #{cstmProvince}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectProductionById" parameterType="Long" resultMap="ProductionResult">
+        <include refid="selectProductionVo"/>
+        where repo_info_id = #{repoInfoId}
+    </select>
+        
+    <insert id="insertProduction" parameterType="Production" useGeneratedKeys="true" keyProperty="repoInfoId">
+        insert into prdt_report_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="suplCode != null">supl_code,</if>
+            <if test="prdtOrderNum != null">prdt_order_num,</if>
+            <if test="prdtInsidNum != null">prdt_insid_num,</if>
+            <if test="eqmtNum != null">eqmt_num,</if>
+            <if test="prdtBatchNum != null">prdt_batch_num,</if>
+            <if test="prcesName != null">prces_name,</if>
+            <if test="categCode != null">categ_code,</if>
+            <if test="typeCode != null">type_code,</if>
+            <if test="prcesCode != null">prces_code,</if>
+            <if test="prdtRouteCode != null">prdt_route_code,</if>
+            <if test="prdtShopId != null">prdt_shop_id,</if>
+            <if test="prdtShopCode != null">prdt_shop_code,</if>
+            <if test="prdtShopName != null">prdt_shop_name,</if>
+            <if test="prdtWorderNum != null">prdt_worder_num,</if>
+            <if test="pyscId != null">pysc_id,</if>
+            <if test="dataSour != null">data_sour,</if>
+            <if test="sourdataCretTime != null">sourdata_cret_time,</if>
+            <if test="planStartTime != null">plan_start_time,</if>
+            <if test="planEndTime != null">plan_end_time,</if>
+            <if test="actuStartTime != null">actu_start_time,</if>
+            <if test="actuEndTime != null">actu_end_time,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="cstmProvince != null">cstm_province,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="suplCode != null">#{suplCode},</if>
+            <if test="prdtOrderNum != null">#{prdtOrderNum},</if>
+            <if test="prdtInsidNum != null">#{prdtInsidNum},</if>
+            <if test="eqmtNum != null">#{eqmtNum},</if>
+            <if test="prdtBatchNum != null">#{prdtBatchNum},</if>
+            <if test="prcesName != null">#{prcesName},</if>
+            <if test="categCode != null">#{categCode},</if>
+            <if test="typeCode != null">#{typeCode},</if>
+            <if test="prcesCode != null">#{prcesCode},</if>
+            <if test="prdtRouteCode != null">#{prdtRouteCode},</if>
+            <if test="prdtShopId != null">#{prdtShopId},</if>
+            <if test="prdtShopCode != null">#{prdtShopCode},</if>
+            <if test="prdtShopName != null">#{prdtShopName},</if>
+            <if test="prdtWorderNum != null">#{prdtWorderNum},</if>
+            <if test="pyscId != null">#{pyscId},</if>
+            <if test="dataSour != null">#{dataSour},</if>
+            <if test="sourdataCretTime != null">#{sourdataCretTime},</if>
+            <if test="planStartTime != null">#{planStartTime},</if>
+            <if test="planEndTime != null">#{planEndTime},</if>
+            <if test="actuStartTime != null">#{actuStartTime},</if>
+            <if test="actuEndTime != null">#{actuEndTime},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="cstmProvince != null">#{cstmProvince},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProduction" parameterType="Production">
+        update prdt_report_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="suplCode != null">supl_code = #{suplCode},</if>
+            <if test="prdtOrderNum != null">prdt_order_num = #{prdtOrderNum},</if>
+            <if test="prdtInsidNum != null">prdt_insid_num = #{prdtInsidNum},</if>
+            <if test="eqmtNum != null">eqmt_num = #{eqmtNum},</if>
+            <if test="prdtBatchNum != null">prdt_batch_num = #{prdtBatchNum},</if>
+            <if test="prcesName != null">prces_name = #{prcesName},</if>
+            <if test="categCode != null">categ_code = #{categCode},</if>
+            <if test="typeCode != null">type_code = #{typeCode},</if>
+            <if test="prcesCode != null">prces_code = #{prcesCode},</if>
+            <if test="prdtRouteCode != null">prdt_route_code = #{prdtRouteCode},</if>
+            <if test="prdtShopId != null">prdt_shop_id = #{prdtShopId},</if>
+            <if test="prdtShopCode != null">prdt_shop_code = #{prdtShopCode},</if>
+            <if test="prdtShopName != null">prdt_shop_name = #{prdtShopName},</if>
+            <if test="prdtWorderNum != null">prdt_worder_num = #{prdtWorderNum},</if>
+            <if test="pyscId != null">pysc_id = #{pyscId},</if>
+            <if test="dataSour != null">data_sour = #{dataSour},</if>
+            <if test="sourdataCretTime != null">sourdata_cret_time = #{sourdataCretTime},</if>
+            <if test="planStartTime != null">plan_start_time = #{planStartTime},</if>
+            <if test="planEndTime != null">plan_end_time = #{planEndTime},</if>
+            <if test="actuStartTime != null">actu_start_time = #{actuStartTime},</if>
+            <if test="actuEndTime != null">actu_end_time = #{actuEndTime},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="cstmProvince != null">cstm_province = #{cstmProvince},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where repo_info_id = #{repoInfoId}
+    </update>
+
+    <delete id="deleteProductionById" parameterType="Long">
+        delete from prdt_report_info where repo_info_id = #{repoInfoId}
+    </delete>
+
+    <delete id="deleteProductionByIds" parameterType="String">
+        delete from prdt_report_info where repo_info_id in 
+        <foreach item="repoInfoId" collection="array" open="(" separator="," close=")">
+            #{repoInfoId}
+        </foreach>
+    </delete>
+
+</mapper>

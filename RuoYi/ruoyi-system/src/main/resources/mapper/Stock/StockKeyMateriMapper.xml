@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stock.mapper.StockKeyMateriMapper">
+    
+    <resultMap type="StockKeyMateri" id="StockKeyMateriResult">
+        <result property="keyMateriStockId"    column="key_materi_stock_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="materiName"    column="materi_name"    />
+        <result property="materiCode"    column="materi_code"    />
+        <result property="materiStockNum"    column="materi_stock_num"    />
+        <result property="materiUnit"    column="materi_unit"    />
+        <result property="materiDesc"    column="materi_desc"    />
+        <result property="materiVendor"    column="materi_vendor"    />
+        <result property="materiMaker"    column="materi_maker"    />
+        <result property="buyTime"    column="buy_time"    />
+        <result property="buyNum"    column="buy_num"    />
+        <result property="arrivalTime"    column="arrival_time"    />
+        <result property="gwNeedNum"    column="gw_need_num"    />
+        <result property="category"    column="category"    />
+        <result property="type"    column="type"    />
+        <result property="dataSour"    column="data_sour"    />
+        <result property="datasourCretTime"    column="datasour_cret_time"    />
+        <result property="note"    column="note"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectStockKeyMateriVo">
+        select key_materi_stock_id, buyer_hq_code, vendor_code, vendor_name, materi_name, materi_code, materi_stock_num, materi_unit, materi_desc, materi_vendor, materi_maker, buy_time, buy_num, arrival_time, gw_need_num, category, type, data_sour, datasour_cret_time, note, data_owner, data_visible, yl, yl2, yl3, yl4, yl5 from stock_key_materi
+    </sql>
+
+    <select id="selectStockKeyMateriList" parameterType="StockKeyMateri" resultMap="StockKeyMateriResult">
+        <include refid="selectStockKeyMateriVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="materiName != null  and materiName != ''"> and materi_name like concat('%', #{materiName}, '%')</if>
+            <if test="materiCode != null  and materiCode != ''"> and materi_code = #{materiCode}</if>
+            <if test="materiStockNum != null "> and materi_stock_num = #{materiStockNum}</if>
+            <if test="materiUnit != null  and materiUnit != ''"> and materi_unit = #{materiUnit}</if>
+            <if test="materiDesc != null  and materiDesc != ''"> and materi_desc = #{materiDesc}</if>
+            <if test="materiVendor != null  and materiVendor != ''"> and materi_vendor = #{materiVendor}</if>
+            <if test="materiMaker != null  and materiMaker != ''"> and materi_maker = #{materiMaker}</if>
+            <if test="buyTime != null "> and buy_time = #{buyTime}</if>
+            <if test="buyNum != null "> and buy_num = #{buyNum}</if>
+            <if test="arrivalTime != null "> and arrival_time = #{arrivalTime}</if>
+            <if test="gwNeedNum != null "> and gw_need_num = #{gwNeedNum}</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="dataSour != null  and dataSour != ''"> and data_sour = #{dataSour}</if>
+            <if test="datasourCretTime != null "> and datasour_cret_time = #{datasourCretTime}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectStockKeyMateriById" parameterType="Long" resultMap="StockKeyMateriResult">
+        <include refid="selectStockKeyMateriVo"/>
+        where key_materi_stock_id = #{keyMateriStockId}
+    </select>
+        
+    <insert id="insertStockKeyMateri" parameterType="StockKeyMateri" useGeneratedKeys="true" keyProperty="keyMateriStockId">
+        insert into stock_key_materi
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="vendorCode != null">vendor_code,</if>
+            <if test="vendorName != null">vendor_name,</if>
+            <if test="materiName != null">materi_name,</if>
+            <if test="materiCode != null">materi_code,</if>
+            <if test="materiStockNum != null">materi_stock_num,</if>
+            <if test="materiUnit != null">materi_unit,</if>
+            <if test="materiDesc != null">materi_desc,</if>
+            <if test="materiVendor != null">materi_vendor,</if>
+            <if test="materiMaker != null">materi_maker,</if>
+            <if test="buyTime != null">buy_time,</if>
+            <if test="buyNum != null">buy_num,</if>
+            <if test="arrivalTime != null">arrival_time,</if>
+            <if test="gwNeedNum != null">gw_need_num,</if>
+            <if test="category != null">category,</if>
+            <if test="type != null">type,</if>
+            <if test="dataSour != null">data_sour,</if>
+            <if test="datasourCretTime != null">datasour_cret_time,</if>
+            <if test="note != null">note,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="vendorCode != null">#{vendorCode},</if>
+            <if test="vendorName != null">#{vendorName},</if>
+            <if test="materiName != null">#{materiName},</if>
+            <if test="materiCode != null">#{materiCode},</if>
+            <if test="materiStockNum != null">#{materiStockNum},</if>
+            <if test="materiUnit != null">#{materiUnit},</if>
+            <if test="materiDesc != null">#{materiDesc},</if>
+            <if test="materiVendor != null">#{materiVendor},</if>
+            <if test="materiMaker != null">#{materiMaker},</if>
+            <if test="buyTime != null">#{buyTime},</if>
+            <if test="buyNum != null">#{buyNum},</if>
+            <if test="arrivalTime != null">#{arrivalTime},</if>
+            <if test="gwNeedNum != null">#{gwNeedNum},</if>
+            <if test="category != null">#{category},</if>
+            <if test="type != null">#{type},</if>
+            <if test="dataSour != null">#{dataSour},</if>
+            <if test="datasourCretTime != null">#{datasourCretTime},</if>
+            <if test="note != null">#{note},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockKeyMateri" parameterType="StockKeyMateri">
+        update stock_key_materi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="vendorCode != null">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null">vendor_name = #{vendorName},</if>
+            <if test="materiName != null">materi_name = #{materiName},</if>
+            <if test="materiCode != null">materi_code = #{materiCode},</if>
+            <if test="materiStockNum != null">materi_stock_num = #{materiStockNum},</if>
+            <if test="materiUnit != null">materi_unit = #{materiUnit},</if>
+            <if test="materiDesc != null">materi_desc = #{materiDesc},</if>
+            <if test="materiVendor != null">materi_vendor = #{materiVendor},</if>
+            <if test="materiMaker != null">materi_maker = #{materiMaker},</if>
+            <if test="buyTime != null">buy_time = #{buyTime},</if>
+            <if test="buyNum != null">buy_num = #{buyNum},</if>
+            <if test="arrivalTime != null">arrival_time = #{arrivalTime},</if>
+            <if test="gwNeedNum != null">gw_need_num = #{gwNeedNum},</if>
+            <if test="category != null">category = #{category},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="dataSour != null">data_sour = #{dataSour},</if>
+            <if test="datasourCretTime != null">datasour_cret_time = #{datasourCretTime},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where key_materi_stock_id = #{keyMateriStockId}
+    </update>
+
+    <delete id="deleteStockKeyMateriById" parameterType="Long">
+        delete from stock_key_materi where key_materi_stock_id = #{keyMateriStockId}
+    </delete>
+
+    <delete id="deleteStockKeyMateriByIds" parameterType="String">
+        delete from stock_key_materi where key_materi_stock_id in 
+        <foreach item="keyMateriStockId" collection="array" open="(" separator="," close=")">
+            #{keyMateriStockId}
+        </foreach>
+    </delete>
+
+</mapper>

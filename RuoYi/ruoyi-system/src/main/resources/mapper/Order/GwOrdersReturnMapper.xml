@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.order.mapper.GwOrdersReturnMapper">
+    
+    <resultMap type="GwOrdersReturn" id="GwOrdersReturnResult">
+        <result property="nnReturnId"    column="nn_return_id"    />
+        <result property="purchaseOrderCode"    column="purchase_order_code"    />
+        <result property="purchaseOrderItemNum"    column="purchase_order_item_num"    />
+        <result property="purchaseOrderItemId"    column="purchase_order_item_id"    />
+        <result property="contractNum"    column="contract_num"    />
+        <result property="contractName"    column="contract_name"    />
+        <result property="purchaserCompanyName"    column="purchaser_company_name"    />
+        <result property="purchaserCompanyCode"    column="purchaser_company_code"    />
+        <result property="purchaserMaterialCode"    column="purchaser_material_code"    />
+        <result property="purchaserMaterialDescrip"    column="purchaser_material_descrip"    />
+        <result property="purchaseNum"    column="purchase_num"    />
+        <result property="contractNumNn"    column="contract_num_nn"    />
+        <result property="technicalFlowNum"    column="technical_flow_num"    />
+        <result property="contractSignedDate"    column="contract_signed_date"    />
+        <result property="contractType"    column="contract_type"    />
+        <result property="itemNum"    column="item_num"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="materialCode"    column="material_code"    />
+        <result property="purchaseTecCuringId"    column="purchase_tec_curing_id"    />
+        <result property="contractPackageNum"    column="contract_package_num"    />
+        <result property="tenderNum"    column="tender_num"    />
+        <result property="curingidDescrip"    column="curingid_descrip"    />
+        <result property="materialBigCode"    column="material_big_code"    />
+        <result property="materialMidCode"    column="material_mid_code"    />
+        <result property="materialSmallCode"    column="material_small_code"    />
+        <result property="materialBigName"    column="material_big_name"    />
+        <result property="materialMidName"    column="material_mid_name"    />
+        <result property="materialSmallName"    column="material_small_name"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="numBarsPerPage"    column="num_bars_per_page"    />
+        <result property="curPageNum"    column="cur_page_num"    />
+        <result property="pageNum"    column="page_num"    />
+        <result property="allRecordNum"    column="all_record_num"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectGwOrdersReturnVo">
+        select nn_return_id, purchase_order_code, purchase_order_item_num, purchase_order_item_id, contract_num, contract_name, purchaser_company_name, purchaser_company_code, purchaser_material_code, purchaser_material_descrip, purchase_num, contract_num_nn, technical_flow_num, contract_signed_date, contract_type, item_num, project_name, material_code, purchase_tec_curing_id, contract_package_num, tender_num, curingid_descrip, material_big_code, material_mid_code, material_small_code, material_big_name, material_mid_name, material_small_name, update_time, num_bars_per_page, cur_page_num, page_num, all_record_num, yl, yl2, yl3, yl4, yl5 from gw_orders_return
+    </sql>
+
+    <select id="selectGwOrdersReturnList" parameterType="GwOrdersReturn" resultMap="GwOrdersReturnResult">
+        <include refid="selectGwOrdersReturnVo"/>
+        <where>  
+            <if test="purchaseOrderCode != null  and purchaseOrderCode != ''"> and purchase_order_code = #{purchaseOrderCode}</if>
+            <if test="purchaseOrderItemNum != null  and purchaseOrderItemNum != ''"> and purchase_order_item_num = #{purchaseOrderItemNum}</if>
+            <if test="purchaseOrderItemId != null  and purchaseOrderItemId != ''"> and purchase_order_item_id = #{purchaseOrderItemId}</if>
+            <if test="contractNum != null  and contractNum != ''"> and contract_num = #{contractNum}</if>
+            <if test="contractName != null  and contractName != ''"> and contract_name like concat('%', #{contractName}, '%')</if>
+            <if test="purchaserCompanyName != null  and purchaserCompanyName != ''"> and purchaser_company_name like concat('%', #{purchaserCompanyName}, '%')</if>
+            <if test="purchaserCompanyCode != null  and purchaserCompanyCode != ''"> and purchaser_company_code = #{purchaserCompanyCode}</if>
+            <if test="purchaserMaterialCode != null  and purchaserMaterialCode != ''"> and purchaser_material_code = #{purchaserMaterialCode}</if>
+            <if test="purchaserMaterialDescrip != null  and purchaserMaterialDescrip != ''"> and purchaser_material_descrip = #{purchaserMaterialDescrip}</if>
+            <if test="purchaseNum != null "> and purchase_num = #{purchaseNum}</if>
+            <if test="contractNumNn != null  and contractNumNn != ''"> and contract_num_nn = #{contractNumNn}</if>
+            <if test="technicalFlowNum != null  and technicalFlowNum != ''"> and technical_flow_num = #{technicalFlowNum}</if>
+            <if test="contractSignedDate != null "> and contract_signed_date = #{contractSignedDate}</if>
+            <if test="contractType != null  and contractType != ''"> and contract_type = #{contractType}</if>
+            <if test="itemNum != null  and itemNum != ''"> and item_num = #{itemNum}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="materialCode != null  and materialCode != ''"> and material_code = #{materialCode}</if>
+            <if test="purchaseTecCuringId != null  and purchaseTecCuringId != ''"> and purchase_tec_curing_id = #{purchaseTecCuringId}</if>
+            <if test="contractPackageNum != null  and contractPackageNum != ''"> and contract_package_num = #{contractPackageNum}</if>
+            <if test="tenderNum != null  and tenderNum != ''"> and tender_num = #{tenderNum}</if>
+            <if test="curingidDescrip != null  and curingidDescrip != ''"> and curingid_descrip = #{curingidDescrip}</if>
+            <if test="materialBigCode != null  and materialBigCode != ''"> and material_big_code = #{materialBigCode}</if>
+            <if test="materialMidCode != null  and materialMidCode != ''"> and material_mid_code = #{materialMidCode}</if>
+            <if test="materialSmallCode != null  and materialSmallCode != ''"> and material_small_code = #{materialSmallCode}</if>
+            <if test="materialBigName != null  and materialBigName != ''"> and material_big_name like concat('%', #{materialBigName}, '%')</if>
+            <if test="materialMidName != null  and materialMidName != ''"> and material_mid_name like concat('%', #{materialMidName}, '%')</if>
+            <if test="materialSmallName != null  and materialSmallName != ''"> and material_small_name like concat('%', #{materialSmallName}, '%')</if>
+            <if test="numBarsPerPage != null "> and num_bars_per_page = #{numBarsPerPage}</if>
+            <if test="curPageNum != null "> and cur_page_num = #{curPageNum}</if>
+            <if test="pageNum != null "> and page_num = #{pageNum}</if>
+            <if test="allRecordNum != null "> and all_record_num = #{allRecordNum}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectGwOrdersReturnById" parameterType="Long" resultMap="GwOrdersReturnResult">
+        <include refid="selectGwOrdersReturnVo"/>
+        where nn_return_id = #{nnReturnId}
+    </select>
+        
+    <insert id="insertGwOrdersReturn" parameterType="GwOrdersReturn" useGeneratedKeys="true" keyProperty="nnReturnId">
+        insert into gw_orders_return
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="purchaseOrderCode != null">purchase_order_code,</if>
+            <if test="purchaseOrderItemNum != null">purchase_order_item_num,</if>
+            <if test="purchaseOrderItemId != null">purchase_order_item_id,</if>
+            <if test="contractNum != null">contract_num,</if>
+            <if test="contractName != null">contract_name,</if>
+            <if test="purchaserCompanyName != null">purchaser_company_name,</if>
+            <if test="purchaserCompanyCode != null">purchaser_company_code,</if>
+            <if test="purchaserMaterialCode != null">purchaser_material_code,</if>
+            <if test="purchaserMaterialDescrip != null">purchaser_material_descrip,</if>
+            <if test="purchaseNum != null">purchase_num,</if>
+            <if test="contractNumNn != null">contract_num_nn,</if>
+            <if test="technicalFlowNum != null">technical_flow_num,</if>
+            <if test="contractSignedDate != null">contract_signed_date,</if>
+            <if test="contractType != null">contract_type,</if>
+            <if test="itemNum != null">item_num,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="materialCode != null">material_code,</if>
+            <if test="purchaseTecCuringId != null">purchase_tec_curing_id,</if>
+            <if test="contractPackageNum != null">contract_package_num,</if>
+            <if test="tenderNum != null">tender_num,</if>
+            <if test="curingidDescrip != null">curingid_descrip,</if>
+            <if test="materialBigCode != null">material_big_code,</if>
+            <if test="materialMidCode != null">material_mid_code,</if>
+            <if test="materialSmallCode != null">material_small_code,</if>
+            <if test="materialBigName != null">material_big_name,</if>
+            <if test="materialMidName != null">material_mid_name,</if>
+            <if test="materialSmallName != null">material_small_name,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="numBarsPerPage != null">num_bars_per_page,</if>
+            <if test="curPageNum != null">cur_page_num,</if>
+            <if test="pageNum != null">page_num,</if>
+            <if test="allRecordNum != null">all_record_num,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="purchaseOrderCode != null">#{purchaseOrderCode},</if>
+            <if test="purchaseOrderItemNum != null">#{purchaseOrderItemNum},</if>
+            <if test="purchaseOrderItemId != null">#{purchaseOrderItemId},</if>
+            <if test="contractNum != null">#{contractNum},</if>
+            <if test="contractName != null">#{contractName},</if>
+            <if test="purchaserCompanyName != null">#{purchaserCompanyName},</if>
+            <if test="purchaserCompanyCode != null">#{purchaserCompanyCode},</if>
+            <if test="purchaserMaterialCode != null">#{purchaserMaterialCode},</if>
+            <if test="purchaserMaterialDescrip != null">#{purchaserMaterialDescrip},</if>
+            <if test="purchaseNum != null">#{purchaseNum},</if>
+            <if test="contractNumNn != null">#{contractNumNn},</if>
+            <if test="technicalFlowNum != null">#{technicalFlowNum},</if>
+            <if test="contractSignedDate != null">#{contractSignedDate},</if>
+            <if test="contractType != null">#{contractType},</if>
+            <if test="itemNum != null">#{itemNum},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="materialCode != null">#{materialCode},</if>
+            <if test="purchaseTecCuringId != null">#{purchaseTecCuringId},</if>
+            <if test="contractPackageNum != null">#{contractPackageNum},</if>
+            <if test="tenderNum != null">#{tenderNum},</if>
+            <if test="curingidDescrip != null">#{curingidDescrip},</if>
+            <if test="materialBigCode != null">#{materialBigCode},</if>
+            <if test="materialMidCode != null">#{materialMidCode},</if>
+            <if test="materialSmallCode != null">#{materialSmallCode},</if>
+            <if test="materialBigName != null">#{materialBigName},</if>
+            <if test="materialMidName != null">#{materialMidName},</if>
+            <if test="materialSmallName != null">#{materialSmallName},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="numBarsPerPage != null">#{numBarsPerPage},</if>
+            <if test="curPageNum != null">#{curPageNum},</if>
+            <if test="pageNum != null">#{pageNum},</if>
+            <if test="allRecordNum != null">#{allRecordNum},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGwOrdersReturn" parameterType="GwOrdersReturn">
+        update gw_orders_return
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="purchaseOrderCode != null">purchase_order_code = #{purchaseOrderCode},</if>
+            <if test="purchaseOrderItemNum != null">purchase_order_item_num = #{purchaseOrderItemNum},</if>
+            <if test="purchaseOrderItemId != null">purchase_order_item_id = #{purchaseOrderItemId},</if>
+            <if test="contractNum != null">contract_num = #{contractNum},</if>
+            <if test="contractName != null">contract_name = #{contractName},</if>
+            <if test="purchaserCompanyName != null">purchaser_company_name = #{purchaserCompanyName},</if>
+            <if test="purchaserCompanyCode != null">purchaser_company_code = #{purchaserCompanyCode},</if>
+            <if test="purchaserMaterialCode != null">purchaser_material_code = #{purchaserMaterialCode},</if>
+            <if test="purchaserMaterialDescrip != null">purchaser_material_descrip = #{purchaserMaterialDescrip},</if>
+            <if test="purchaseNum != null">purchase_num = #{purchaseNum},</if>
+            <if test="contractNumNn != null">contract_num_nn = #{contractNumNn},</if>
+            <if test="technicalFlowNum != null">technical_flow_num = #{technicalFlowNum},</if>
+            <if test="contractSignedDate != null">contract_signed_date = #{contractSignedDate},</if>
+            <if test="contractType != null">contract_type = #{contractType},</if>
+            <if test="itemNum != null">item_num = #{itemNum},</if>
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="materialCode != null">material_code = #{materialCode},</if>
+            <if test="purchaseTecCuringId != null">purchase_tec_curing_id = #{purchaseTecCuringId},</if>
+            <if test="contractPackageNum != null">contract_package_num = #{contractPackageNum},</if>
+            <if test="tenderNum != null">tender_num = #{tenderNum},</if>
+            <if test="curingidDescrip != null">curingid_descrip = #{curingidDescrip},</if>
+            <if test="materialBigCode != null">material_big_code = #{materialBigCode},</if>
+            <if test="materialMidCode != null">material_mid_code = #{materialMidCode},</if>
+            <if test="materialSmallCode != null">material_small_code = #{materialSmallCode},</if>
+            <if test="materialBigName != null">material_big_name = #{materialBigName},</if>
+            <if test="materialMidName != null">material_mid_name = #{materialMidName},</if>
+            <if test="materialSmallName != null">material_small_name = #{materialSmallName},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="numBarsPerPage != null">num_bars_per_page = #{numBarsPerPage},</if>
+            <if test="curPageNum != null">cur_page_num = #{curPageNum},</if>
+            <if test="pageNum != null">page_num = #{pageNum},</if>
+            <if test="allRecordNum != null">all_record_num = #{allRecordNum},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where nn_return_id = #{nnReturnId}
+    </update>
+
+    <delete id="deleteGwOrdersReturnById" parameterType="Long">
+        delete from gw_orders_return where nn_return_id = #{nnReturnId}
+    </delete>
+
+    <delete id="deleteGwOrdersReturnByIds" parameterType="String">
+        delete from gw_orders_return where nn_return_id in 
+        <foreach item="nnReturnId" collection="array" open="(" separator="," close=")">
+            #{nnReturnId}
+        </foreach>
+    </delete>
+
+</mapper>

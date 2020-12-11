@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stock.mapper.StockSparePartsMapper">
+    
+    <resultMap type="StockSpareParts" id="StockSparePartsResult">
+        <result property="spareStockId"    column="spare_stock_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="spareNum"    column="spare_num"    />
+        <result property="spareDesc"    column="spare_desc"    />
+        <result property="spareStockNum"    column="spare_stock_num"    />
+        <result property="units"    column="units"    />
+        <result property="dataSour"    column="data_sour"    />
+        <result property="dsourCretTime"    column="dsour_cret_time"    />
+        <result property="note"    column="note"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectStockSparePartsVo">
+        select spare_stock_id, buyer_hq_code, vendor_code, vendor_name, spare_num, spare_desc, spare_stock_num, units, data_sour, dsour_cret_time, note, data_owner, data_visible, yl, yl2, yl3, yl4, yl5 from stock_spare_parts
+    </sql>
+
+    <select id="selectStockSparePartsList" parameterType="StockSpareParts" resultMap="StockSparePartsResult">
+        <include refid="selectStockSparePartsVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="spareNum != null "> and spare_num = #{spareNum}</if>
+            <if test="spareDesc != null  and spareDesc != ''"> and spare_desc = #{spareDesc}</if>
+            <if test="spareStockNum != null "> and spare_stock_num = #{spareStockNum}</if>
+            <if test="units != null  and units != ''"> and units = #{units}</if>
+            <if test="dataSour != null  and dataSour != ''"> and data_sour = #{dataSour}</if>
+            <if test="dsourCretTime != null "> and dsour_cret_time = #{dsourCretTime}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectStockSparePartsById" parameterType="Long" resultMap="StockSparePartsResult">
+        <include refid="selectStockSparePartsVo"/>
+        where spare_stock_id = #{spareStockId}
+    </select>
+        
+    <insert id="insertStockSpareParts" parameterType="StockSpareParts" useGeneratedKeys="true" keyProperty="spareStockId">
+        insert into stock_spare_parts
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code,</if>
+            <if test="vendorName != null">vendor_name,</if>
+            <if test="spareNum != null">spare_num,</if>
+            <if test="spareDesc != null">spare_desc,</if>
+            <if test="spareStockNum != null">spare_stock_num,</if>
+            <if test="units != null">units,</if>
+            <if test="dataSour != null">data_sour,</if>
+            <if test="dsourCretTime != null">dsour_cret_time,</if>
+            <if test="note != null">note,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="vendorCode != null and vendorCode != ''">#{vendorCode},</if>
+            <if test="vendorName != null">#{vendorName},</if>
+            <if test="spareNum != null">#{spareNum},</if>
+            <if test="spareDesc != null">#{spareDesc},</if>
+            <if test="spareStockNum != null">#{spareStockNum},</if>
+            <if test="units != null">#{units},</if>
+            <if test="dataSour != null">#{dataSour},</if>
+            <if test="dsourCretTime != null">#{dsourCretTime},</if>
+            <if test="note != null">#{note},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockSpareParts" parameterType="StockSpareParts">
+        update stock_spare_parts
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null">vendor_name = #{vendorName},</if>
+            <if test="spareNum != null">spare_num = #{spareNum},</if>
+            <if test="spareDesc != null">spare_desc = #{spareDesc},</if>
+            <if test="spareStockNum != null">spare_stock_num = #{spareStockNum},</if>
+            <if test="units != null">units = #{units},</if>
+            <if test="dataSour != null">data_sour = #{dataSour},</if>
+            <if test="dsourCretTime != null">dsour_cret_time = #{dsourCretTime},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where spare_stock_id = #{spareStockId}
+    </update>
+
+    <delete id="deleteStockSparePartsById" parameterType="Long">
+        delete from stock_spare_parts where spare_stock_id = #{spareStockId}
+    </delete>
+
+    <delete id="deleteStockSparePartsByIds" parameterType="String">
+        delete from stock_spare_parts where spare_stock_id in 
+        <foreach item="spareStockId" collection="array" open="(" separator="," close=")">
+            #{spareStockId}
+        </foreach>
+    </delete>
+
+</mapper>

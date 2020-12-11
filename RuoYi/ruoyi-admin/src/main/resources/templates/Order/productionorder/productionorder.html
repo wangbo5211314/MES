@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('生产订单列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采购方总部编码：</label>
+                                <input type="text" name="buyerHqCode"/>
+                            </li>
+                            <li>
+                                <label>订单类型：</label>
+                                <select name="orderType" th:with="type=${@dict.getType('production_order_type')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>供应商编码：</label>
+                                <input type="text" name="vendorCode"/>
+                            </li>
+                            <li>
+                                <label>供应商名称：</label>
+                                <input type="text" name="vendorName"/>
+                            </li>
+                            <li>
+                                <label>生产订单号：</label>
+                                <input type="text" name="productionOrderNum"/>
+                            </li>
+                            <li>
+                                <label>品类编码：</label>
+                                <input type="text" name="categoryCode"/>
+                            </li>
+                            <li>
+                                <label>种类编码：</label>
+                                <input type="text" name="kindCode"/>
+                            </li>
+                            <li>
+                                <label>排产计划编码：</label>
+                                <input type="text" name="schedulingPlanCode"/>
+                            </li>
+                            <li>
+                                <label>采购订单行项目id：</label>
+                                <input type="text" name="purchaseOrderItemId"/>
+                            </li>
+                            <li>
+                                <label>数据关联类型：</label>
+                                <input type="text" name="dataAssociationType"/>
+                            </li>
+                            <li>
+                                <label>销售订单行项目号：</label>
+                                <input type="text" name="saleOrderItemNum"/>
+                            </li>
+                            <li>
+                                <label>厂家物料编码：</label>
+                                <input type="text" name="factoryMaterialCode"/>
+                            </li>
+                            <li>
+                                <label>厂家物料名称国网确认：</label>
+                                <input type="text" name="factoryMaterialName"/>
+                            </li>
+                            <li>
+                                <label>厂家物资单位：</label>
+                                <input type="text" name="factoryMaterialUnit"/>
+                            </li>
+                            <li>
+                                <label>厂家物料描述：</label>
+                                <input type="text" name="factoryMaterialDescription"/>
+                            </li>
+                            <li>
+                                <label>生产数量：</label>
+                                <input type="text" name="producedNum"/>
+                            </li>
+                            <li>
+                                <label>计量单位：</label>
+                                <input type="text" name="meteringUnit"/>
+                            </li>
+                            <li>
+                                <label>物资id分组：</label>
+                                <input type="text" name="materialidGroup"/>
+                            </li>
+                            <li>
+                                <label>物资id类型：</label>
+                                <input type="text" name="materialidType"/>
+                            </li>
+                            <li>
+                                <label>产品型号：</label>
+                                <input type="text" name="productType"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划开始日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanStartDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanStartDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划完成日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanFinishDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanFinishDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际开始日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActualStartDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActualStartDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际完成日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActualFinishDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActualFinishDate]"/>
+                            </li>
+                            <li>
+                                <label>生产工厂名称：</label>
+                                <input type="text" name="produceFactoryName"/>
+                            </li>
+                            <li>
+                                <label>生产车间名称：</label>
+                                <input type="text" name="produceShopName"/>
+                            </li>
+                            <li>
+                                <label>生产订单状态：</label>
+                                <select name="productionOrderStatus" th:with="type=${@dict.getType('production_order_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>生产中心：</label>
+                                <input type="text" name="productionCenter"/>
+                            </li>
+                            <li>
+                                <label>数据来源：</label>
+                                <select name="dataSource" th:with="type=${@dict.getType('productionorder_date_source')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li class="select-time">
+                                <label>来源数据创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDatasourceCreateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDatasourceCreateTime]"/>
+                            </li>
+                            <li>
+                                <label>数据拥有方：</label>
+                                <input type="text" name="dataOwner"/>
+                            </li>
+                            <li>
+                                <label>数据可见方：</label>
+                                <input type="text" name="dataVisible"/>
+                            </li>
+                           <!-- <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="Order:productionorder:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="Order:productionorder:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="Order:productionorder:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="Order:productionorder:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('Order:productionorder:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('Order:productionorder:remove')}]];
+        var orderTypeDatas = [[${@dict.getType('production_order_type')}]];
+        var productionOrderStatusDatas = [[${@dict.getType('production_order_status')}]];
+        var dataSourceDatas = [[${@dict.getType('productionorder_date_source')}]];
+        var prefix = ctx + "Order/productionorder";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "生产订单",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'productionOrderId',
+                    title: '生产订单ID',
+                    visible: false
+                },
+                {
+                    field: 'buyerHqCode',
+                    title: '采购方总部编码'
+                },
+                {
+                    field: 'orderType',
+                    title: '订单类型',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(orderTypeDatas, value);
+                    }
+                },
+                {
+                    field: 'vendorCode',
+                    title: '供应商编码'
+                },
+                {
+                    field: 'vendorName',
+                    title: '供应商名称'
+                },
+                {
+                    field: 'productionOrderNum',
+                    title: '生产订单号'
+                },
+                {
+                    field: 'categoryCode',
+                    title: '品类编码'
+                },
+                {
+                    field: 'kindCode',
+                    title: '种类编码'
+                },
+                {
+                    field: 'schedulingPlanCode',
+                    title: '排产计划编码'
+                },
+                {
+                    field: 'purchaseOrderItemId',
+                    title: '采购订单行项目id'
+                },
+                {
+                    field: 'dataAssociationType',
+                    title: '数据关联类型'
+                },
+                {
+                    field: 'saleOrderItemNum',
+                    title: '销售订单行项目号'
+                },
+                {
+                    field: 'factoryMaterialCode',
+                    title: '厂家物料编码'
+                },
+                {
+                    field: 'factoryMaterialName',
+                    title: '厂家物料名称国网确认'
+                },
+                {
+                    field: 'factoryMaterialUnit',
+                    title: '厂家物资单位'
+                },
+                {
+                    field: 'factoryMaterialDescription',
+                    title: '厂家物料描述'
+                },
+                {
+                    field: 'producedNum',
+                    title: '生产数量'
+                },
+                {
+                    field: 'meteringUnit',
+                    title: '计量单位'
+                },
+                {
+                    field: 'materialidGroup',
+                    title: '物资id分组'
+                },
+                {
+                    field: 'materialidType',
+                    title: '物资id类型'
+                },
+                {
+                    field: 'productType',
+                    title: '产品型号'
+                },
+                {
+                    field: 'planStartDate',
+                    title: '计划开始日期'
+                },
+                {
+                    field: 'planFinishDate',
+                    title: '计划完成日期'
+                },
+                {
+                    field: 'actualStartDate',
+                    title: '实际开始日期'
+                },
+                {
+                    field: 'actualFinishDate',
+                    title: '实际完成日期'
+                },
+                {
+                    field: 'produceFactoryName',
+                    title: '生产工厂名称'
+                },
+                {
+                    field: 'produceShopName',
+                    title: '生产车间名称'
+                },
+                {
+                    field: 'productionOrderStatus',
+                    title: '生产订单状态',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(productionOrderStatusDatas, value);
+                    }
+                },
+                {
+                    field: 'productionCenter',
+                    title: '生产中心'
+                },
+                {
+                    field: 'dataSource',
+                    title: '数据来源',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(dataSourceDatas, value);
+                    }
+                },
+                {
+                    field: 'datasourceCreateTime',
+                    title: '来源数据创建时间'
+                },
+                {
+                    field: 'dataOwner',
+                    title: '数据拥有方'
+                },
+                {
+                    field: 'dataVisible',
+                    title: '数据可见方'
+                },
+               /* {
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.productionOrderId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.productionOrderId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

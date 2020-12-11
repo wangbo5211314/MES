@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('电池列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采集规范版本号：</label>
+                                <input type="text" name="cletNormVers"/>
+                            </li>
+                            <li>
+                                <label>生产订单编号：</label>
+                                <input type="text" name="prdtOrderNum"/>
+                            </li>
+                            <li>
+                                <label>工单编号：</label>
+                                <input type="text" name="listNum"/>
+                            </li>
+                            <li>
+                                <label>检验数据编号：</label>
+                                <input type="text" name="testDataNum"/>
+                            </li>
+                            <li class="select-time">
+                                <label>检验时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTestTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTestTime]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>创建时间/抓取时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCretTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCretTime]"/>
+                            </li>
+                            <li>
+                                <label>原材料制造商：</label>
+                                <input type="text" name="mateMaker"/>
+                            </li>
+                            <li>
+                                <label>规格型号：</label>
+                                <input type="text" name="specsType"/>
+                            </li>
+                            <li>
+                                <label>下限值：</label>
+                                <input type="text" name="lowLimit"/>
+                            </li>
+                            <li>
+                                <label>上限值：</label>
+                                <input type="text" name="upLimit"/>
+                            </li>
+                            <li>
+                                <label>工序编码：</label>
+                                <input type="text" name="procCode"/>
+                            </li>
+                            <li>
+                                <label>电压值(V)：</label>
+                                <input type="text" name="voltageValue"/>
+                            </li>
+                            <li>
+                                <label>电池检测结论：</label>
+                                <input type="text" name="dcTestResult"/>
+                            </li>
+                            <!--<li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="RawMate:battery:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="RawMate:battery:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="RawMate:battery:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="RawMate:battery:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('RawMate:battery:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('RawMate:battery:remove')}]];
+        var prefix = ctx + "RawMate/battery";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "电池",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'batteryId',
+                    title: '电池ID',
+                    visible: false
+                },
+                {
+                    field: 'cletNormVers',
+                    title: '采集规范版本号'
+                },
+                {
+                    field: 'prdtOrderNum',
+                    title: '生产订单编号'
+                },
+                {
+                    field: 'listNum',
+                    title: '工单编号'
+                },
+                {
+                    field: 'testDataNum',
+                    title: '检验数据编号'
+                },
+                {
+                    field: 'testTime',
+                    title: '检验时间'
+                },
+                {
+                    field: 'cretTime',
+                    title: '创建时间/抓取时间'
+                },
+                {
+                    field: 'mateMaker',
+                    title: '原材料制造商'
+                },
+                {
+                    field: 'specsType',
+                    title: '规格型号'
+                },
+                {
+                    field: 'lowLimit',
+                    title: '下限值'
+                },
+                {
+                    field: 'upLimit',
+                    title: '上限值'
+                },
+                {
+                    field: 'procCode',
+                    title: '工序编码'
+                },
+                {
+                    field: 'voltageValue',
+                    title: '电压值(V)'
+                },
+                {
+                    field: 'dcTestResult',
+                    title: '电池检测结论'
+                },
+                /*{
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.batteryId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.batteryId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

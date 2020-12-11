@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('报工信息列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采购方总部编码：</label>
+                                <input type="text" name="buyerHqCode"/>
+                            </li>
+                            <li>
+                                <label>供应商编码：</label>
+                                <input type="text" name="suplCode"/>
+                            </li>
+                            <li>
+                                <label>生产订单编号：</label>
+                                <input type="text" name="prdtOrderNum"/>
+                            </li>
+                            <li>
+                                <label>产品内部ID号：</label>
+                                <input type="text" name="prdtInsidNum"/>
+                            </li>
+                            <li>
+                                <label>设备编号：</label>
+                                <input type="text" name="eqmtNum"/>
+                            </li>
+                            <li>
+                                <label>生产批次号：</label>
+                                <input type="text" name="prdtBatchNum"/>
+                            </li>
+                            <li>
+                                <label>工序名称：</label>
+                                <input type="text" name="prcesName"/>
+                            </li>
+                            <li>
+                                <label>品类编码：</label>
+                                <input type="text" name="categCode"/>
+                            </li>
+                            <li>
+                                <label>种类编码：</label>
+                                <input type="text" name="typeCode"/>
+                            </li>
+                            <li>
+                                <label>工序编码：</label>
+                                <input type="text" name="prcesCode"/>
+                            </li>
+                            <li>
+                                <label>生产工艺路线编码：</label>
+                                <input type="text" name="prdtRouteCode"/>
+                            </li>
+                            <li>
+                                <label>生产车间id：</label>
+                                <input type="text" name="prdtShopId"/>
+                            </li>
+                            <li>
+                                <label>生产车间编码：</label>
+                                <input type="text" name="prdtShopCode"/>
+                            </li>
+                            <li>
+                                <label>生产车间名称：</label>
+                                <input type="text" name="prdtShopName"/>
+                            </li>
+                            <li>
+                                <label>生产工单编号：</label>
+                                <input type="text" name="prdtWorderNum"/>
+                            </li>
+                            <li>
+                                <label>实物id：</label>
+                                <input type="text" name="pyscId"/>
+                            </li>
+                            <li>
+                                <label>数据来源：</label>
+                                <select name="dataSour" th:with="type=${@dict.getType('prdt_repo_datasource')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li class="select-time">
+                                <label>来源数据创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginSourdataCretTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endSourdataCretTime]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划开始时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanStartTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanStartTime]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划结束时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanEndTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanEndTime]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际开始时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuStartTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuStartTime]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际结束时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuEndTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuEndTime]"/>
+                            </li>
+                            <li>
+                                <label>订单状态：</label>
+                                <input type="text" name="orderStatus"/>
+                            </li>
+                            <li>
+                                <label>客户所属省份：</label>
+                                <select name="cstmProvince" th:with="type=${@dict.getType('prdt_repo_cusprov')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>数据拥有方：</label>
+                                <input type="text" name="dataOwner"/>
+                            </li>
+                            <li>
+                                <label>数据可见方：</label>
+                                <input type="text" name="dataVisible"/>
+                            </li>
+                            <!--<li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="Production:reportinfo:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="Production:reportinfo:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="Production:reportinfo:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="Production:reportinfo:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('Production:reportinfo:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('Production:reportinfo:remove')}]];
+        var dataSourDatas = [[${@dict.getType('prdt_repo_datasource')}]];
+        var cstmProvinceDatas = [[${@dict.getType('prdt_repo_cusprov')}]];
+        var prefix = ctx + "Production/reportinfo";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "报工信息",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'repoInfoId',
+                    title: '报工信息ID',
+                    visible: false
+                },
+                {
+                    field: 'buyerHqCode',
+                    title: '采购方总部编码'
+                },
+                {
+                    field: 'suplCode',
+                    title: '供应商编码'
+                },
+                {
+                    field: 'prdtOrderNum',
+                    title: '生产订单编号'
+                },
+                {
+                    field: 'prdtInsidNum',
+                    title: '产品内部ID号'
+                },
+                {
+                    field: 'eqmtNum',
+                    title: '设备编号'
+                },
+                {
+                    field: 'prdtBatchNum',
+                    title: '生产批次号'
+                },
+                {
+                    field: 'prcesName',
+                    title: '工序名称'
+                },
+                {
+                    field: 'categCode',
+                    title: '品类编码'
+                },
+                {
+                    field: 'typeCode',
+                    title: '种类编码'
+                },
+                {
+                    field: 'prcesCode',
+                    title: '工序编码'
+                },
+                {
+                    field: 'prdtRouteCode',
+                    title: '生产工艺路线编码'
+                },
+                {
+                    field: 'prdtShopId',
+                    title: '生产车间id'
+                },
+                {
+                    field: 'prdtShopCode',
+                    title: '生产车间编码'
+                },
+                {
+                    field: 'prdtShopName',
+                    title: '生产车间名称'
+                },
+                {
+                    field: 'prdtWorderNum',
+                    title: '生产工单编号'
+                },
+                {
+                    field: 'pyscId',
+                    title: '实物id'
+                },
+                {
+                    field: 'dataSour',
+                    title: '数据来源',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(dataSourDatas, value);
+                    }
+                },
+                {
+                    field: 'sourdataCretTime',
+                    title: '来源数据创建时间'
+                },
+                {
+                    field: 'planStartTime',
+                    title: '计划开始时间'
+                },
+                {
+                    field: 'planEndTime',
+                    title: '计划结束时间'
+                },
+                {
+                    field: 'actuStartTime',
+                    title: '实际开始时间'
+                },
+                {
+                    field: 'actuEndTime',
+                    title: '实际结束时间'
+                },
+                {
+                    field: 'orderStatus',
+                    title: '订单状态'
+                },
+                {
+                    field: 'cstmProvince',
+                    title: '客户所属省份',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(cstmProvinceDatas, value);
+                    }
+                },
+                {
+                    field: 'dataOwner',
+                    title: '数据拥有方'
+                },
+                {
+                    field: 'dataVisible',
+                    title: '数据可见方'
+                },
+              /*  {
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.repoInfoId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.repoInfoId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.rawmate.mapper.RawMateYjMapper">
+    
+    <resultMap type="RawMateYj" id="RawMateYjResult">
+        <result property="yjId"    column="yj_id"    />
+        <result property="cletNormVers"    column="clet__norm_vers"    />
+        <result property="prdtOrderNum"    column="prdt_order_num"    />
+        <result property="listNum"    column="list_num"    />
+        <result property="testDataNum"    column="test_data_num"    />
+        <result property="testTime"    column="test_time"    />
+        <result property="cretTime"    column="cret_time"    />
+        <result property="mateMaker"    column="mate_maker"    />
+        <result property="specsType"    column="specs_type"    />
+        <result property="procCode"    column="proc_code"    />
+        <result property="showResult"    column="show_result"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectRawMateYjVo">
+        select yj_id, clet__norm_vers, prdt_order_num, list_num, test_data_num, test_time, cret_time, mate_maker, specs_type, proc_code, show_result, yl, yl2, yl3, yl4, yl5 from raw_mate_yj
+    </sql>
+
+    <select id="selectRawMateYjList" parameterType="RawMateYj" resultMap="RawMateYjResult">
+        <include refid="selectRawMateYjVo"/>
+        <where>  
+            <if test="cletNormVers != null  and cletNormVers != ''"> and clet__norm_vers = #{cletNormVers}</if>
+            <if test="prdtOrderNum != null  and prdtOrderNum != ''"> and prdt_order_num = #{prdtOrderNum}</if>
+            <if test="listNum != null  and listNum != ''"> and list_num = #{listNum}</if>
+            <if test="testDataNum != null  and testDataNum != ''"> and test_data_num = #{testDataNum}</if>
+            <if test="testTime != null "> and test_time = #{testTime}</if>
+            <if test="cretTime != null "> and cret_time = #{cretTime}</if>
+            <if test="mateMaker != null  and mateMaker != ''"> and mate_maker = #{mateMaker}</if>
+            <if test="specsType != null  and specsType != ''"> and specs_type = #{specsType}</if>
+            <if test="procCode != null  and procCode != ''"> and proc_code = #{procCode}</if>
+            <if test="showResult != null  and showResult != ''"> and show_result = #{showResult}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectRawMateYjById" parameterType="Long" resultMap="RawMateYjResult">
+        <include refid="selectRawMateYjVo"/>
+        where yj_id = #{yjId}
+    </select>
+        
+    <insert id="insertRawMateYj" parameterType="RawMateYj" useGeneratedKeys="true" keyProperty="yjId">
+        insert into raw_mate_yj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cletNormVers != null">clet__norm_vers,</if>
+            <if test="prdtOrderNum != null">prdt_order_num,</if>
+            <if test="listNum != null">list_num,</if>
+            <if test="testDataNum != null">test_data_num,</if>
+            <if test="testTime != null">test_time,</if>
+            <if test="cretTime != null">cret_time,</if>
+            <if test="mateMaker != null">mate_maker,</if>
+            <if test="specsType != null">specs_type,</if>
+            <if test="procCode != null">proc_code,</if>
+            <if test="showResult != null">show_result,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cletNormVers != null">#{cletNormVers},</if>
+            <if test="prdtOrderNum != null">#{prdtOrderNum},</if>
+            <if test="listNum != null">#{listNum},</if>
+            <if test="testDataNum != null">#{testDataNum},</if>
+            <if test="testTime != null">#{testTime},</if>
+            <if test="cretTime != null">#{cretTime},</if>
+            <if test="mateMaker != null">#{mateMaker},</if>
+            <if test="specsType != null">#{specsType},</if>
+            <if test="procCode != null">#{procCode},</if>
+            <if test="showResult != null">#{showResult},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRawMateYj" parameterType="RawMateYj">
+        update raw_mate_yj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cletNormVers != null">clet__norm_vers = #{cletNormVers},</if>
+            <if test="prdtOrderNum != null">prdt_order_num = #{prdtOrderNum},</if>
+            <if test="listNum != null">list_num = #{listNum},</if>
+            <if test="testDataNum != null">test_data_num = #{testDataNum},</if>
+            <if test="testTime != null">test_time = #{testTime},</if>
+            <if test="cretTime != null">cret_time = #{cretTime},</if>
+            <if test="mateMaker != null">mate_maker = #{mateMaker},</if>
+            <if test="specsType != null">specs_type = #{specsType},</if>
+            <if test="procCode != null">proc_code = #{procCode},</if>
+            <if test="showResult != null">show_result = #{showResult},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where yj_id = #{yjId}
+    </update>
+
+    <delete id="deleteRawMateYjById" parameterType="Long">
+        delete from raw_mate_yj where yj_id = #{yjId}
+    </delete>
+
+    <delete id="deleteRawMateYjByIds" parameterType="String">
+        delete from raw_mate_yj where yj_id in 
+        <foreach item="yjId" collection="array" open="(" separator="," close=")">
+            #{yjId}
+        </foreach>
+    </delete>
+
+</mapper>

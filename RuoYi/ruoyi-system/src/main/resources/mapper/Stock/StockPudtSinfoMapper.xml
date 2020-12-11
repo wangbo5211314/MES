@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stock.mapper.StockPudtSinfoMapper">
+    
+    <resultMap type="StockPudtSinfo" id="StockPudtSinfoResult">
+        <result property="pudtSinfoId"    column="pudt_sinfo_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="pudtCode"    column="pudt_code"    />
+        <result property="pudtName"    column="pudt_name"    />
+        <result property="pudtSrestNum"    column="pudt_srest_num"    />
+        <result property="units"    column="units"    />
+        <result property="dataSour"    column="data_sour"    />
+        <result property="dsourCretTime"    column="dsour_cret_time"    />
+        <result property="note"    column="note"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="gwPursNum"    column="gw_purs_num"    />
+        <result property="storBatchNum"    column="stor_batch_num"    />
+        <result property="curbhStockNum"    column="curbh_stock_num"    />
+        <result property="pursCmpyName"    column="purs_cmpy_name"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectStockPudtSinfoVo">
+        select pudt_sinfo_id, buyer_hq_code, vendor_code, vendor_name, pudt_code, pudt_name, pudt_srest_num, units, data_sour, dsour_cret_time, note, data_owner, data_visible, gw_purs_num, stor_batch_num, curbh_stock_num, purs_cmpy_name, yl, yl2, yl3, yl4, yl5 from stock_pudt_sinfo
+    </sql>
+
+    <select id="selectStockPudtSinfoList" parameterType="StockPudtSinfo" resultMap="StockPudtSinfoResult">
+        <include refid="selectStockPudtSinfoVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="pudtCode != null  and pudtCode != ''"> and pudt_code = #{pudtCode}</if>
+            <if test="pudtName != null  and pudtName != ''"> and pudt_name like concat('%', #{pudtName}, '%')</if>
+            <if test="pudtSrestNum != null "> and pudt_srest_num = #{pudtSrestNum}</if>
+            <if test="units != null  and units != ''"> and units = #{units}</if>
+            <if test="dataSour != null  and dataSour != ''"> and data_sour = #{dataSour}</if>
+            <if test="dsourCretTime != null "> and dsour_cret_time = #{dsourCretTime}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="gwPursNum != null  and gwPursNum != ''"> and gw_purs_num = #{gwPursNum}</if>
+            <if test="storBatchNum != null  and storBatchNum != ''"> and stor_batch_num = #{storBatchNum}</if>
+            <if test="curbhStockNum != null "> and curbh_stock_num = #{curbhStockNum}</if>
+            <if test="pursCmpyName != null  and pursCmpyName != ''"> and purs_cmpy_name like concat('%', #{pursCmpyName}, '%')</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectStockPudtSinfoById" parameterType="Long" resultMap="StockPudtSinfoResult">
+        <include refid="selectStockPudtSinfoVo"/>
+        where pudt_sinfo_id = #{pudtSinfoId}
+    </select>
+        
+    <insert id="insertStockPudtSinfo" parameterType="StockPudtSinfo" useGeneratedKeys="true" keyProperty="pudtSinfoId">
+        insert into stock_pudt_sinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="vendorCode != null">vendor_code,</if>
+            <if test="vendorName != null">vendor_name,</if>
+            <if test="pudtCode != null">pudt_code,</if>
+            <if test="pudtName != null">pudt_name,</if>
+            <if test="pudtSrestNum != null">pudt_srest_num,</if>
+            <if test="units != null">units,</if>
+            <if test="dataSour != null">data_sour,</if>
+            <if test="dsourCretTime != null">dsour_cret_time,</if>
+            <if test="note != null">note,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="gwPursNum != null">gw_purs_num,</if>
+            <if test="storBatchNum != null">stor_batch_num,</if>
+            <if test="curbhStockNum != null">curbh_stock_num,</if>
+            <if test="pursCmpyName != null">purs_cmpy_name,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="vendorCode != null">#{vendorCode},</if>
+            <if test="vendorName != null">#{vendorName},</if>
+            <if test="pudtCode != null">#{pudtCode},</if>
+            <if test="pudtName != null">#{pudtName},</if>
+            <if test="pudtSrestNum != null">#{pudtSrestNum},</if>
+            <if test="units != null">#{units},</if>
+            <if test="dataSour != null">#{dataSour},</if>
+            <if test="dsourCretTime != null">#{dsourCretTime},</if>
+            <if test="note != null">#{note},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="gwPursNum != null">#{gwPursNum},</if>
+            <if test="storBatchNum != null">#{storBatchNum},</if>
+            <if test="curbhStockNum != null">#{curbhStockNum},</if>
+            <if test="pursCmpyName != null">#{pursCmpyName},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockPudtSinfo" parameterType="StockPudtSinfo">
+        update stock_pudt_sinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="vendorCode != null">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null">vendor_name = #{vendorName},</if>
+            <if test="pudtCode != null">pudt_code = #{pudtCode},</if>
+            <if test="pudtName != null">pudt_name = #{pudtName},</if>
+            <if test="pudtSrestNum != null">pudt_srest_num = #{pudtSrestNum},</if>
+            <if test="units != null">units = #{units},</if>
+            <if test="dataSour != null">data_sour = #{dataSour},</if>
+            <if test="dsourCretTime != null">dsour_cret_time = #{dsourCretTime},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="gwPursNum != null">gw_purs_num = #{gwPursNum},</if>
+            <if test="storBatchNum != null">stor_batch_num = #{storBatchNum},</if>
+            <if test="curbhStockNum != null">curbh_stock_num = #{curbhStockNum},</if>
+            <if test="pursCmpyName != null">purs_cmpy_name = #{pursCmpyName},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where pudt_sinfo_id = #{pudtSinfoId}
+    </update>
+
+    <delete id="deleteStockPudtSinfoById" parameterType="Long">
+        delete from stock_pudt_sinfo where pudt_sinfo_id = #{pudtSinfoId}
+    </delete>
+
+    <delete id="deleteStockPudtSinfoByIds" parameterType="String">
+        delete from stock_pudt_sinfo where pudt_sinfo_id in 
+        <foreach item="pudtSinfoId" collection="array" open="(" separator="," close=")">
+            #{pudtSinfoId}
+        </foreach>
+    </delete>
+
+</mapper>

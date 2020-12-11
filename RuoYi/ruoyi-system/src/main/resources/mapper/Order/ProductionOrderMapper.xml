@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.order.mapper.ProductionOrderMapper">
+    
+    <resultMap type="ProductionOrder" id="ProductionOrderResult">
+        <result property="productionOrderId"    column="production_order_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="orderType"    column="order_type"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="productionOrderNum"    column="production_order_num"    />
+        <result property="categoryCode"    column="category_code"    />
+        <result property="kindCode"    column="kind_code"    />
+        <result property="schedulingPlanCode"    column="scheduling_plan_code"    />
+        <result property="purchaseOrderItemId"    column="purchase_order_item_id"    />
+        <result property="dataAssociationType"    column="data_association_type"    />
+        <result property="saleOrderItemNum"    column="sale_order_item_num"    />
+        <result property="factoryMaterialCode"    column="factory_material_code"    />
+        <result property="factoryMaterialName"    column="factory_material_name"    />
+        <result property="factoryMaterialUnit"    column="factory_material_unit"    />
+        <result property="factoryMaterialDescription"    column="factory_material_description"    />
+        <result property="producedNum"    column="produced_num"    />
+        <result property="meteringUnit"    column="metering_unit"    />
+        <result property="materialidGroup"    column="materialid_group"    />
+        <result property="materialidType"    column="materialid_type"    />
+        <result property="productType"    column="product_type"    />
+        <result property="planStartDate"    column="plan_start_date"    />
+        <result property="planFinishDate"    column="plan_finish_date"    />
+        <result property="actualStartDate"    column="actual_start_date"    />
+        <result property="actualFinishDate"    column="actual_finish_date"    />
+        <result property="produceFactoryName"    column="produce_factory_name"    />
+        <result property="produceShopName"    column="produce_shop_name"    />
+        <result property="productionOrderStatus"    column="production_order_status"    />
+        <result property="productionCenter"    column="production_center"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="datasourceCreateTime"    column="datasource_create_time"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectProductionOrderVo">
+        select production_order_id, buyer_hq_code, order_type, vendor_code, vendor_name, production_order_num, category_code, kind_code, scheduling_plan_code, purchase_order_item_id, data_association_type, sale_order_item_num, factory_material_code, factory_material_name, factory_material_unit, factory_material_description, produced_num, metering_unit, materialid_group, materialid_type, product_type, plan_start_date, plan_finish_date, actual_start_date, actual_finish_date, produce_factory_name, produce_shop_name, production_order_status, production_center, data_source, datasource_create_time, data_owner, data_visible, yl, yl2, yl3, yl4, yl5 from production_order
+    </sql>
+
+    <select id="selectProductionOrderList" parameterType="ProductionOrder" resultMap="ProductionOrderResult">
+        <include refid="selectProductionOrderVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="orderType != null  and orderType != ''"> and order_type = #{orderType}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="productionOrderNum != null  and productionOrderNum != ''"> and production_order_num = #{productionOrderNum}</if>
+            <if test="categoryCode != null  and categoryCode != ''"> and category_code = #{categoryCode}</if>
+            <if test="kindCode != null  and kindCode != ''"> and kind_code = #{kindCode}</if>
+            <if test="schedulingPlanCode != null  and schedulingPlanCode != ''"> and scheduling_plan_code = #{schedulingPlanCode}</if>
+            <if test="purchaseOrderItemId != null  and purchaseOrderItemId != ''"> and purchase_order_item_id = #{purchaseOrderItemId}</if>
+            <if test="dataAssociationType != null  and dataAssociationType != ''"> and data_association_type = #{dataAssociationType}</if>
+            <if test="saleOrderItemNum != null  and saleOrderItemNum != ''"> and sale_order_item_num = #{saleOrderItemNum}</if>
+            <if test="factoryMaterialCode != null  and factoryMaterialCode != ''"> and factory_material_code = #{factoryMaterialCode}</if>
+            <if test="factoryMaterialName != null  and factoryMaterialName != ''"> and factory_material_name like concat('%', #{factoryMaterialName}, '%')</if>
+            <if test="factoryMaterialUnit != null  and factoryMaterialUnit != ''"> and factory_material_unit like concat('%', #{factoryMaterialUnit}, '%')</if>
+            <if test="factoryMaterialDescription != null  and factoryMaterialDescription != ''"> and factory_material_description like concat('%', #{factoryMaterialDescription}, '%')</if>
+            <if test="producedNum != null "> and produced_num = #{producedNum}</if>
+            <if test="meteringUnit != null  and meteringUnit != ''"> and metering_unit = #{meteringUnit}</if>
+            <if test="materialidGroup != null  and materialidGroup != ''"> and materialid_group = #{materialidGroup}</if>
+            <if test="materialidType != null  and materialidType != ''"> and materialid_type = #{materialidType}</if>
+            <if test="productType != null  and productType != ''"> and product_type = #{productType}</if>
+            <if test="planStartDate != null "> and plan_start_date = #{planStartDate}</if>
+            <if test="planFinishDate != null "> and plan_finish_date = #{planFinishDate}</if>
+            <if test="actualStartDate != null "> and actual_start_date = #{actualStartDate}</if>
+            <if test="actualFinishDate != null "> and actual_finish_date = #{actualFinishDate}</if>
+            <if test="produceFactoryName != null  and produceFactoryName != ''"> and produce_factory_name like concat('%', #{produceFactoryName}, '%')</if>
+            <if test="produceShopName != null  and produceShopName != ''"> and produce_shop_name like concat('%', #{produceShopName}, '%')</if>
+            <if test="productionOrderStatus != null  and productionOrderStatus != ''"> and production_order_status = #{productionOrderStatus}</if>
+            <if test="productionCenter != null  and productionCenter != ''"> and production_center like concat('%', #{productionCenter}, '%')</if>
+            <if test="dataSource != null  and dataSource != ''"> and data_source = #{dataSource}</if>
+            <if test="datasourceCreateTime != null "> and datasource_create_time = #{datasourceCreateTime}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectProductionOrderById" parameterType="Long" resultMap="ProductionOrderResult">
+        <include refid="selectProductionOrderVo"/>
+        where production_order_id = #{productionOrderId}
+    </select>
+        
+    <insert id="insertProductionOrder" parameterType="ProductionOrder" useGeneratedKeys="true" keyProperty="productionOrderId">
+        insert into production_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null and buyerHqCode != ''">buyer_hq_code,</if>
+            <if test="orderType != null">order_type,</if>
+            <if test="vendorCode != null">vendor_code,</if>
+            <if test="vendorName != null">vendor_name,</if>
+            <if test="productionOrderNum != null">production_order_num,</if>
+            <if test="categoryCode != null">category_code,</if>
+            <if test="kindCode != null">kind_code,</if>
+            <if test="schedulingPlanCode != null">scheduling_plan_code,</if>
+            <if test="purchaseOrderItemId != null">purchase_order_item_id,</if>
+            <if test="dataAssociationType != null">data_association_type,</if>
+            <if test="saleOrderItemNum != null">sale_order_item_num,</if>
+            <if test="factoryMaterialCode != null">factory_material_code,</if>
+            <if test="factoryMaterialName != null">factory_material_name,</if>
+            <if test="factoryMaterialUnit != null">factory_material_unit,</if>
+            <if test="factoryMaterialDescription != null">factory_material_description,</if>
+            <if test="producedNum != null">produced_num,</if>
+            <if test="meteringUnit != null">metering_unit,</if>
+            <if test="materialidGroup != null">materialid_group,</if>
+            <if test="materialidType != null">materialid_type,</if>
+            <if test="productType != null">product_type,</if>
+            <if test="planStartDate != null">plan_start_date,</if>
+            <if test="planFinishDate != null">plan_finish_date,</if>
+            <if test="actualStartDate != null">actual_start_date,</if>
+            <if test="actualFinishDate != null">actual_finish_date,</if>
+            <if test="produceFactoryName != null">produce_factory_name,</if>
+            <if test="produceShopName != null">produce_shop_name,</if>
+            <if test="productionOrderStatus != null">production_order_status,</if>
+            <if test="productionCenter != null">production_center,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="datasourceCreateTime != null">datasource_create_time,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null and buyerHqCode != ''">#{buyerHqCode},</if>
+            <if test="orderType != null">#{orderType},</if>
+            <if test="vendorCode != null">#{vendorCode},</if>
+            <if test="vendorName != null">#{vendorName},</if>
+            <if test="productionOrderNum != null">#{productionOrderNum},</if>
+            <if test="categoryCode != null">#{categoryCode},</if>
+            <if test="kindCode != null">#{kindCode},</if>
+            <if test="schedulingPlanCode != null">#{schedulingPlanCode},</if>
+            <if test="purchaseOrderItemId != null">#{purchaseOrderItemId},</if>
+            <if test="dataAssociationType != null">#{dataAssociationType},</if>
+            <if test="saleOrderItemNum != null">#{saleOrderItemNum},</if>
+            <if test="factoryMaterialCode != null">#{factoryMaterialCode},</if>
+            <if test="factoryMaterialName != null">#{factoryMaterialName},</if>
+            <if test="factoryMaterialUnit != null">#{factoryMaterialUnit},</if>
+            <if test="factoryMaterialDescription != null">#{factoryMaterialDescription},</if>
+            <if test="producedNum != null">#{producedNum},</if>
+            <if test="meteringUnit != null">#{meteringUnit},</if>
+            <if test="materialidGroup != null">#{materialidGroup},</if>
+            <if test="materialidType != null">#{materialidType},</if>
+            <if test="productType != null">#{productType},</if>
+            <if test="planStartDate != null">#{planStartDate},</if>
+            <if test="planFinishDate != null">#{planFinishDate},</if>
+            <if test="actualStartDate != null">#{actualStartDate},</if>
+            <if test="actualFinishDate != null">#{actualFinishDate},</if>
+            <if test="produceFactoryName != null">#{produceFactoryName},</if>
+            <if test="produceShopName != null">#{produceShopName},</if>
+            <if test="productionOrderStatus != null">#{productionOrderStatus},</if>
+            <if test="productionCenter != null">#{productionCenter},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="datasourceCreateTime != null">#{datasourceCreateTime},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProductionOrder" parameterType="ProductionOrder">
+        update production_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null and buyerHqCode != ''">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="orderType != null">order_type = #{orderType},</if>
+            <if test="vendorCode != null">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null">vendor_name = #{vendorName},</if>
+            <if test="productionOrderNum != null">production_order_num = #{productionOrderNum},</if>
+            <if test="categoryCode != null">category_code = #{categoryCode},</if>
+            <if test="kindCode != null">kind_code = #{kindCode},</if>
+            <if test="schedulingPlanCode != null">scheduling_plan_code = #{schedulingPlanCode},</if>
+            <if test="purchaseOrderItemId != null">purchase_order_item_id = #{purchaseOrderItemId},</if>
+            <if test="dataAssociationType != null">data_association_type = #{dataAssociationType},</if>
+            <if test="saleOrderItemNum != null">sale_order_item_num = #{saleOrderItemNum},</if>
+            <if test="factoryMaterialCode != null">factory_material_code = #{factoryMaterialCode},</if>
+            <if test="factoryMaterialName != null">factory_material_name = #{factoryMaterialName},</if>
+            <if test="factoryMaterialUnit != null">factory_material_unit = #{factoryMaterialUnit},</if>
+            <if test="factoryMaterialDescription != null">factory_material_description = #{factoryMaterialDescription},</if>
+            <if test="producedNum != null">produced_num = #{producedNum},</if>
+            <if test="meteringUnit != null">metering_unit = #{meteringUnit},</if>
+            <if test="materialidGroup != null">materialid_group = #{materialidGroup},</if>
+            <if test="materialidType != null">materialid_type = #{materialidType},</if>
+            <if test="productType != null">product_type = #{productType},</if>
+            <if test="planStartDate != null">plan_start_date = #{planStartDate},</if>
+            <if test="planFinishDate != null">plan_finish_date = #{planFinishDate},</if>
+            <if test="actualStartDate != null">actual_start_date = #{actualStartDate},</if>
+            <if test="actualFinishDate != null">actual_finish_date = #{actualFinishDate},</if>
+            <if test="produceFactoryName != null">produce_factory_name = #{produceFactoryName},</if>
+            <if test="produceShopName != null">produce_shop_name = #{produceShopName},</if>
+            <if test="productionOrderStatus != null">production_order_status = #{productionOrderStatus},</if>
+            <if test="productionCenter != null">production_center = #{productionCenter},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="datasourceCreateTime != null">datasource_create_time = #{datasourceCreateTime},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where production_order_id = #{productionOrderId}
+    </update>
+
+    <delete id="deleteProductionOrderById" parameterType="Long">
+        delete from production_order where production_order_id = #{productionOrderId}
+    </delete>
+
+    <delete id="deleteProductionOrderByIds" parameterType="String">
+        delete from production_order where production_order_id in 
+        <foreach item="productionOrderId" collection="array" open="(" separator="," close=")">
+            #{productionOrderId}
+        </foreach>
+    </delete>
+
+</mapper>

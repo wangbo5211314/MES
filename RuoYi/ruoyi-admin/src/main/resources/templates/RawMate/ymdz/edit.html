@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改压敏电阻')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-ymdz-edit" th:object="${rawMateYmdz}">
+            <input name="varistorId" th:field="*{varistorId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采集规范版本号：</label>
+                <div class="col-sm-8">
+                    <input name="cletNormVers" th:field="*{cletNormVers}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产订单编号：</label>
+                <div class="col-sm-8">
+                    <input name="prdtOrderNum" th:field="*{prdtOrderNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工单编号：</label>
+                <div class="col-sm-8">
+                    <input name="listNum" th:field="*{listNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检验数据编号：</label>
+                <div class="col-sm-8">
+                    <input name="testDataNum" th:field="*{testDataNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检验时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="testTime" th:value="${#dates.format(rawMateYmdz.testTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建时间/抓取时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="cretTime" th:value="${#dates.format(rawMateYmdz.cretTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">原材料制造商：</label>
+                <div class="col-sm-8">
+                    <input name="mateMaker" th:field="*{mateMaker}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">规格型号：</label>
+                <div class="col-sm-8">
+                    <input name="specsType" th:field="*{specsType}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">下限值：</label>
+                <div class="col-sm-8">
+                    <input name="lowLimit" th:field="*{lowLimit}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">上限值：</label>
+                <div class="col-sm-8">
+                    <input name="upLimit" th:field="*{upLimit}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工序编码：</label>
+                <div class="col-sm-8">
+                    <input name="procCode" th:field="*{procCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">压敏电压实测值：</label>
+                <div class="col-sm-8">
+                    <input name="varivActValue" th:field="*{varivActValue}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">压敏电阻测试结论：</label>
+                <div class="col-sm-8">
+                    <input name="variTestResult" th:field="*{variTestResult}" class="form-control" type="text">
+                </div>
+            </div>
+           <!-- <div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl" th:field="*{yl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" th:field="*{yl2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" th:field="*{yl3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" th:field="*{yl4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" th:field="*{yl5}" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "RawMate/ymdz";
+        $("#form-ymdz-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-ymdz-edit').serialize());
+            }
+        }
+
+        $("input[name='testTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='cretTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stock.mapper.StockSorderInfoMapper">
+    
+    <resultMap type="StockSorderInfo" id="StockSorderInfoResult">
+        <result property="supInfoId"    column="sup_info_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="contType"    column="cont_type"    />
+        <result property="purcDocuNum"    column="purc_docu_num"    />
+        <result property="contNum"    column="cont_num"    />
+        <result property="contSignTime"    column="cont_sign_time"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="contName"    column="cont_name"    />
+        <result property="gwContNum"    column="gw_cont_num"    />
+        <result property="mateBigNum"    column="mate_big_num"    />
+        <result property="mateMidNum"    column="mate_mid_num"    />
+        <result property="mateSmallNum"    column="mate_small_num"    />
+        <result property="mateBigName"    column="mate_big_name"    />
+        <result property="mateMidName"    column="mate_mid_name"    />
+        <result property="mateSmallName"    column="mate_small_name"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="cateCode"    column="cate_code"    />
+        <result property="kindCode"    column="kind_code"    />
+        <result property="purcCompName"    column="purc_comp_name"    />
+        <result property="purcCompCode"    column="purc_comp_code"    />
+        <result property="supItemNum"    column="sup_item_num"    />
+        <result property="sitemAcptName"    column="sitem_acpt_name"    />
+        <result property="sitemVmateCode"    column="sitem_vmate_code"    />
+        <result property="sitemMateDesc"    column="sitem_mate_desc"    />
+        <result property="sitemGwmtCode"    column="sitem_gwmt_code"    />
+        <result property="sitemGwmtDesc"    column="sitem_gwmt_desc"    />
+        <result property="sitemBuyNum"    column="sitem_buy_num"    />
+        <result property="sitemUnits"    column="sitem_units"    />
+        <result property="dataSour"    column="data_sour"    />
+        <result property="dsourCreaTime"    column="dsour_crea_time"    />
+        <result property="note"    column="note"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisi"    column="data_visi"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectStockSorderInfoVo">
+        select sup_info_id, buyer_hq_code, vendor_code, cont_type, purc_docu_num, cont_num, cont_sign_time, project_name, cont_name, gw_cont_num, mate_big_num, mate_mid_num, mate_small_num, mate_big_name, mate_mid_name, mate_small_name, goods_name, cate_code, kind_code, purc_comp_name, purc_comp_code, sup_item_num, sitem_acpt_name, sitem_vmate_code, sitem_mate_desc, sitem_gwmt_code, sitem_gwmt_desc, sitem_buy_num, sitem_units, data_sour, dsour_crea_time, note, data_owner, data_visi, yl, yl2, yl3, yl4, yl5 from stock_sorder_info
+    </sql>
+
+    <select id="selectStockSorderInfoList" parameterType="StockSorderInfo" resultMap="StockSorderInfoResult">
+        <include refid="selectStockSorderInfoVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="contType != null  and contType != ''"> and cont_type = #{contType}</if>
+            <if test="purcDocuNum != null  and purcDocuNum != ''"> and purc_docu_num = #{purcDocuNum}</if>
+            <if test="contNum != null  and contNum != ''"> and cont_num = #{contNum}</if>
+            <if test="contSignTime != null "> and cont_sign_time = #{contSignTime}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="contName != null  and contName != ''"> and cont_name like concat('%', #{contName}, '%')</if>
+            <if test="gwContNum != null  and gwContNum != ''"> and gw_cont_num = #{gwContNum}</if>
+            <if test="mateBigNum != null  and mateBigNum != ''"> and mate_big_num = #{mateBigNum}</if>
+            <if test="mateMidNum != null  and mateMidNum != ''"> and mate_mid_num = #{mateMidNum}</if>
+            <if test="mateSmallNum != null  and mateSmallNum != ''"> and mate_small_num = #{mateSmallNum}</if>
+            <if test="mateBigName != null  and mateBigName != ''"> and mate_big_name like concat('%', #{mateBigName}, '%')</if>
+            <if test="mateMidName != null  and mateMidName != ''"> and mate_mid_name like concat('%', #{mateMidName}, '%')</if>
+            <if test="mateSmallName != null  and mateSmallName != ''"> and mate_small_name like concat('%', #{mateSmallName}, '%')</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="cateCode != null  and cateCode != ''"> and cate_code = #{cateCode}</if>
+            <if test="kindCode != null  and kindCode != ''"> and kind_code = #{kindCode}</if>
+            <if test="purcCompName != null  and purcCompName != ''"> and purc_comp_name like concat('%', #{purcCompName}, '%')</if>
+            <if test="purcCompCode != null  and purcCompCode != ''"> and purc_comp_code = #{purcCompCode}</if>
+            <if test="supItemNum != null  and supItemNum != ''"> and sup_item_num = #{supItemNum}</if>
+            <if test="sitemAcptName != null  and sitemAcptName != ''"> and sitem_acpt_name like concat('%', #{sitemAcptName}, '%')</if>
+            <if test="sitemVmateCode != null  and sitemVmateCode != ''"> and sitem_vmate_code = #{sitemVmateCode}</if>
+            <if test="sitemMateDesc != null  and sitemMateDesc != ''"> and sitem_mate_desc = #{sitemMateDesc}</if>
+            <if test="sitemGwmtCode != null  and sitemGwmtCode != ''"> and sitem_gwmt_code = #{sitemGwmtCode}</if>
+            <if test="sitemGwmtDesc != null  and sitemGwmtDesc != ''"> and sitem_gwmt_desc = #{sitemGwmtDesc}</if>
+            <if test="sitemBuyNum != null "> and sitem_buy_num = #{sitemBuyNum}</if>
+            <if test="sitemUnits != null  and sitemUnits != ''"> and sitem_units = #{sitemUnits}</if>
+            <if test="dataSour != null  and dataSour != ''"> and data_sour = #{dataSour}</if>
+            <if test="dsourCreaTime != null "> and dsour_crea_time = #{dsourCreaTime}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisi != null  and dataVisi != ''"> and data_visi = #{dataVisi}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectStockSorderInfoById" parameterType="Long" resultMap="StockSorderInfoResult">
+        <include refid="selectStockSorderInfoVo"/>
+        where sup_info_id = #{supInfoId}
+    </select>
+        
+    <insert id="insertStockSorderInfo" parameterType="StockSorderInfo" useGeneratedKeys="true" keyProperty="supInfoId">
+        insert into stock_sorder_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code,</if>
+            <if test="contType != null">cont_type,</if>
+            <if test="purcDocuNum != null">purc_docu_num,</if>
+            <if test="contNum != null">cont_num,</if>
+            <if test="contSignTime != null">cont_sign_time,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="contName != null">cont_name,</if>
+            <if test="gwContNum != null">gw_cont_num,</if>
+            <if test="mateBigNum != null">mate_big_num,</if>
+            <if test="mateMidNum != null">mate_mid_num,</if>
+            <if test="mateSmallNum != null">mate_small_num,</if>
+            <if test="mateBigName != null">mate_big_name,</if>
+            <if test="mateMidName != null">mate_mid_name,</if>
+            <if test="mateSmallName != null">mate_small_name,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="cateCode != null">cate_code,</if>
+            <if test="kindCode != null">kind_code,</if>
+            <if test="purcCompName != null">purc_comp_name,</if>
+            <if test="purcCompCode != null">purc_comp_code,</if>
+            <if test="supItemNum != null">sup_item_num,</if>
+            <if test="sitemAcptName != null">sitem_acpt_name,</if>
+            <if test="sitemVmateCode != null">sitem_vmate_code,</if>
+            <if test="sitemMateDesc != null">sitem_mate_desc,</if>
+            <if test="sitemGwmtCode != null">sitem_gwmt_code,</if>
+            <if test="sitemGwmtDesc != null">sitem_gwmt_desc,</if>
+            <if test="sitemBuyNum != null">sitem_buy_num,</if>
+            <if test="sitemUnits != null">sitem_units,</if>
+            <if test="dataSour != null">data_sour,</if>
+            <if test="dsourCreaTime != null">dsour_crea_time,</if>
+            <if test="note != null">note,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisi != null">data_visi,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="vendorCode != null and vendorCode != ''">#{vendorCode},</if>
+            <if test="contType != null">#{contType},</if>
+            <if test="purcDocuNum != null">#{purcDocuNum},</if>
+            <if test="contNum != null">#{contNum},</if>
+            <if test="contSignTime != null">#{contSignTime},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="contName != null">#{contName},</if>
+            <if test="gwContNum != null">#{gwContNum},</if>
+            <if test="mateBigNum != null">#{mateBigNum},</if>
+            <if test="mateMidNum != null">#{mateMidNum},</if>
+            <if test="mateSmallNum != null">#{mateSmallNum},</if>
+            <if test="mateBigName != null">#{mateBigName},</if>
+            <if test="mateMidName != null">#{mateMidName},</if>
+            <if test="mateSmallName != null">#{mateSmallName},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="cateCode != null">#{cateCode},</if>
+            <if test="kindCode != null">#{kindCode},</if>
+            <if test="purcCompName != null">#{purcCompName},</if>
+            <if test="purcCompCode != null">#{purcCompCode},</if>
+            <if test="supItemNum != null">#{supItemNum},</if>
+            <if test="sitemAcptName != null">#{sitemAcptName},</if>
+            <if test="sitemVmateCode != null">#{sitemVmateCode},</if>
+            <if test="sitemMateDesc != null">#{sitemMateDesc},</if>
+            <if test="sitemGwmtCode != null">#{sitemGwmtCode},</if>
+            <if test="sitemGwmtDesc != null">#{sitemGwmtDesc},</if>
+            <if test="sitemBuyNum != null">#{sitemBuyNum},</if>
+            <if test="sitemUnits != null">#{sitemUnits},</if>
+            <if test="dataSour != null">#{dataSour},</if>
+            <if test="dsourCreaTime != null">#{dsourCreaTime},</if>
+            <if test="note != null">#{note},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisi != null">#{dataVisi},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockSorderInfo" parameterType="StockSorderInfo">
+        update stock_sorder_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code = #{vendorCode},</if>
+            <if test="contType != null">cont_type = #{contType},</if>
+            <if test="purcDocuNum != null">purc_docu_num = #{purcDocuNum},</if>
+            <if test="contNum != null">cont_num = #{contNum},</if>
+            <if test="contSignTime != null">cont_sign_time = #{contSignTime},</if>
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="contName != null">cont_name = #{contName},</if>
+            <if test="gwContNum != null">gw_cont_num = #{gwContNum},</if>
+            <if test="mateBigNum != null">mate_big_num = #{mateBigNum},</if>
+            <if test="mateMidNum != null">mate_mid_num = #{mateMidNum},</if>
+            <if test="mateSmallNum != null">mate_small_num = #{mateSmallNum},</if>
+            <if test="mateBigName != null">mate_big_name = #{mateBigName},</if>
+            <if test="mateMidName != null">mate_mid_name = #{mateMidName},</if>
+            <if test="mateSmallName != null">mate_small_name = #{mateSmallName},</if>
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="cateCode != null">cate_code = #{cateCode},</if>
+            <if test="kindCode != null">kind_code = #{kindCode},</if>
+            <if test="purcCompName != null">purc_comp_name = #{purcCompName},</if>
+            <if test="purcCompCode != null">purc_comp_code = #{purcCompCode},</if>
+            <if test="supItemNum != null">sup_item_num = #{supItemNum},</if>
+            <if test="sitemAcptName != null">sitem_acpt_name = #{sitemAcptName},</if>
+            <if test="sitemVmateCode != null">sitem_vmate_code = #{sitemVmateCode},</if>
+            <if test="sitemMateDesc != null">sitem_mate_desc = #{sitemMateDesc},</if>
+            <if test="sitemGwmtCode != null">sitem_gwmt_code = #{sitemGwmtCode},</if>
+            <if test="sitemGwmtDesc != null">sitem_gwmt_desc = #{sitemGwmtDesc},</if>
+            <if test="sitemBuyNum != null">sitem_buy_num = #{sitemBuyNum},</if>
+            <if test="sitemUnits != null">sitem_units = #{sitemUnits},</if>
+            <if test="dataSour != null">data_sour = #{dataSour},</if>
+            <if test="dsourCreaTime != null">dsour_crea_time = #{dsourCreaTime},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisi != null">data_visi = #{dataVisi},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where sup_info_id = #{supInfoId}
+    </update>
+
+    <delete id="deleteStockSorderInfoById" parameterType="Long">
+        delete from stock_sorder_info where sup_info_id = #{supInfoId}
+    </delete>
+
+    <delete id="deleteStockSorderInfoByIds" parameterType="String">
+        delete from stock_sorder_info where sup_info_id in 
+        <foreach item="supInfoId" collection="array" open="(" separator="," close=")">
+            #{supInfoId}
+        </foreach>
+    </delete>
+
+</mapper>

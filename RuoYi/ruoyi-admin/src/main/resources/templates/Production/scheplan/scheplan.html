@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('排产计划列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采购方总部编码：</label>
+                                <input type="text" name="buyerHqCode"/>
+                            </li>
+                            <li>
+                                <label>供应商编码：</label>
+                                <input type="text" name="vendorCode"/>
+                            </li>
+                            <li>
+                                <label>供应商名称：</label>
+                                <input type="text" name="vendorName"/>
+                            </li>
+                            <li>
+                                <label>采购订单行项目 id：</label>
+                                <input type="text" name="purOrderItemId"/>
+                            </li>
+                            <li>
+                                <label>排产计划编码：</label>
+                                <input type="text" name="schPlanCode"/>
+                            </li>
+                            <li>
+                                <label>物料编码：</label>
+                                <input type="text" name="matCode"/>
+                            </li>
+                            <li>
+                                <label>物料描述：</label>
+                                <input type="text" name="matDesc"/>
+                            </li>
+                            <li>
+                                <label>排产数量：</label>
+                                <input type="text" name="schNum"/>
+                            </li>
+                            <li>
+                                <label>品类编码：</label>
+                                <input type="text" name="cateCode"/>
+                            </li>
+                            <li>
+                                <label>种类编码：</label>
+                                <input type="text" name="typeCode"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划开始日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanStartDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanStartDate]"/>
+                            </li>
+                            <li>
+                                <label>计划工期：</label>
+                                <input type="text" name="planDay"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划完成日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanFiniDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanFiniDate]"/>
+                            </li>
+                            <li>
+                                <label>实际工期：</label>
+                                <input type="text" name="actuDay"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际开始日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuStartDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuStartDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际完成日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuFiniDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuFiniDate]"/>
+                            </li>
+                            <li>
+                                <label>进度：</label>
+                                <input type="text" name="schedule"/>
+                            </li>
+                            <li class="select-time">
+                                <label>交付日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginSubmitDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endSubmitDate]"/>
+                            </li>
+                            <li>
+                                <label>数据来源：</label>
+                                <select name="dataSour" th:with="type=${@dict.getType('pcjh_datasource')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li class="select-time">
+                                <label>来源数据创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDatasoCreateDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDatasoCreateDate]"/>
+                            </li>
+                            <li>
+                                <label>数据拥有方：</label>
+                                <input type="text" name="dataOwner"/>
+                            </li>
+                            <li>
+                                <label>数据可见方：</label>
+                                <input type="text" name="dataVisible"/>
+                            </li>
+                            <!--<li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="Production:scheplan:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="Production:scheplan:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="Production:scheplan:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="Production:scheplan:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('Production:scheplan:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('Production:scheplan:remove')}]];
+        var dataSourDatas = [[${@dict.getType('pcjh_datasource')}]];
+        var prefix = ctx + "Production/scheplan";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "排产计划",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'schPlanId',
+                    title: 'ID',
+                    visible: false
+                },
+                {
+                    field: 'buyerHqCode',
+                    title: '采购方总部编码'
+                },
+                {
+                    field: 'vendorCode',
+                    title: '供应商编码'
+                },
+                {
+                    field: 'vendorName',
+                    title: '供应商名称'
+                },
+                {
+                    field: 'purOrderItemId',
+                    title: '采购订单行项目 id'
+                },
+                {
+                    field: 'schPlanCode',
+                    title: '排产计划编码'
+                },
+                {
+                    field: 'matCode',
+                    title: '物料编码'
+                },
+                {
+                    field: 'matDesc',
+                    title: '物料描述'
+                },
+                {
+                    field: 'schNum',
+                    title: '排产数量'
+                },
+                {
+                    field: 'cateCode',
+                    title: '品类编码'
+                },
+                {
+                    field: 'typeCode',
+                    title: '种类编码'
+                },
+                {
+                    field: 'planStartDate',
+                    title: '计划开始日期'
+                },
+                {
+                    field: 'planDay',
+                    title: '计划工期'
+                },
+                {
+                    field: 'planFiniDate',
+                    title: '计划完成日期'
+                },
+                {
+                    field: 'actuDay',
+                    title: '实际工期'
+                },
+                {
+                    field: 'actuStartDate',
+                    title: '实际开始日期'
+                },
+                {
+                    field: 'actuFiniDate',
+                    title: '实际完成日期'
+                },
+                {
+                    field: 'schedule',
+                    title: '进度'
+                },
+                {
+                    field: 'submitDate',
+                    title: '交付日期'
+                },
+                {
+                    field: 'dataSour',
+                    title: '数据来源',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(dataSourDatas, value);
+                    }
+                },
+                {
+                    field: 'datasoCreateDate',
+                    title: '来源数据创建时间'
+                },
+                {
+                    field: 'dataOwner',
+                    title: '数据拥有方'
+                },
+                {
+                    field: 'dataVisible',
+                    title: '数据可见方'
+                },
+               /* {
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.schPlanId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.schPlanId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

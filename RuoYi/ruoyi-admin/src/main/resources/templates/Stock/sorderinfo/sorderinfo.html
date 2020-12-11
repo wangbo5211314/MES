@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('供货单信息列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采购方总部编码：</label>
+                                <input type="text" name="buyerHqCode"/>
+                            </li>
+                            <li>
+                                <label>供应商编码：</label>
+                                <input type="text" name="vendorCode"/>
+                            </li>
+                            <li>
+                                <label>合同类型：</label>
+                                <select name="contType" th:with="type=${@dict.getType('sorder_cont_type')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>采购供货单编号：</label>
+                                <input type="text" name="purcDocuNum"/>
+                            </li>
+                            <li>
+                                <label>合同编号：</label>
+                                <input type="text" name="contNum"/>
+                            </li>
+                            <li class="select-time">
+                                <label>合同签订日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginContSignTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endContSignTime]"/>
+                            </li>
+                            <li>
+                                <label>工程项目名称：</label>
+                                <input type="text" name="projectName"/>
+                            </li>
+                            <li>
+                                <label>合同名称：</label>
+                                <input type="text" name="contName"/>
+                            </li>
+                            <li>
+                                <label>合同编号(国网经法)：</label>
+                                <input type="text" name="gwContNum"/>
+                            </li>
+                            <li>
+                                <label>物资大类编号：</label>
+                                <input type="text" name="mateBigNum"/>
+                            </li>
+                            <li>
+                                <label>物资中类编号：</label>
+                                <input type="text" name="mateMidNum"/>
+                            </li>
+                            <li>
+                                <label>物资小类编号：</label>
+                                <input type="text" name="mateSmallNum"/>
+                            </li>
+                            <li>
+                                <label>物资大类名称：</label>
+                                <input type="text" name="mateBigName"/>
+                            </li>
+                            <li>
+                                <label>物资中类名称：</label>
+                                <input type="text" name="mateMidName"/>
+                            </li>
+                            <li>
+                                <label>物资小类名称：</label>
+                                <input type="text" name="mateSmallName"/>
+                            </li>
+                            <li>
+                                <label>货物名称：</label>
+                                <input type="text" name="goodsName"/>
+                            </li>
+                            <li>
+                                <label>品类编码：</label>
+                                <input type="text" name="cateCode"/>
+                            </li>
+                            <li>
+                                <label>种类编码：</label>
+                                <input type="text" name="kindCode"/>
+                            </li>
+                            <li>
+                                <label>采购方公司名称：</label>
+                                <input type="text" name="purcCompName"/>
+                            </li>
+                            <li>
+                                <label>采购方公司编码：</label>
+                                <input type="text" name="purcCompCode"/>
+                            </li>
+                            <li>
+                                <label>供货单项目号：</label>
+                                <input type="text" name="supItemNum"/>
+                            </li>
+                            <li>
+                                <label>供货单行项目收货方公司名称：</label>
+                                <input type="text" name="sitemAcptName"/>
+                            </li>
+                            <li>
+                                <label>供货单行项目供应商侧物料编码：</label>
+                                <input type="text" name="sitemVmateCode"/>
+                            </li>
+                            <li>
+                                <label>供货单行项目物料描述：</label>
+                                <input type="text" name="sitemMateDesc"/>
+                            </li>
+                            <li>
+                                <label>供货单行项目国网侧物料编码：</label>
+                                <input type="text" name="sitemGwmtCode"/>
+                            </li>
+                            <li>
+                                <label>供货单行项目国网侧物料描述：</label>
+                                <input type="text" name="sitemGwmtDesc"/>
+                            </li>
+                            <li>
+                                <label>供货单行项目采购数量：</label>
+                                <input type="text" name="sitemBuyNum"/>
+                            </li>
+                            <li>
+                                <label>供货单行项目计量单位：</label>
+                                <input type="text" name="sitemUnits"/>
+                            </li>
+                            <li>
+                                <label>数据来源：</label>
+                                <select name="dataSour" th:with="type=${@dict.getType('sorder_info_dsour')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li class="select-time">
+                                <label>来源数据创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDsourCreaTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDsourCreaTime]"/>
+                            </li>
+                            <li>
+                                <label>备注：</label>
+                                <input type="text" name="note"/>
+                            </li>
+                            <li>
+                                <label>数据拥有方：</label>
+                                <input type="text" name="dataOwner"/>
+                            </li>
+                            <li>
+                                <label>数据可见方：</label>
+                                <input type="text" name="dataVisi"/>
+                            </li>
+                           <!-- <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="Stock:sorderinfo:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="Stock:sorderinfo:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="Stock:sorderinfo:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="Stock:sorderinfo:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('Stock:sorderinfo:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('Stock:sorderinfo:remove')}]];
+        var contTypeDatas = [[${@dict.getType('sorder_cont_type')}]];
+        var dataSourDatas = [[${@dict.getType('sorder_info_dsour')}]];
+        var prefix = ctx + "Stock/sorderinfo";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "供货单信息",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'supInfoId',
+                    title: '供货单信息ID',
+                    visible: false
+                },
+                {
+                    field: 'buyerHqCode',
+                    title: '采购方总部编码'
+                },
+                {
+                    field: 'vendorCode',
+                    title: '供应商编码'
+                },
+                {
+                    field: 'contType',
+                    title: '合同类型',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(contTypeDatas, value);
+                    }
+                },
+                {
+                    field: 'purcDocuNum',
+                    title: '采购供货单编号'
+                },
+                {
+                    field: 'contNum',
+                    title: '合同编号'
+                },
+                {
+                    field: 'contSignTime',
+                    title: '合同签订日期'
+                },
+                {
+                    field: 'projectName',
+                    title: '工程项目名称'
+                },
+                {
+                    field: 'contName',
+                    title: '合同名称'
+                },
+                {
+                    field: 'gwContNum',
+                    title: '合同编号(国网经法)'
+                },
+                {
+                    field: 'mateBigNum',
+                    title: '物资大类编号'
+                },
+                {
+                    field: 'mateMidNum',
+                    title: '物资中类编号'
+                },
+                {
+                    field: 'mateSmallNum',
+                    title: '物资小类编号'
+                },
+                {
+                    field: 'mateBigName',
+                    title: '物资大类名称'
+                },
+                {
+                    field: 'mateMidName',
+                    title: '物资中类名称'
+                },
+                {
+                    field: 'mateSmallName',
+                    title: '物资小类名称'
+                },
+                {
+                    field: 'goodsName',
+                    title: '货物名称'
+                },
+                {
+                    field: 'cateCode',
+                    title: '品类编码'
+                },
+                {
+                    field: 'kindCode',
+                    title: '种类编码'
+                },
+                {
+                    field: 'purcCompName',
+                    title: '采购方公司名称'
+                },
+                {
+                    field: 'purcCompCode',
+                    title: '采购方公司编码'
+                },
+                {
+                    field: 'supItemNum',
+                    title: '供货单项目号'
+                },
+                {
+                    field: 'sitemAcptName',
+                    title: '供货单行项目收货方公司名称'
+                },
+                {
+                    field: 'sitemVmateCode',
+                    title: '供货单行项目供应商侧物料编码'
+                },
+                {
+                    field: 'sitemMateDesc',
+                    title: '供货单行项目物料描述'
+                },
+                {
+                    field: 'sitemGwmtCode',
+                    title: '供货单行项目国网侧物料编码'
+                },
+                {
+                    field: 'sitemGwmtDesc',
+                    title: '供货单行项目国网侧物料描述'
+                },
+                {
+                    field: 'sitemBuyNum',
+                    title: '供货单行项目采购数量'
+                },
+                {
+                    field: 'sitemUnits',
+                    title: '供货单行项目计量单位'
+                },
+                {
+                    field: 'dataSour',
+                    title: '数据来源',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(dataSourDatas, value);
+                    }
+                },
+                {
+                    field: 'dsourCreaTime',
+                    title: '来源数据创建时间'
+                },
+                {
+                    field: 'note',
+                    title: '备注'
+                },
+                {
+                    field: 'dataOwner',
+                    title: '数据拥有方'
+                },
+                {
+                    field: 'dataVisi',
+                    title: '数据可见方'
+                },
+               /* {
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.supInfoId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.supInfoId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.PrdtWorkOrderMapper">
+    
+    <resultMap type="PrdtWorkOrder" id="PrdtWorkOrderResult">
+        <result property="workOrderId"    column="work_order_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="venderPrdtOrderNum"    column="vender_prdt_order_num"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="prdtTicketCode"    column="prdt_ticket_code"    />
+        <result property="cateCode"    column="cate_code"    />
+        <result property="kindCode"    column="kind_code"    />
+        <result property="factMatelCode"    column="fact_matel_code"    />
+        <result property="factMatelDesc"    column="fact_matel_desc"    />
+        <result property="matelBatch"    column="matel_batch"    />
+        <result property="prdtNum"    column="prdt_num"    />
+        <result property="meteUnit"    column="mete_unit"    />
+        <result property="planStartDate"    column="plan_start_date"    />
+        <result property="planEndDate"    column="plan_end_date"    />
+        <result property="actuStartDate"    column="actu_start_date"    />
+        <result property="actuFinishDate"    column="actu_finish_date"    />
+        <result property="ticketStatu"    column="ticket_statu"    />
+        <result property="routeCode"    column="route_code"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="datasourCreateDate"    column="datasour_create_date"    />
+        <result property="tombDelete"    column="tomb_delete"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="prodTypeSize"    column="prod_type_size"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectPrdtWorkOrderVo">
+        select work_order_id, buyer_hq_code, vender_prdt_order_num, vendor_code, vendor_name, prdt_ticket_code, cate_code, kind_code, fact_matel_code, fact_matel_desc, matel_batch, prdt_num, mete_unit, plan_start_date, plan_end_date, actu_start_date, actu_finish_date, ticket_statu, route_code, data_source, datasour_create_date, tomb_delete, data_owner, data_visible, prod_type_size, yl, yl2, yl3, yl4, yl5 from prdt_work_order
+    </sql>
+
+    <select id="selectPrdtWorkOrderList" parameterType="PrdtWorkOrder" resultMap="PrdtWorkOrderResult">
+        <include refid="selectPrdtWorkOrderVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="venderPrdtOrderNum != null  and venderPrdtOrderNum != ''"> and vender_prdt_order_num = #{venderPrdtOrderNum}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="prdtTicketCode != null  and prdtTicketCode != ''"> and prdt_ticket_code = #{prdtTicketCode}</if>
+            <if test="cateCode != null  and cateCode != ''"> and cate_code = #{cateCode}</if>
+            <if test="kindCode != null  and kindCode != ''"> and kind_code = #{kindCode}</if>
+            <if test="factMatelCode != null  and factMatelCode != ''"> and fact_matel_code = #{factMatelCode}</if>
+            <if test="factMatelDesc != null  and factMatelDesc != ''"> and fact_matel_desc = #{factMatelDesc}</if>
+            <if test="matelBatch != null  and matelBatch != ''"> and matel_batch = #{matelBatch}</if>
+            <if test="prdtNum != null "> and prdt_num = #{prdtNum}</if>
+            <if test="meteUnit != null  and meteUnit != ''"> and mete_unit = #{meteUnit}</if>
+            <if test="planStartDate != null "> and plan_start_date = #{planStartDate}</if>
+            <if test="planEndDate != null "> and plan_end_date = #{planEndDate}</if>
+            <if test="actuStartDate != null "> and actu_start_date = #{actuStartDate}</if>
+            <if test="actuFinishDate != null "> and actu_finish_date = #{actuFinishDate}</if>
+            <if test="ticketStatu != null  and ticketStatu != ''"> and ticket_statu = #{ticketStatu}</if>
+            <if test="routeCode != null  and routeCode != ''"> and route_code = #{routeCode}</if>
+            <if test="dataSource != null  and dataSource != ''"> and data_source = #{dataSource}</if>
+            <if test="datasourCreateDate != null "> and datasour_create_date = #{datasourCreateDate}</if>
+            <if test="tombDelete != null  and tombDelete != ''"> and tomb_delete = #{tombDelete}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="prodTypeSize != null  and prodTypeSize != ''"> and prod_type_size like concat('%', #{prodTypeSize}, '%')</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectPrdtWorkOrderById" parameterType="Long" resultMap="PrdtWorkOrderResult">
+        <include refid="selectPrdtWorkOrderVo"/>
+        where work_order_id = #{workOrderId}
+    </select>
+        
+    <insert id="insertPrdtWorkOrder" parameterType="PrdtWorkOrder" useGeneratedKeys="true" keyProperty="workOrderId">
+        insert into prdt_work_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="venderPrdtOrderNum != null">vender_prdt_order_num,</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code,</if>
+            <if test="vendorName != null">vendor_name,</if>
+            <if test="prdtTicketCode != null and prdtTicketCode != ''">prdt_ticket_code,</if>
+            <if test="cateCode != null">cate_code,</if>
+            <if test="kindCode != null">kind_code,</if>
+            <if test="factMatelCode != null">fact_matel_code,</if>
+            <if test="factMatelDesc != null">fact_matel_desc,</if>
+            <if test="matelBatch != null">matel_batch,</if>
+            <if test="prdtNum != null">prdt_num,</if>
+            <if test="meteUnit != null">mete_unit,</if>
+            <if test="planStartDate != null">plan_start_date,</if>
+            <if test="planEndDate != null">plan_end_date,</if>
+            <if test="actuStartDate != null">actu_start_date,</if>
+            <if test="actuFinishDate != null">actu_finish_date,</if>
+            <if test="ticketStatu != null">ticket_statu,</if>
+            <if test="routeCode != null">route_code,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="datasourCreateDate != null">datasour_create_date,</if>
+            <if test="tombDelete != null">tomb_delete,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="prodTypeSize != null">prod_type_size,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="venderPrdtOrderNum != null">#{venderPrdtOrderNum},</if>
+            <if test="vendorCode != null and vendorCode != ''">#{vendorCode},</if>
+            <if test="vendorName != null">#{vendorName},</if>
+            <if test="prdtTicketCode != null and prdtTicketCode != ''">#{prdtTicketCode},</if>
+            <if test="cateCode != null">#{cateCode},</if>
+            <if test="kindCode != null">#{kindCode},</if>
+            <if test="factMatelCode != null">#{factMatelCode},</if>
+            <if test="factMatelDesc != null">#{factMatelDesc},</if>
+            <if test="matelBatch != null">#{matelBatch},</if>
+            <if test="prdtNum != null">#{prdtNum},</if>
+            <if test="meteUnit != null">#{meteUnit},</if>
+            <if test="planStartDate != null">#{planStartDate},</if>
+            <if test="planEndDate != null">#{planEndDate},</if>
+            <if test="actuStartDate != null">#{actuStartDate},</if>
+            <if test="actuFinishDate != null">#{actuFinishDate},</if>
+            <if test="ticketStatu != null">#{ticketStatu},</if>
+            <if test="routeCode != null">#{routeCode},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="datasourCreateDate != null">#{datasourCreateDate},</if>
+            <if test="tombDelete != null">#{tombDelete},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="prodTypeSize != null">#{prodTypeSize},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePrdtWorkOrder" parameterType="PrdtWorkOrder">
+        update prdt_work_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="venderPrdtOrderNum != null">vender_prdt_order_num = #{venderPrdtOrderNum},</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null">vendor_name = #{vendorName},</if>
+            <if test="prdtTicketCode != null and prdtTicketCode != ''">prdt_ticket_code = #{prdtTicketCode},</if>
+            <if test="cateCode != null">cate_code = #{cateCode},</if>
+            <if test="kindCode != null">kind_code = #{kindCode},</if>
+            <if test="factMatelCode != null">fact_matel_code = #{factMatelCode},</if>
+            <if test="factMatelDesc != null">fact_matel_desc = #{factMatelDesc},</if>
+            <if test="matelBatch != null">matel_batch = #{matelBatch},</if>
+            <if test="prdtNum != null">prdt_num = #{prdtNum},</if>
+            <if test="meteUnit != null">mete_unit = #{meteUnit},</if>
+            <if test="planStartDate != null">plan_start_date = #{planStartDate},</if>
+            <if test="planEndDate != null">plan_end_date = #{planEndDate},</if>
+            <if test="actuStartDate != null">actu_start_date = #{actuStartDate},</if>
+            <if test="actuFinishDate != null">actu_finish_date = #{actuFinishDate},</if>
+            <if test="ticketStatu != null">ticket_statu = #{ticketStatu},</if>
+            <if test="routeCode != null">route_code = #{routeCode},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="datasourCreateDate != null">datasour_create_date = #{datasourCreateDate},</if>
+            <if test="tombDelete != null">tomb_delete = #{tombDelete},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="prodTypeSize != null">prod_type_size = #{prodTypeSize},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where work_order_id = #{workOrderId}
+    </update>
+
+    <delete id="deletePrdtWorkOrderById" parameterType="Long">
+        delete from prdt_work_order where work_order_id = #{workOrderId}
+    </delete>
+
+    <delete id="deletePrdtWorkOrderByIds" parameterType="String">
+        delete from prdt_work_order where work_order_id in 
+        <foreach item="workOrderId" collection="array" open="(" separator="," close=")">
+            #{workOrderId}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改排产计划')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-scheplan-edit" th:object="${prdtSchePlan}">
+            <input name="schPlanId" th:field="*{schPlanId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购方总部编码：</label>
+                <div class="col-sm-8">
+                    <input name="buyerHqCode" th:field="*{buyerHqCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供应商编码：</label>
+                <div class="col-sm-8">
+                    <input name="vendorCode" th:field="*{vendorCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供应商名称：</label>
+                <div class="col-sm-8">
+                    <input name="vendorName" th:field="*{vendorName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单行项目 id：</label>
+                <div class="col-sm-8">
+                    <input name="purOrderItemId" th:field="*{purOrderItemId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">排产计划编码：</label>
+                <div class="col-sm-8">
+                    <input name="schPlanCode" th:field="*{schPlanCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物料编码：</label>
+                <div class="col-sm-8">
+                    <input name="matCode" th:field="*{matCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物料描述：</label>
+                <div class="col-sm-8">
+                    <input name="matDesc" th:field="*{matDesc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">排产数量：</label>
+                <div class="col-sm-8">
+                    <input name="schNum" th:field="*{schNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">品类编码：</label>
+                <div class="col-sm-8">
+                    <input name="cateCode" th:field="*{cateCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">种类编码：</label>
+                <div class="col-sm-8">
+                    <input name="typeCode" th:field="*{typeCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计划开始日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="planStartDate" th:value="${#dates.format(prdtSchePlan.planStartDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计划工期：</label>
+                <div class="col-sm-8">
+                    <input name="planDay" th:field="*{planDay}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计划完成日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="planFiniDate" th:value="${#dates.format(prdtSchePlan.planFiniDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实际工期：</label>
+                <div class="col-sm-8">
+                    <input name="actuDay" th:field="*{actuDay}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实际开始日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="actuStartDate" th:value="${#dates.format(prdtSchePlan.actuStartDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实际完成日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="actuFiniDate" th:value="${#dates.format(prdtSchePlan.actuFiniDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">进度：</label>
+                <div class="col-sm-8">
+                    <input name="schedule" th:field="*{schedule}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">交付日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="submitDate" th:value="${#dates.format(prdtSchePlan.submitDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数据来源：</label>
+                <div class="col-sm-8">
+                    <select name="dataSour" class="form-control m-b" th:with="type=${@dict.getType('pcjh_datasource')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{dataSour}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">来源数据创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="datasoCreateDate" th:value="${#dates.format(prdtSchePlan.datasoCreateDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数据拥有方：</label>
+                <div class="col-sm-8">
+                    <input name="dataOwner" th:field="*{dataOwner}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数据可见方：</label>
+                <div class="col-sm-8">
+                    <input name="dataVisible" th:field="*{dataVisible}" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl" th:field="*{yl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" th:field="*{yl2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" th:field="*{yl3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" th:field="*{yl4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" th:field="*{yl5}" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "Production/scheplan";
+        $("#form-scheplan-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-scheplan-edit').serialize());
+            }
+        }
+
+        $("input[name='planStartDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='planFiniDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='actuStartDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='actuFiniDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='submitDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='datasoCreateDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

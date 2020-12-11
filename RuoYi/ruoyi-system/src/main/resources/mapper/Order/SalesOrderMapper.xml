@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.order.mapper.SalesOrderMapper">
+    
+    <resultMap type="SalesOrder" id="SalesOrderResult">
+        <result property="salesOrderId"    column="sales_order_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="saleOrderNum"    column="sale_order_num"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="buyerCompanyCode"    column="buyer_company_code"    />
+        <result property="buyerCompanyName"    column="buyer_company_name"    />
+        <result property="buyerCompanyProvince"    column="buyer_company_province"    />
+        <result property="categoryCode"    column="category_code"    />
+        <result property="kindCode"    column="kind_code"    />
+        <result property="saleOrderStatus"    column="sale_order_status"    />
+        <result property="saleOrderitemNum"    column="sale_orderitem_num"    />
+        <result property="purchaseOrderitemId"    column="purchase_orderitem_id"    />
+        <result property="meterialCode"    column="meterial_code"    />
+        <result property="meterialName"    column="meterial_name"    />
+        <result property="meterialUnit"    column="meterial_unit"    />
+        <result property="meterialNum"    column="meterial_num"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="datasourceCreateTime"    column="datasource_create_time"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectSalesOrderVo">
+        select sales_order_id, buyer_hq_code, sale_order_num, vendor_code, buyer_company_code, buyer_company_name, buyer_company_province, category_code, kind_code, sale_order_status, sale_orderitem_num, purchase_orderitem_id, meterial_code, meterial_name, meterial_unit, meterial_num, data_owner, data_visible, data_source, datasource_create_time, yl, yl2, yl3, yl4, yl5 from sales_order
+    </sql>
+
+    <select id="selectSalesOrderList" parameterType="SalesOrder" resultMap="SalesOrderResult">
+        <include refid="selectSalesOrderVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="saleOrderNum != null  and saleOrderNum != ''"> and sale_order_num = #{saleOrderNum}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="buyerCompanyCode != null  and buyerCompanyCode != ''"> and buyer_company_code = #{buyerCompanyCode}</if>
+            <if test="buyerCompanyName != null  and buyerCompanyName != ''"> and buyer_company_name like concat('%', #{buyerCompanyName}, '%')</if>
+            <if test="buyerCompanyProvince != null  and buyerCompanyProvince != ''"> and buyer_company_province = #{buyerCompanyProvince}</if>
+            <if test="categoryCode != null  and categoryCode != ''"> and category_code = #{categoryCode}</if>
+            <if test="kindCode != null  and kindCode != ''"> and kind_code = #{kindCode}</if>
+            <if test="saleOrderStatus != null  and saleOrderStatus != ''"> and sale_order_status = #{saleOrderStatus}</if>
+            <if test="saleOrderitemNum != null  and saleOrderitemNum != ''"> and sale_orderitem_num = #{saleOrderitemNum}</if>
+            <if test="purchaseOrderitemId != null  and purchaseOrderitemId != ''"> and purchase_orderitem_id = #{purchaseOrderitemId}</if>
+            <if test="meterialCode != null  and meterialCode != ''"> and meterial_code = #{meterialCode}</if>
+            <if test="meterialName != null  and meterialName != ''"> and meterial_name like concat('%', #{meterialName}, '%')</if>
+            <if test="meterialUnit != null  and meterialUnit != ''"> and meterial_unit = #{meterialUnit}</if>
+            <if test="meterialNum != null "> and meterial_num = #{meterialNum}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="dataSource != null  and dataSource != ''"> and data_source = #{dataSource}</if>
+            <if test="datasourceCreateTime != null "> and datasource_create_time = #{datasourceCreateTime}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectSalesOrderById" parameterType="Long" resultMap="SalesOrderResult">
+        <include refid="selectSalesOrderVo"/>
+        where sales_order_id = #{salesOrderId}
+    </select>
+        
+    <insert id="insertSalesOrder" parameterType="SalesOrder" useGeneratedKeys="true" keyProperty="salesOrderId">
+        insert into sales_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null and buyerHqCode != ''">buyer_hq_code,</if>
+            <if test="saleOrderNum != null and saleOrderNum != ''">sale_order_num,</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code,</if>
+            <if test="buyerCompanyCode != null">buyer_company_code,</if>
+            <if test="buyerCompanyName != null and buyerCompanyName != ''">buyer_company_name,</if>
+            <if test="buyerCompanyProvince != null and buyerCompanyProvince != ''">buyer_company_province,</if>
+            <if test="categoryCode != null and categoryCode != ''">category_code,</if>
+            <if test="kindCode != null and kindCode != ''">kind_code,</if>
+            <if test="saleOrderStatus != null">sale_order_status,</if>
+            <if test="saleOrderitemNum != null and saleOrderitemNum != ''">sale_orderitem_num,</if>
+            <if test="purchaseOrderitemId != null and purchaseOrderitemId != ''">purchase_orderitem_id,</if>
+            <if test="meterialCode != null and meterialCode != ''">meterial_code,</if>
+            <if test="meterialName != null and meterialName != ''">meterial_name,</if>
+            <if test="meterialUnit != null and meterialUnit != ''">meterial_unit,</if>
+            <if test="meterialNum != null">meterial_num,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="dataSource != null and dataSource != ''">data_source,</if>
+            <if test="datasourceCreateTime != null">datasource_create_time,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null and buyerHqCode != ''">#{buyerHqCode},</if>
+            <if test="saleOrderNum != null and saleOrderNum != ''">#{saleOrderNum},</if>
+            <if test="vendorCode != null and vendorCode != ''">#{vendorCode},</if>
+            <if test="buyerCompanyCode != null">#{buyerCompanyCode},</if>
+            <if test="buyerCompanyName != null and buyerCompanyName != ''">#{buyerCompanyName},</if>
+            <if test="buyerCompanyProvince != null and buyerCompanyProvince != ''">#{buyerCompanyProvince},</if>
+            <if test="categoryCode != null and categoryCode != ''">#{categoryCode},</if>
+            <if test="kindCode != null and kindCode != ''">#{kindCode},</if>
+            <if test="saleOrderStatus != null">#{saleOrderStatus},</if>
+            <if test="saleOrderitemNum != null and saleOrderitemNum != ''">#{saleOrderitemNum},</if>
+            <if test="purchaseOrderitemId != null and purchaseOrderitemId != ''">#{purchaseOrderitemId},</if>
+            <if test="meterialCode != null and meterialCode != ''">#{meterialCode},</if>
+            <if test="meterialName != null and meterialName != ''">#{meterialName},</if>
+            <if test="meterialUnit != null and meterialUnit != ''">#{meterialUnit},</if>
+            <if test="meterialNum != null">#{meterialNum},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="dataSource != null and dataSource != ''">#{dataSource},</if>
+            <if test="datasourceCreateTime != null">#{datasourceCreateTime},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSalesOrder" parameterType="SalesOrder">
+        update sales_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null and buyerHqCode != ''">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="saleOrderNum != null and saleOrderNum != ''">sale_order_num = #{saleOrderNum},</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code = #{vendorCode},</if>
+            <if test="buyerCompanyCode != null">buyer_company_code = #{buyerCompanyCode},</if>
+            <if test="buyerCompanyName != null and buyerCompanyName != ''">buyer_company_name = #{buyerCompanyName},</if>
+            <if test="buyerCompanyProvince != null and buyerCompanyProvince != ''">buyer_company_province = #{buyerCompanyProvince},</if>
+            <if test="categoryCode != null and categoryCode != ''">category_code = #{categoryCode},</if>
+            <if test="kindCode != null and kindCode != ''">kind_code = #{kindCode},</if>
+            <if test="saleOrderStatus != null">sale_order_status = #{saleOrderStatus},</if>
+            <if test="saleOrderitemNum != null and saleOrderitemNum != ''">sale_orderitem_num = #{saleOrderitemNum},</if>
+            <if test="purchaseOrderitemId != null and purchaseOrderitemId != ''">purchase_orderitem_id = #{purchaseOrderitemId},</if>
+            <if test="meterialCode != null and meterialCode != ''">meterial_code = #{meterialCode},</if>
+            <if test="meterialName != null and meterialName != ''">meterial_name = #{meterialName},</if>
+            <if test="meterialUnit != null and meterialUnit != ''">meterial_unit = #{meterialUnit},</if>
+            <if test="meterialNum != null">meterial_num = #{meterialNum},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="dataSource != null and dataSource != ''">data_source = #{dataSource},</if>
+            <if test="datasourceCreateTime != null">datasource_create_time = #{datasourceCreateTime},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where sales_order_id = #{salesOrderId}
+    </update>
+
+    <delete id="deleteSalesOrderById" parameterType="Long">
+        delete from sales_order where sales_order_id = #{salesOrderId}
+    </delete>
+
+    <delete id="deleteSalesOrderByIds" parameterType="String">
+        delete from sales_order where sales_order_id in 
+        <foreach item="salesOrderId" collection="array" open="(" separator="," close=")">
+            #{salesOrderId}
+        </foreach>
+    </delete>
+
+</mapper>

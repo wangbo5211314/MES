@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.order.mapper.GwOrdersReqMapper">
+    
+    <resultMap type="GwOrdersReq" id="GwOrdersReqResult">
+        <result property="nnRequestId"    column="nn_request_id"    />
+        <result property="buyerHeadquartersCode"    column="buyer_headquarters_code"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="startContractDate"    column="start_contract_date"    />
+        <result property="endContractDate"    column="end_contract_date"    />
+        <result property="startUpdateTime"    column="start_update_time"    />
+        <result property="stopUpdateTime"    column="stop_update_time"    />
+        <result property="contractNumNn"    column="contract_num_nn"    />
+        <result property="contractNum"    column="contract_num"    />
+        <result property="purchaseOrderCode"    column="purchase_order_code"    />
+        <result property="numBarsPerPage"    column="num_bars_per_page"    />
+        <result property="curPageNum"    column="cur_page_num"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectGwOrdersReqVo">
+        select nn_request_id, buyer_headquarters_code, vendor_code, vendor_name, start_contract_date, end_contract_date, start_update_time, stop_update_time, contract_num_nn, contract_num, purchase_order_code, num_bars_per_page, cur_page_num, yl, yl2, yl3, yl4, yl5 from gw_orders_req
+    </sql>
+
+    <select id="selectGwOrdersReqList" parameterType="GwOrdersReq" resultMap="GwOrdersReqResult">
+        <include refid="selectGwOrdersReqVo"/>
+        <where>  
+            <if test="buyerHeadquartersCode != null  and buyerHeadquartersCode != ''"> and buyer_headquarters_code = #{buyerHeadquartersCode}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="startContractDate != null "> and start_contract_date = #{startContractDate}</if>
+            <if test="endContractDate != null "> and end_contract_date = #{endContractDate}</if>
+            <if test="startUpdateTime != null "> and start_update_time = #{startUpdateTime}</if>
+            <if test="stopUpdateTime != null "> and stop_update_time = #{stopUpdateTime}</if>
+            <if test="contractNumNn != null  and contractNumNn != ''"> and contract_num_nn = #{contractNumNn}</if>
+            <if test="contractNum != null  and contractNum != ''"> and contract_num = #{contractNum}</if>
+            <if test="purchaseOrderCode != null  and purchaseOrderCode != ''"> and purchase_order_code = #{purchaseOrderCode}</if>
+            <if test="numBarsPerPage != null "> and num_bars_per_page = #{numBarsPerPage}</if>
+            <if test="curPageNum != null "> and cur_page_num = #{curPageNum}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectGwOrdersReqById" parameterType="Long" resultMap="GwOrdersReqResult">
+        <include refid="selectGwOrdersReqVo"/>
+        where nn_request_id = #{nnRequestId}
+    </select>
+        
+    <insert id="insertGwOrdersReq" parameterType="GwOrdersReq" useGeneratedKeys="true" keyProperty="nnRequestId">
+        insert into gw_orders_req
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHeadquartersCode != null and buyerHeadquartersCode != ''">buyer_headquarters_code,</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code,</if>
+            <if test="vendorName != null and vendorName != ''">vendor_name,</if>
+            <if test="startContractDate != null">start_contract_date,</if>
+            <if test="endContractDate != null">end_contract_date,</if>
+            <if test="startUpdateTime != null">start_update_time,</if>
+            <if test="stopUpdateTime != null">stop_update_time,</if>
+            <if test="contractNumNn != null">contract_num_nn,</if>
+            <if test="contractNum != null">contract_num,</if>
+            <if test="purchaseOrderCode != null">purchase_order_code,</if>
+            <if test="numBarsPerPage != null">num_bars_per_page,</if>
+            <if test="curPageNum != null">cur_page_num,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHeadquartersCode != null and buyerHeadquartersCode != ''">#{buyerHeadquartersCode},</if>
+            <if test="vendorCode != null and vendorCode != ''">#{vendorCode},</if>
+            <if test="vendorName != null and vendorName != ''">#{vendorName},</if>
+            <if test="startContractDate != null">#{startContractDate},</if>
+            <if test="endContractDate != null">#{endContractDate},</if>
+            <if test="startUpdateTime != null">#{startUpdateTime},</if>
+            <if test="stopUpdateTime != null">#{stopUpdateTime},</if>
+            <if test="contractNumNn != null">#{contractNumNn},</if>
+            <if test="contractNum != null">#{contractNum},</if>
+            <if test="purchaseOrderCode != null">#{purchaseOrderCode},</if>
+            <if test="numBarsPerPage != null">#{numBarsPerPage},</if>
+            <if test="curPageNum != null">#{curPageNum},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGwOrdersReq" parameterType="GwOrdersReq">
+        update gw_orders_req
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHeadquartersCode != null and buyerHeadquartersCode != ''">buyer_headquarters_code = #{buyerHeadquartersCode},</if>
+            <if test="vendorCode != null and vendorCode != ''">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null and vendorName != ''">vendor_name = #{vendorName},</if>
+            <if test="startContractDate != null">start_contract_date = #{startContractDate},</if>
+            <if test="endContractDate != null">end_contract_date = #{endContractDate},</if>
+            <if test="startUpdateTime != null">start_update_time = #{startUpdateTime},</if>
+            <if test="stopUpdateTime != null">stop_update_time = #{stopUpdateTime},</if>
+            <if test="contractNumNn != null">contract_num_nn = #{contractNumNn},</if>
+            <if test="contractNum != null">contract_num = #{contractNum},</if>
+            <if test="purchaseOrderCode != null">purchase_order_code = #{purchaseOrderCode},</if>
+            <if test="numBarsPerPage != null">num_bars_per_page = #{numBarsPerPage},</if>
+            <if test="curPageNum != null">cur_page_num = #{curPageNum},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where nn_request_id = #{nnRequestId}
+    </update>
+
+    <delete id="deleteGwOrdersReqById" parameterType="Long">
+        delete from gw_orders_req where nn_request_id = #{nnRequestId}
+    </delete>
+
+    <delete id="deleteGwOrdersReqByIds" parameterType="String">
+        delete from gw_orders_req where nn_request_id in 
+        <foreach item="nnRequestId" collection="array" open="(" separator="," close=")">
+            #{nnRequestId}
+        </foreach>
+    </delete>
+
+</mapper>

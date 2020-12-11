@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增国网采购订单-返回')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-orderreturn-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单编码：</label>
+                <div class="col-sm-8">
+                    <input name="purchaseOrderCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单行项目号：</label>
+                <div class="col-sm-8">
+                    <input name="purchaseOrderItemNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单行项目id：</label>
+                <div class="col-sm-8">
+                    <input name="purchaseOrderItemId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同编号：</label>
+                <div class="col-sm-8">
+                    <input name="contractNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同名称：</label>
+                <div class="col-sm-8">
+                    <input name="contractName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购方公司名称：</label>
+                <div class="col-sm-8">
+                    <input name="purchaserCompanyName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购方公司编码：</label>
+                <div class="col-sm-8">
+                    <input name="purchaserCompanyCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购方物料编码：</label>
+                <div class="col-sm-8">
+                    <input name="purchaserMaterialCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购方物料描述：</label>
+                <div class="col-sm-8">
+                    <input name="purchaserMaterialDescrip" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购数量：</label>
+                <div class="col-sm-8">
+                    <input name="purchaseNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同编号(国网经法)：</label>
+                <div class="col-sm-8">
+                    <input name="contractNumNn" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">技术规范流水号：</label>
+                <div class="col-sm-8">
+                    <input name="technicalFlowNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同签订日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="contractSignedDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同类型：</label>
+                <div class="col-sm-8">
+                    <input name="contractType" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">项目编号：</label>
+                <div class="col-sm-8">
+                    <input name="itemNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工程项目名称：</label>
+                <div class="col-sm-8">
+                    <input name="projectName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物资编码：</label>
+                <div class="col-sm-8">
+                    <input name="materialCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购技术固化ID：</label>
+                <div class="col-sm-8">
+                    <input name="purchaseTecCuringId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同包号：</label>
+                <div class="col-sm-8">
+                    <input name="contractPackageNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">招标批次号：</label>
+                <div class="col-sm-8">
+                    <input name="tenderNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">固化ID描述：</label>
+                <div class="col-sm-8">
+                    <input name="curingidDescrip" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物资大类编码：</label>
+                <div class="col-sm-8">
+                    <input name="materialBigCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物资中类编码：</label>
+                <div class="col-sm-8">
+                    <input name="materialMidCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物资小类编码：</label>
+                <div class="col-sm-8">
+                    <input name="materialSmallCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物资大类名称：</label>
+                <div class="col-sm-8">
+                    <input name="materialBigName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物资中类名称：</label>
+                <div class="col-sm-8">
+                    <input name="materialMidName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物资小类名称：</label>
+                <div class="col-sm-8">
+                    <input name="materialSmallName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">每页条数：</label>
+                <div class="col-sm-8">
+                    <input name="numBarsPerPage" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">当前页码：</label>
+                <div class="col-sm-8">
+                    <input name="curPageNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">页数：</label>
+                <div class="col-sm-8">
+                    <input name="pageNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总记录数：</label>
+                <div class="col-sm-8">
+                    <input name="allRecordNum" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "Order/orderreturn"
+        $("#form-orderreturn-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-orderreturn-add').serialize());
+            }
+        }
+
+        $("input[name='contractSignedDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

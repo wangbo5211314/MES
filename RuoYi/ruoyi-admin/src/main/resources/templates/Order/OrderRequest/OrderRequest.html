@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('国网采购订单-请求列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采购方总部编码：</label>
+                                <input type="text" name="buyerHeadquartersCode"/>
+                            </li>
+                            <li>
+                                <label>供应商编码：</label>
+                                <input type="text" name="vendorCode"/>
+                            </li>
+                            <li>
+                                <label>供应商名称：</label>
+                                <input type="text" name="vendorName"/>
+                            </li>
+                            <li class="select-time">
+                                <label>合同签订开始日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginStartContractDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endStartContractDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>合同签订结束日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginEndContractDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endEndContractDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>更新时间起：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginStartUpdateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endStartUpdateTime]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>更新时间起：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginStopUpdateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endStopUpdateTime]"/>
+                            </li>
+                            <li>
+                                <label>合同编号(国网经法)：</label>
+                                <input type="text" name="contractNumNn"/>
+                            </li>
+                            <li>
+                                <label>合同编号：</label>
+                                <input type="text" name="contractNum"/>
+                            </li>
+                            <li>
+                                <label>采购订单编码：</label>
+                                <input type="text" name="purchaseOrderCode"/>
+                            </li>
+                            <li>
+                                <label>每页条数：</label>
+                                <input type="text" name="numBarsPerPage"/>
+                            </li>
+                            <li>
+                                <label>当前页码：</label>
+                                <input type="text" name="curPageNum"/>
+                            </li>
+                          <!--  <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>-->
+                            <!--<li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="Order:OrderRequest:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="Order:OrderRequest:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="Order:OrderRequest:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="Order:OrderRequest:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('Order:OrderRequest:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('Order:OrderRequest:remove')}]];
+        var prefix = ctx + "Order/OrderRequest";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "国网采购订单-请求",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'nnRequestId',
+                    title: 'ID',
+                    visible: false
+                },
+                {
+                    field: 'buyerHeadquartersCode',
+                    title: '采购方总部编码'
+                },
+                {
+                    field: 'vendorCode',
+                    title: '供应商编码'
+                },
+                {
+                    field: 'vendorName',
+                    title: '供应商名称'
+                },
+                {
+                    field: 'startContractDate',
+                    title: '合同签订开始日期'
+                },
+                {
+                    field: 'endContractDate',
+                    title: '合同签订结束日期'
+                },
+                {
+                    field: 'startUpdateTime',
+                    title: '更新时间起'
+                },
+                {
+                    field: 'stopUpdateTime',
+                    title: '更新时间起'
+                },
+                {
+                    field: 'contractNumNn',
+                    title: '合同编号(国网经法)'
+                },
+                {
+                    field: 'contractNum',
+                    title: '合同编号'
+                },
+                {
+                    field: 'purchaseOrderCode',
+                    title: '采购订单编码'
+                },
+                {
+                    field: 'numBarsPerPage',
+                    title: '每页条数'
+                },
+                {
+                    field: 'curPageNum',
+                    title: '当前页码'
+                },
+                /*{
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.nnRequestId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.nnRequestId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

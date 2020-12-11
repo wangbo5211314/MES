@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.PrdtSchePlanMapper">
+    
+    <resultMap type="PrdtSchePlan" id="PrdtSchePlanResult">
+        <result property="schPlanId"    column="sch_plan_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="purOrderItemId"    column="pur_order_item_id"    />
+        <result property="schPlanCode"    column="sch_plan_code"    />
+        <result property="matCode"    column="mat_code"    />
+        <result property="matDesc"    column="mat_desc"    />
+        <result property="schNum"    column="sch_num"    />
+        <result property="cateCode"    column="cate_code"    />
+        <result property="typeCode"    column="type_code"    />
+        <result property="planStartDate"    column="plan_start_date"    />
+        <result property="planDay"    column="plan_day"    />
+        <result property="planFiniDate"    column="plan_fini_date"    />
+        <result property="actuDay"    column="actu_day"    />
+        <result property="actuStartDate"    column="actu_start_date"    />
+        <result property="actuFiniDate"    column="actu_fini_date"    />
+        <result property="schedule"    column="schedule"    />
+        <result property="submitDate"    column="submit_date"    />
+        <result property="dataSour"    column="data_sour"    />
+        <result property="datasoCreateDate"    column="dataso_create_date"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectPrdtSchePlanVo">
+        select sch_plan_id, buyer_hq_code, vendor_code, vendor_name, pur_order_item_id, sch_plan_code, mat_code, mat_desc, sch_num, cate_code, type_code, plan_start_date, plan_day, plan_fini_date, actu_day, actu_start_date, actu_fini_date, schedule, submit_date, data_sour, dataso_create_date, data_owner, data_visible, yl, yl2, yl3, yl4, yl5 from prdt_sche_plan
+    </sql>
+
+    <select id="selectPrdtSchePlanList" parameterType="PrdtSchePlan" resultMap="PrdtSchePlanResult">
+        <include refid="selectPrdtSchePlanVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="purOrderItemId != null  and purOrderItemId != ''"> and pur_order_item_id = #{purOrderItemId}</if>
+            <if test="schPlanCode != null  and schPlanCode != ''"> and sch_plan_code = #{schPlanCode}</if>
+            <if test="matCode != null  and matCode != ''"> and mat_code = #{matCode}</if>
+            <if test="matDesc != null  and matDesc != ''"> and mat_desc = #{matDesc}</if>
+            <if test="schNum != null "> and sch_num = #{schNum}</if>
+            <if test="cateCode != null  and cateCode != ''"> and cate_code = #{cateCode}</if>
+            <if test="typeCode != null  and typeCode != ''"> and type_code = #{typeCode}</if>
+            <if test="planStartDate != null "> and plan_start_date = #{planStartDate}</if>
+            <if test="planDay != null "> and plan_day = #{planDay}</if>
+            <if test="planFiniDate != null "> and plan_fini_date = #{planFiniDate}</if>
+            <if test="actuDay != null "> and actu_day = #{actuDay}</if>
+            <if test="actuStartDate != null "> and actu_start_date = #{actuStartDate}</if>
+            <if test="actuFiniDate != null "> and actu_fini_date = #{actuFiniDate}</if>
+            <if test="schedule != null  and schedule != ''"> and schedule = #{schedule}</if>
+            <if test="submitDate != null "> and submit_date = #{submitDate}</if>
+            <if test="dataSour != null  and dataSour != ''"> and data_sour = #{dataSour}</if>
+            <if test="datasoCreateDate != null "> and dataso_create_date = #{datasoCreateDate}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner = #{dataOwner}</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible = #{dataVisible}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectPrdtSchePlanById" parameterType="Long" resultMap="PrdtSchePlanResult">
+        <include refid="selectPrdtSchePlanVo"/>
+        where sch_plan_id = #{schPlanId}
+    </select>
+        
+    <insert id="insertPrdtSchePlan" parameterType="PrdtSchePlan" useGeneratedKeys="true" keyProperty="schPlanId">
+        insert into prdt_sche_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="vendorCode != null">vendor_code,</if>
+            <if test="vendorName != null">vendor_name,</if>
+            <if test="purOrderItemId != null">pur_order_item_id,</if>
+            <if test="schPlanCode != null">sch_plan_code,</if>
+            <if test="matCode != null">mat_code,</if>
+            <if test="matDesc != null">mat_desc,</if>
+            <if test="schNum != null">sch_num,</if>
+            <if test="cateCode != null">cate_code,</if>
+            <if test="typeCode != null">type_code,</if>
+            <if test="planStartDate != null">plan_start_date,</if>
+            <if test="planDay != null">plan_day,</if>
+            <if test="planFiniDate != null">plan_fini_date,</if>
+            <if test="actuDay != null">actu_day,</if>
+            <if test="actuStartDate != null">actu_start_date,</if>
+            <if test="actuFiniDate != null">actu_fini_date,</if>
+            <if test="schedule != null">schedule,</if>
+            <if test="submitDate != null">submit_date,</if>
+            <if test="dataSour != null">data_sour,</if>
+            <if test="datasoCreateDate != null">dataso_create_date,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="vendorCode != null">#{vendorCode},</if>
+            <if test="vendorName != null">#{vendorName},</if>
+            <if test="purOrderItemId != null">#{purOrderItemId},</if>
+            <if test="schPlanCode != null">#{schPlanCode},</if>
+            <if test="matCode != null">#{matCode},</if>
+            <if test="matDesc != null">#{matDesc},</if>
+            <if test="schNum != null">#{schNum},</if>
+            <if test="cateCode != null">#{cateCode},</if>
+            <if test="typeCode != null">#{typeCode},</if>
+            <if test="planStartDate != null">#{planStartDate},</if>
+            <if test="planDay != null">#{planDay},</if>
+            <if test="planFiniDate != null">#{planFiniDate},</if>
+            <if test="actuDay != null">#{actuDay},</if>
+            <if test="actuStartDate != null">#{actuStartDate},</if>
+            <if test="actuFiniDate != null">#{actuFiniDate},</if>
+            <if test="schedule != null">#{schedule},</if>
+            <if test="submitDate != null">#{submitDate},</if>
+            <if test="dataSour != null">#{dataSour},</if>
+            <if test="datasoCreateDate != null">#{datasoCreateDate},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePrdtSchePlan" parameterType="PrdtSchePlan">
+        update prdt_sche_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="vendorCode != null">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null">vendor_name = #{vendorName},</if>
+            <if test="purOrderItemId != null">pur_order_item_id = #{purOrderItemId},</if>
+            <if test="schPlanCode != null">sch_plan_code = #{schPlanCode},</if>
+            <if test="matCode != null">mat_code = #{matCode},</if>
+            <if test="matDesc != null">mat_desc = #{matDesc},</if>
+            <if test="schNum != null">sch_num = #{schNum},</if>
+            <if test="cateCode != null">cate_code = #{cateCode},</if>
+            <if test="typeCode != null">type_code = #{typeCode},</if>
+            <if test="planStartDate != null">plan_start_date = #{planStartDate},</if>
+            <if test="planDay != null">plan_day = #{planDay},</if>
+            <if test="planFiniDate != null">plan_fini_date = #{planFiniDate},</if>
+            <if test="actuDay != null">actu_day = #{actuDay},</if>
+            <if test="actuStartDate != null">actu_start_date = #{actuStartDate},</if>
+            <if test="actuFiniDate != null">actu_fini_date = #{actuFiniDate},</if>
+            <if test="schedule != null">schedule = #{schedule},</if>
+            <if test="submitDate != null">submit_date = #{submitDate},</if>
+            <if test="dataSour != null">data_sour = #{dataSour},</if>
+            <if test="datasoCreateDate != null">dataso_create_date = #{datasoCreateDate},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where sch_plan_id = #{schPlanId}
+    </update>
+
+    <delete id="deletePrdtSchePlanById" parameterType="Long">
+        delete from prdt_sche_plan where sch_plan_id = #{schPlanId}
+    </delete>
+
+    <delete id="deletePrdtSchePlanByIds" parameterType="String">
+        delete from prdt_sche_plan where sch_plan_id in 
+        <foreach item="schPlanId" collection="array" open="(" separator="," close=")">
+            #{schPlanId}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改报工信息')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-reportinfo-edit" th:object="${production}">
+            <input name="repoInfoId" th:field="*{repoInfoId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购方总部编码：</label>
+                <div class="col-sm-8">
+                    <input name="buyerHqCode" th:field="*{buyerHqCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供应商编码：</label>
+                <div class="col-sm-8">
+                    <input name="suplCode" th:field="*{suplCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产订单编号：</label>
+                <div class="col-sm-8">
+                    <input name="prdtOrderNum" th:field="*{prdtOrderNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产品内部ID号：</label>
+                <div class="col-sm-8">
+                    <input name="prdtInsidNum" th:field="*{prdtInsidNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备编号：</label>
+                <div class="col-sm-8">
+                    <input name="eqmtNum" th:field="*{eqmtNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产批次号：</label>
+                <div class="col-sm-8">
+                    <input name="prdtBatchNum" th:field="*{prdtBatchNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工序名称：</label>
+                <div class="col-sm-8">
+                    <input name="prcesName" th:field="*{prcesName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">品类编码：</label>
+                <div class="col-sm-8">
+                    <input name="categCode" th:field="*{categCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">种类编码：</label>
+                <div class="col-sm-8">
+                    <input name="typeCode" th:field="*{typeCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工序编码：</label>
+                <div class="col-sm-8">
+                    <input name="prcesCode" th:field="*{prcesCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产工艺路线编码：</label>
+                <div class="col-sm-8">
+                    <input name="prdtRouteCode" th:field="*{prdtRouteCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产车间id：</label>
+                <div class="col-sm-8">
+                    <input name="prdtShopId" th:field="*{prdtShopId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产车间编码：</label>
+                <div class="col-sm-8">
+                    <input name="prdtShopCode" th:field="*{prdtShopCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产车间名称：</label>
+                <div class="col-sm-8">
+                    <input name="prdtShopName" th:field="*{prdtShopName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产工单编号：</label>
+                <div class="col-sm-8">
+                    <input name="prdtWorderNum" th:field="*{prdtWorderNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实物id：</label>
+                <div class="col-sm-8">
+                    <input name="pyscId" th:field="*{pyscId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数据来源：</label>
+                <div class="col-sm-8">
+                    <select name="dataSour" class="form-control m-b" th:with="type=${@dict.getType('prdt_repo_datasource')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{dataSour}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">来源数据创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="sourdataCretTime" th:value="${#dates.format(production.sourdataCretTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计划开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="planStartTime" th:value="${#dates.format(production.planStartTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计划结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="planEndTime" th:value="${#dates.format(production.planEndTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实际开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="actuStartTime" th:value="${#dates.format(production.actuStartTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实际结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="actuEndTime" th:value="${#dates.format(production.actuEndTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">订单状态：</label>
+                <div class="col-sm-8">
+                    <input name="orderStatus" th:field="*{orderStatus}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户所属省份：</label>
+                <div class="col-sm-8">
+                    <select name="cstmProvince" class="form-control m-b" th:with="type=${@dict.getType('prdt_repo_cusprov')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{cstmProvince}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数据拥有方：</label>
+                <div class="col-sm-8">
+                    <input name="dataOwner" th:field="*{dataOwner}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数据可见方：</label>
+                <div class="col-sm-8">
+                    <input name="dataVisible" th:field="*{dataVisible}" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl" th:field="*{yl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" th:field="*{yl2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" th:field="*{yl3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" th:field="*{yl4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" th:field="*{yl5}" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "Production/reportinfo";
+        $("#form-reportinfo-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-reportinfo-edit').serialize());
+            }
+        }
+
+        $("input[name='sourdataCretTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='planStartTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='planEndTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='actuStartTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='actuEndTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

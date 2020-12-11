@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stock.mapper.StockPhysidInfoMapper">
+    
+    <resultMap type="StockPhysidInfo" id="StockPhysidInfoResult">
+        <result property="phsyidInfoId"    column="phsyid_info_id"    />
+        <result property="buyerHqCode"    column="buyer_hq_code"    />
+        <result property="vendorCode"    column="vendor_code"    />
+        <result property="vendorName"    column="vendor_name"    />
+        <result property="physId"    column="phys_id"    />
+        <result property="purcOrderItenId"    column="purc_order_iten_id"    />
+        <result property="physPrdtStatus"    column="phys_prdt_status"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="sourdataCretTime"    column="sourdata_cret_time"    />
+        <result property="note"    column="note"    />
+        <result property="dataOwner"    column="data_owner"    />
+        <result property="dataVisible"    column="data_visible"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectStockPhysidInfoVo">
+        select phsyid_info_id, buyer_hq_code, vendor_code, vendor_name, phys_id, purc_order_iten_id, phys_prdt_status, data_source, sourdata_cret_time, note, data_owner, data_visible, yl, yl2, yl3, yl4, yl5 from stock_physid_info
+    </sql>
+
+    <select id="selectStockPhysidInfoList" parameterType="StockPhysidInfo" resultMap="StockPhysidInfoResult">
+        <include refid="selectStockPhysidInfoVo"/>
+        <where>  
+            <if test="buyerHqCode != null  and buyerHqCode != ''"> and buyer_hq_code = #{buyerHqCode}</if>
+            <if test="vendorCode != null  and vendorCode != ''"> and vendor_code = #{vendorCode}</if>
+            <if test="vendorName != null  and vendorName != ''"> and vendor_name like concat('%', #{vendorName}, '%')</if>
+            <if test="physId != null  and physId != ''"> and phys_id = #{physId}</if>
+            <if test="purcOrderItenId != null  and purcOrderItenId != ''"> and purc_order_iten_id = #{purcOrderItenId}</if>
+            <if test="physPrdtStatus != null  and physPrdtStatus != ''"> and phys_prdt_status = #{physPrdtStatus}</if>
+            <if test="dataSource != null  and dataSource != ''"> and data_source = #{dataSource}</if>
+            <if test="sourdataCretTime != null "> and sourdata_cret_time = #{sourdataCretTime}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="dataOwner != null  and dataOwner != ''"> and data_owner like concat('%', #{dataOwner}, '%')</if>
+            <if test="dataVisible != null  and dataVisible != ''"> and data_visible like concat('%', #{dataVisible}, '%')</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectStockPhysidInfoById" parameterType="Long" resultMap="StockPhysidInfoResult">
+        <include refid="selectStockPhysidInfoVo"/>
+        where phsyid_info_id = #{phsyidInfoId}
+    </select>
+        
+    <insert id="insertStockPhysidInfo" parameterType="StockPhysidInfo" useGeneratedKeys="true" keyProperty="phsyidInfoId">
+        insert into stock_physid_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code,</if>
+            <if test="vendorCode != null">vendor_code,</if>
+            <if test="vendorName != null">vendor_name,</if>
+            <if test="physId != null">phys_id,</if>
+            <if test="purcOrderItenId != null">purc_order_iten_id,</if>
+            <if test="physPrdtStatus != null">phys_prdt_status,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="sourdataCretTime != null">sourdata_cret_time,</if>
+            <if test="note != null">note,</if>
+            <if test="dataOwner != null">data_owner,</if>
+            <if test="dataVisible != null">data_visible,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buyerHqCode != null">#{buyerHqCode},</if>
+            <if test="vendorCode != null">#{vendorCode},</if>
+            <if test="vendorName != null">#{vendorName},</if>
+            <if test="physId != null">#{physId},</if>
+            <if test="purcOrderItenId != null">#{purcOrderItenId},</if>
+            <if test="physPrdtStatus != null">#{physPrdtStatus},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="sourdataCretTime != null">#{sourdataCretTime},</if>
+            <if test="note != null">#{note},</if>
+            <if test="dataOwner != null">#{dataOwner},</if>
+            <if test="dataVisible != null">#{dataVisible},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockPhysidInfo" parameterType="StockPhysidInfo">
+        update stock_physid_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buyerHqCode != null">buyer_hq_code = #{buyerHqCode},</if>
+            <if test="vendorCode != null">vendor_code = #{vendorCode},</if>
+            <if test="vendorName != null">vendor_name = #{vendorName},</if>
+            <if test="physId != null">phys_id = #{physId},</if>
+            <if test="purcOrderItenId != null">purc_order_iten_id = #{purcOrderItenId},</if>
+            <if test="physPrdtStatus != null">phys_prdt_status = #{physPrdtStatus},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="sourdataCretTime != null">sourdata_cret_time = #{sourdataCretTime},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="dataOwner != null">data_owner = #{dataOwner},</if>
+            <if test="dataVisible != null">data_visible = #{dataVisible},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where phsyid_info_id = #{phsyidInfoId}
+    </update>
+
+    <delete id="deleteStockPhysidInfoById" parameterType="Long">
+        delete from stock_physid_info where phsyid_info_id = #{phsyidInfoId}
+    </delete>
+
+    <delete id="deleteStockPhysidInfoByIds" parameterType="String">
+        delete from stock_physid_info where phsyid_info_id in 
+        <foreach item="phsyidInfoId" collection="array" open="(" separator="," close=")">
+            #{phsyidInfoId}
+        </foreach>
+    </delete>
+
+</mapper>

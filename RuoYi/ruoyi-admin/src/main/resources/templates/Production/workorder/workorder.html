@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('工单列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采购方总部编码：</label>
+                                <input type="text" name="buyerHqCode"/>
+                            </li>
+                            <li>
+                                <label>供应商生产订单编号：</label>
+                                <input type="text" name="venderPrdtOrderNum"/>
+                            </li>
+                            <li>
+                                <label>供应商编码：</label>
+                                <input type="text" name="vendorCode"/>
+                            </li>
+                            <li>
+                                <label>供应商名称：</label>
+                                <input type="text" name="vendorName"/>
+                            </li>
+                            <li>
+                                <label>生产工单编码：</label>
+                                <input type="text" name="prdtTicketCode"/>
+                            </li>
+                            <li>
+                                <label>品类编码：</label>
+                                <input type="text" name="cateCode"/>
+                            </li>
+                            <li>
+                                <label>种类编码：</label>
+                                <input type="text" name="kindCode"/>
+                            </li>
+                            <li>
+                                <label>厂家物料编码：</label>
+                                <input type="text" name="factMatelCode"/>
+                            </li>
+                            <li>
+                                <label>厂家物料描述：</label>
+                                <input type="text" name="factMatelDesc"/>
+                            </li>
+                            <li>
+                                <label>物料批次：</label>
+                                <input type="text" name="matelBatch"/>
+                            </li>
+                            <li>
+                                <label>生产数量：</label>
+                                <input type="text" name="prdtNum"/>
+                            </li>
+                            <li>
+                                <label>计量单位：</label>
+                                <input type="text" name="meteUnit"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划开始日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanStartDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanStartDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>计划完成日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanEndDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanEndDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际开始日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuStartDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuStartDate]"/>
+                            </li>
+                            <li class="select-time">
+                                <label>实际完成日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuFinishDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuFinishDate]"/>
+                            </li>
+                            <li>
+                                <label>工单状态：</label>
+                                <select name="ticketStatu" th:with="type=${@dict.getType('work_order_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>工艺路线编码：</label>
+                                <input type="text" name="routeCode"/>
+                            </li>
+                            <li>
+                                <label>数据来源：</label>
+                                <select name="dataSource" th:with="type=${@dict.getType('work_datasour')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li class="select-time">
+                                <label>来源数据创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDatasourCreateDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDatasourCreateDate]"/>
+                            </li>
+                            <li>
+                                <label>逻辑删除：</label>
+                                <select name="tombDelete" th:with="type=${@dict.getType('work_ljsc')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>数据拥有方：</label>
+                                <input type="text" name="dataOwner"/>
+                            </li>
+                            <li>
+                                <label>数据可见方：</label>
+                                <input type="text" name="dataVisible"/>
+                            </li>
+                            <li>
+                                <label>产品型号规格：</label>
+                                <input type="text" name="prodTypeSize"/>
+                            </li>
+                           <!-- <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="Production:workorder:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="Production:workorder:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="Production:workorder:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="Production:workorder:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('Production:workorder:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('Production:workorder:remove')}]];
+        var ticketStatuDatas = [[${@dict.getType('work_order_status')}]];
+        var dataSourceDatas = [[${@dict.getType('work_datasour')}]];
+        var tombDeleteDatas = [[${@dict.getType('work_ljsc')}]];
+        var prefix = ctx + "Production/workorder";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "工单",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'workOrderId',
+                    title: 'ID',
+                    visible: false
+                },
+                {
+                    field: 'buyerHqCode',
+                    title: '采购方总部编码'
+                },
+                {
+                    field: 'venderPrdtOrderNum',
+                    title: '供应商生产订单编号'
+                },
+                {
+                    field: 'vendorCode',
+                    title: '供应商编码'
+                },
+                {
+                    field: 'vendorName',
+                    title: '供应商名称'
+                },
+                {
+                    field: 'prdtTicketCode',
+                    title: '生产工单编码'
+                },
+                {
+                    field: 'cateCode',
+                    title: '品类编码'
+                },
+                {
+                    field: 'kindCode',
+                    title: '种类编码'
+                },
+                {
+                    field: 'factMatelCode',
+                    title: '厂家物料编码'
+                },
+                {
+                    field: 'factMatelDesc',
+                    title: '厂家物料描述'
+                },
+                {
+                    field: 'matelBatch',
+                    title: '物料批次'
+                },
+                {
+                    field: 'prdtNum',
+                    title: '生产数量'
+                },
+                {
+                    field: 'meteUnit',
+                    title: '计量单位'
+                },
+                {
+                    field: 'planStartDate',
+                    title: '计划开始日期'
+                },
+                {
+                    field: 'planEndDate',
+                    title: '计划完成日期'
+                },
+                {
+                    field: 'actuStartDate',
+                    title: '实际开始日期'
+                },
+                {
+                    field: 'actuFinishDate',
+                    title: '实际完成日期'
+                },
+                {
+                    field: 'ticketStatu',
+                    title: '工单状态',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(ticketStatuDatas, value);
+                    }
+                },
+                {
+                    field: 'routeCode',
+                    title: '工艺路线编码'
+                },
+                {
+                    field: 'dataSource',
+                    title: '数据来源',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(dataSourceDatas, value);
+                    }
+                },
+                {
+                    field: 'datasourCreateDate',
+                    title: '来源数据创建时间'
+                },
+                {
+                    field: 'tombDelete',
+                    title: '逻辑删除',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(tombDeleteDatas, value);
+                    }
+                },
+                {
+                    field: 'dataOwner',
+                    title: '数据拥有方'
+                },
+                {
+                    field: 'dataVisible',
+                    title: '数据可见方'
+                },
+                {
+                    field: 'prodTypeSize',
+                    title: '产品型号规格'
+                },
+                /*{
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.workOrderId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.workOrderId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

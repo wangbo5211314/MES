@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.rawmate.mapper.RawMateDlhgqMapper">
+    
+    <resultMap type="RawMateDlhgq" id="RawMateDlhgqResult">
+        <result property="dlhgqId"    column="dlhgq_id"    />
+        <result property="cletNormVers"    column="clet__norm_vers"    />
+        <result property="prdtOrderNum"    column="prdt_order_num"    />
+        <result property="listNum"    column="list_num"    />
+        <result property="testDataNum"    column="test_data_num"    />
+        <result property="testTime"    column="test_time"    />
+        <result property="cretTime"    column="cret_time"    />
+        <result property="mateMaker"    column="mate_maker"    />
+        <result property="specsType"    column="specs_type"    />
+        <result property="lowLimit"    column="low_limit"    />
+        <result property="upLimit"    column="up_limit"    />
+        <result property="procCode"    column="proc_code"    />
+        <result property="diffValue"    column="diff_value"    />
+        <result property="dlhgqTestResult"    column="dlhgq_test_result"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectRawMateDlhgqVo">
+        select dlhgq_id, clet__norm_vers, prdt_order_num, list_num, test_data_num, test_time, cret_time, mate_maker, specs_type, low_limit, up_limit, proc_code, diff_value, dlhgq_test_result, yl, yl2, yl3, yl4, yl5 from raw_mate_dlhgq
+    </sql>
+
+    <select id="selectRawMateDlhgqList" parameterType="RawMateDlhgq" resultMap="RawMateDlhgqResult">
+        <include refid="selectRawMateDlhgqVo"/>
+        <where>  
+            <if test="cletNormVers != null  and cletNormVers != ''"> and clet__norm_vers = #{cletNormVers}</if>
+            <if test="prdtOrderNum != null  and prdtOrderNum != ''"> and prdt_order_num = #{prdtOrderNum}</if>
+            <if test="listNum != null  and listNum != ''"> and list_num = #{listNum}</if>
+            <if test="testDataNum != null  and testDataNum != ''"> and test_data_num = #{testDataNum}</if>
+            <if test="testTime != null "> and test_time = #{testTime}</if>
+            <if test="cretTime != null "> and cret_time = #{cretTime}</if>
+            <if test="mateMaker != null  and mateMaker != ''"> and mate_maker = #{mateMaker}</if>
+            <if test="specsType != null  and specsType != ''"> and specs_type = #{specsType}</if>
+            <if test="lowLimit != null "> and low_limit = #{lowLimit}</if>
+            <if test="upLimit != null "> and up_limit = #{upLimit}</if>
+            <if test="procCode != null  and procCode != ''"> and proc_code = #{procCode}</if>
+            <if test="diffValue != null "> and diff_value = #{diffValue}</if>
+            <if test="dlhgqTestResult != null  and dlhgqTestResult != ''"> and dlhgq_test_result = #{dlhgqTestResult}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectRawMateDlhgqById" parameterType="Long" resultMap="RawMateDlhgqResult">
+        <include refid="selectRawMateDlhgqVo"/>
+        where dlhgq_id = #{dlhgqId}
+    </select>
+        
+    <insert id="insertRawMateDlhgq" parameterType="RawMateDlhgq" useGeneratedKeys="true" keyProperty="dlhgqId">
+        insert into raw_mate_dlhgq
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cletNormVers != null">clet__norm_vers,</if>
+            <if test="prdtOrderNum != null">prdt_order_num,</if>
+            <if test="listNum != null">list_num,</if>
+            <if test="testDataNum != null">test_data_num,</if>
+            <if test="testTime != null">test_time,</if>
+            <if test="cretTime != null">cret_time,</if>
+            <if test="mateMaker != null">mate_maker,</if>
+            <if test="specsType != null">specs_type,</if>
+            <if test="lowLimit != null">low_limit,</if>
+            <if test="upLimit != null">up_limit,</if>
+            <if test="procCode != null">proc_code,</if>
+            <if test="diffValue != null">diff_value,</if>
+            <if test="dlhgqTestResult != null">dlhgq_test_result,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cletNormVers != null">#{cletNormVers},</if>
+            <if test="prdtOrderNum != null">#{prdtOrderNum},</if>
+            <if test="listNum != null">#{listNum},</if>
+            <if test="testDataNum != null">#{testDataNum},</if>
+            <if test="testTime != null">#{testTime},</if>
+            <if test="cretTime != null">#{cretTime},</if>
+            <if test="mateMaker != null">#{mateMaker},</if>
+            <if test="specsType != null">#{specsType},</if>
+            <if test="lowLimit != null">#{lowLimit},</if>
+            <if test="upLimit != null">#{upLimit},</if>
+            <if test="procCode != null">#{procCode},</if>
+            <if test="diffValue != null">#{diffValue},</if>
+            <if test="dlhgqTestResult != null">#{dlhgqTestResult},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRawMateDlhgq" parameterType="RawMateDlhgq">
+        update raw_mate_dlhgq
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cletNormVers != null">clet__norm_vers = #{cletNormVers},</if>
+            <if test="prdtOrderNum != null">prdt_order_num = #{prdtOrderNum},</if>
+            <if test="listNum != null">list_num = #{listNum},</if>
+            <if test="testDataNum != null">test_data_num = #{testDataNum},</if>
+            <if test="testTime != null">test_time = #{testTime},</if>
+            <if test="cretTime != null">cret_time = #{cretTime},</if>
+            <if test="mateMaker != null">mate_maker = #{mateMaker},</if>
+            <if test="specsType != null">specs_type = #{specsType},</if>
+            <if test="lowLimit != null">low_limit = #{lowLimit},</if>
+            <if test="upLimit != null">up_limit = #{upLimit},</if>
+            <if test="procCode != null">proc_code = #{procCode},</if>
+            <if test="diffValue != null">diff_value = #{diffValue},</if>
+            <if test="dlhgqTestResult != null">dlhgq_test_result = #{dlhgqTestResult},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where dlhgq_id = #{dlhgqId}
+    </update>
+
+    <delete id="deleteRawMateDlhgqById" parameterType="Long">
+        delete from raw_mate_dlhgq where dlhgq_id = #{dlhgqId}
+    </delete>
+
+    <delete id="deleteRawMateDlhgqByIds" parameterType="String">
+        delete from raw_mate_dlhgq where dlhgq_id in 
+        <foreach item="dlhgqId" collection="array" open="(" separator="," close=")">
+            #{dlhgqId}
+        </foreach>
+    </delete>
+
+</mapper>
