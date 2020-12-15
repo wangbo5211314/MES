@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.company.mapper.CompanyManageMapper">
+    
+    <resultMap type="CompanyManage" id="CompanyManageResult">
+        <result property="compId"    column="comp_id"    />
+        <result property="compParentId"    column="comp_parent_id"    />
+        <result property="compCode"    column="comp_code"    />
+        <result property="compTel"    column="comp_tel"    />
+        <result property="compName"    column="comp_name"    />
+        <result property="compAddress"    column="comp_address"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectCompanyManageVo">
+        select comp_id, comp_parent_id, comp_code, comp_tel, comp_name, comp_address, yl, yl2, yl3, yl4, yl5 from company
+    </sql>
+
+    <select id="selectCompanyManageList" parameterType="CompanyManage" resultMap="CompanyManageResult">
+        <include refid="selectCompanyManageVo"/>
+        <where>  
+            <if test="compParentId != null "> and comp_parent_id = #{compParentId}</if>
+            <if test="compCode != null  and compCode != ''"> and comp_code = #{compCode}</if>
+            <if test="compTel != null  and compTel != ''"> and comp_tel = #{compTel}</if>
+            <if test="compName != null  and compName != ''"> and comp_name like concat('%', #{compName}, '%')</if>
+            <if test="compAddress != null  and compAddress != ''"> and comp_address = #{compAddress}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectCompanyManageById" parameterType="Long" resultMap="CompanyManageResult">
+        <include refid="selectCompanyManageVo"/>
+        where comp_id = #{compId}
+    </select>
+        
+    <insert id="insertCompanyManage" parameterType="CompanyManage" useGeneratedKeys="true" keyProperty="compId">
+        insert into company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="compParentId != null">comp_parent_id,</if>
+            <if test="compCode != null">comp_code,</if>
+            <if test="compTel != null">comp_tel,</if>
+            <if test="compName != null">comp_name,</if>
+            <if test="compAddress != null">comp_address,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="compParentId != null">#{compParentId},</if>
+            <if test="compCode != null">#{compCode},</if>
+            <if test="compTel != null">#{compTel},</if>
+            <if test="compName != null">#{compName},</if>
+            <if test="compAddress != null">#{compAddress},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCompanyManage" parameterType="CompanyManage">
+        update company
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="compParentId != null">comp_parent_id = #{compParentId},</if>
+            <if test="compCode != null">comp_code = #{compCode},</if>
+            <if test="compTel != null">comp_tel = #{compTel},</if>
+            <if test="compName != null">comp_name = #{compName},</if>
+            <if test="compAddress != null">comp_address = #{compAddress},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where comp_id = #{compId}
+    </update>
+
+    <delete id="deleteCompanyManageById" parameterType="Long">
+        delete from company where comp_id = #{compId}
+    </delete>
+
+    <delete id="deleteCompanyManageByIds" parameterType="String">
+        delete from company where comp_id in 
+        <foreach item="compId" collection="array" open="(" separator="," close=")">
+            #{compId}
+        </foreach>
+    </delete>
+
+</mapper>

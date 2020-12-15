@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.jiance.mapper.DetectMaincheckResultMapper">
+    
+    <resultMap type="DetectMaincheckResult" id="DetectMaincheckResultResult">
+        <result property="id"    column="id"    />
+        <result property="taskId"    column="task_id"    />
+        <result property="device"    column="device"    />
+        <result property="barcode"    column="barcode"    />
+        <result property="gw"    column="gw"    />
+        <result property="result"    column="result"    />
+        <result property="veryReason"    column="very_reason"    />
+        <result property="chkDate"    column="chk_date"    />
+    </resultMap>
+
+    <sql id="selectDetectMaincheckResultVo">
+        select id, task_id, device, barcode, gw, result, very_reason, chk_date from t_detect_maincheck_result
+    </sql>
+
+    <select id="selectDetectMaincheckResultList" parameterType="DetectMaincheckResult" resultMap="DetectMaincheckResultResult">
+        <include refid="selectDetectMaincheckResultVo"/>
+        <where>  
+            <if test="taskId != null  and taskId != ''"> and task_id = #{taskId}</if>
+            <if test="device != null  and device != ''"> and device = #{device}</if>
+            <if test="barcode != null  and barcode != ''"> and barcode = #{barcode}</if>
+            <if test="gw != null  and gw != ''"> and gw = #{gw}</if>
+            <if test="result != null  and result != ''"> and result = #{result}</if>
+            <if test="veryReason != null  and veryReason != ''"> and very_reason = #{veryReason}</if>
+            <if test="chkDate != null "> and chk_date = #{chkDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectDetectMaincheckResultById" parameterType="Long" resultMap="DetectMaincheckResultResult">
+        <include refid="selectDetectMaincheckResultVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDetectMaincheckResult" parameterType="DetectMaincheckResult" useGeneratedKeys="true" keyProperty="id">
+        insert into t_detect_maincheck_result
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskId != null and taskId != ''">task_id,</if>
+            <if test="device != null and device != ''">device,</if>
+            <if test="barcode != null and barcode != ''">barcode,</if>
+            <if test="gw != null and gw != ''">gw,</if>
+            <if test="result != null">result,</if>
+            <if test="veryReason != null">very_reason,</if>
+            <if test="chkDate != null">chk_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskId != null and taskId != ''">#{taskId},</if>
+            <if test="device != null and device != ''">#{device},</if>
+            <if test="barcode != null and barcode != ''">#{barcode},</if>
+            <if test="gw != null and gw != ''">#{gw},</if>
+            <if test="result != null">#{result},</if>
+            <if test="veryReason != null">#{veryReason},</if>
+            <if test="chkDate != null">#{chkDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDetectMaincheckResult" parameterType="DetectMaincheckResult">
+        update t_detect_maincheck_result
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskId != null and taskId != ''">task_id = #{taskId},</if>
+            <if test="device != null and device != ''">device = #{device},</if>
+            <if test="barcode != null and barcode != ''">barcode = #{barcode},</if>
+            <if test="gw != null and gw != ''">gw = #{gw},</if>
+            <if test="result != null">result = #{result},</if>
+            <if test="veryReason != null">very_reason = #{veryReason},</if>
+            <if test="chkDate != null">chk_date = #{chkDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDetectMaincheckResultById" parameterType="Long">
+        delete from t_detect_maincheck_result where id = #{id}
+    </delete>
+
+    <delete id="deleteDetectMaincheckResultByIds" parameterType="String">
+        delete from t_detect_maincheck_result where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
