@@ -8,22 +8,22 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 基础数据配置平台对象 sp_table_manager
  * 
- * @author ruoyi
- * @date 2020-12-14
+ * @author wangbo
+ * @date 2020-12-22
  */
 public class SpTableManager extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private String id;
+    private Long id;
 
     /** 表名称 */
     @Excel(name = "表名称")
     private String tableName;
 
-    /** 业务描述 */
-    @Excel(name = "业务描述")
+    /** 表描述 */
+    @Excel(name = "表描述")
     private String tableDesc;
 
     /** 创建人 */
@@ -42,12 +42,12 @@ public class SpTableManager extends BaseEntity
     @Excel(name = "授权(多个用逗号分隔，如：sys:menu:list,sys:menu:create)")
     private String permission;
 
-    public void setId(String id) 
+    public void setId(Long id) 
     {
         this.id = id;
     }
 
-    public String getId() 
+    public Long getId() 
     {
         return id;
     }

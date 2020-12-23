@@ -22,8 +22,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 基础数据配置平台Controller
  * 
- * @author ruoyi
- * @date 2020-12-14
+ * @author wangbo
+ * @date 2020-12-22
  */
 @Controller
 @RequestMapping("/Process/sptablemanager")
@@ -93,7 +93,7 @@ public class SpTableManagerController extends BaseController
      * 修改基础数据配置平台
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") String id, ModelMap mmap)
+    public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
         SpTableManager spTableManager = spTableManagerService.selectSpTableManagerById(id);
         mmap.put("spTableManager", spTableManager);

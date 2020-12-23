@@ -23,7 +23,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 图像结论表Controller
- * 
+ *
  * @author wangbo
  * @date 2020-12-15
  */
@@ -43,9 +43,14 @@ public class DetectImageResultController extends BaseController
         return prefix + "/imageresult";
     }
 
-    /**
-     * 查询图像结论表列表
-     */
+
+   /**
+   * @Description:  查询图像结论表列表
+   * @Param: [detectImageResult]
+   * @return: com.ruoyi.common.core.page.TableDataInfo
+   * @Author: 王博
+   * @Date: 2020-12-18
+    */
     @RequiresPermissions("jiance:imageresult:list")
     @PostMapping("/list")
     @ResponseBody

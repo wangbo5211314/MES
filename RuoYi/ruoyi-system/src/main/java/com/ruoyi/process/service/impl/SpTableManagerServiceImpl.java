@@ -12,8 +12,8 @@ import com.ruoyi.common.core.text.Convert;
 /**
  * 基础数据配置平台Service业务层处理
  * 
- * @author ruoyi
- * @date 2020-12-14
+ * @author wangbo
+ * @date 2020-12-22
  */
 @Service
 public class SpTableManagerServiceImpl implements ISpTableManagerService 
@@ -28,7 +28,7 @@ public class SpTableManagerServiceImpl implements ISpTableManagerService
      * @return 基础数据配置平台
      */
     @Override
-    public SpTableManager selectSpTableManagerById(String id)
+    public SpTableManager selectSpTableManagerById(Long id)
     {
         return spTableManagerMapper.selectSpTableManagerById(id);
     }
@@ -90,7 +90,7 @@ public class SpTableManagerServiceImpl implements ISpTableManagerService
      * @return 结果
      */
     @Override
-    public int deleteSpTableManagerById(String id)
+    public int deleteSpTableManagerById(Long id)
     {
         return spTableManagerMapper.deleteSpTableManagerById(id);
     }

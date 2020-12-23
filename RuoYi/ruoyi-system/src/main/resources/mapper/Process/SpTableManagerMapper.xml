@@ -25,22 +25,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="tableName != null  and tableName != ''"> and table_name like concat('%', #{tableName}, '%')</if>
             <if test="tableDesc != null  and tableDesc != ''"> and table_desc = #{tableDesc}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
             <if test="createUsername != null  and createUsername != ''"> and create_username like concat('%', #{createUsername}, '%')</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
             <if test="updateUsername != null  and updateUsername != ''"> and update_username like concat('%', #{updateUsername}, '%')</if>
             <if test="isDeleted != null  and isDeleted != ''"> and is_deleted = #{isDeleted}</if>
             <if test="permission != null  and permission != ''"> and permission = #{permission}</if>
         </where>
     </select>
     
-    <select id="selectSpTableManagerById" parameterType="String" resultMap="SpTableManagerResult">
+    <select id="selectSpTableManagerById" parameterType="Long" resultMap="SpTableManagerResult">
         <include refid="selectSpTableManagerVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertSpTableManager" parameterType="SpTableManager">
+    <insert id="insertSpTableManager" parameterType="SpTableManager" useGeneratedKeys="true" keyProperty="id">
         insert into sp_table_manager
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="tableName != null and tableName != ''">table_name,</if>
             <if test="tableDesc != null">table_desc,</if>
             <if test="createTime != null">create_time,</if>
@@ -48,10 +49,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time,</if>
             <if test="updateUsername != null and updateUsername != ''">update_username,</if>
             <if test="isDeleted != null and isDeleted != ''">is_deleted,</if>
-            <if test="permission != null and permission != ''">permission,</if>
+            <if test="permission != null">permission,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="tableName != null and tableName != ''">#{tableName},</if>
             <if test="tableDesc != null">#{tableDesc},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">#{updateTime},</if>
             <if test="updateUsername != null and updateUsername != ''">#{updateUsername},</if>
             <if test="isDeleted != null and isDeleted != ''">#{isDeleted},</if>
-            <if test="permission != null and permission != ''">#{permission},</if>
+            <if test="permission != null">#{permission},</if>
          </trim>
     </insert>
 
@@ -73,12 +73,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateUsername != null and updateUsername != ''">update_username = #{updateUsername},</if>
             <if test="isDeleted != null and isDeleted != ''">is_deleted = #{isDeleted},</if>
-            <if test="permission != null and permission != ''">permission = #{permission},</if>
+            <if test="permission != null">permission = #{permission},</if>
         </trim>
         where id = #{id}
     </update>
 
-    <delete id="deleteSpTableManagerById" parameterType="String">
+    <delete id="deleteSpTableManagerById" parameterType="Long">
         delete from sp_table_manager where id = #{id}
     </delete>
 

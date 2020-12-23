@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.process.mapper.SpOperMapper">
+    
+    <resultMap type="SpOper" id="SpOperResult">
+        <result property="spOperId"    column="sp_oper_id"    />
+        <result property="oper"    column="oper"    />
+        <result property="operDesc"    column="oper_desc"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createUsername"    column="create_username"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateUsername"    column="update_username"    />
+    </resultMap>
+
+    <sql id="selectSpOperVo">
+        select sp_oper_id, oper, oper_desc, create_time, create_username, update_time, update_username from sp_oper
+    </sql>
+
+    <select id="selectSpOperList" parameterType="SpOper" resultMap="SpOperResult">
+        <include refid="selectSpOperVo"/>
+        <where>  
+            <if test="oper != null  and oper != ''"> and oper = #{oper}</if>
+            <if test="operDesc != null  and operDesc != ''"> and oper_desc = #{operDesc}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createUsername != null  and createUsername != ''"> and create_username like concat('%', #{createUsername}, '%')</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="updateUsername != null  and updateUsername != ''"> and update_username like concat('%', #{updateUsername}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectSpOperById" parameterType="Long" resultMap="SpOperResult">
+        <include refid="selectSpOperVo"/>
+        where sp_oper_id = #{spOperId}
+    </select>
+        
+    <insert id="insertSpOper" parameterType="SpOper" useGeneratedKeys="true" keyProperty="spOperId">
+        insert into sp_oper
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="oper != null">oper,</if>
+            <if test="operDesc != null">oper_desc,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createUsername != null and createUsername != ''">create_username,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateUsername != null and updateUsername != ''">update_username,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="oper != null">#{oper},</if>
+            <if test="operDesc != null">#{operDesc},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createUsername != null and createUsername != ''">#{createUsername},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateUsername != null and updateUsername != ''">#{updateUsername},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSpOper" parameterType="SpOper">
+        update sp_oper
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="oper != null">oper = #{oper},</if>
+            <if test="operDesc != null">oper_desc = #{operDesc},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createUsername != null and createUsername != ''">create_username = #{createUsername},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUsername != null and updateUsername != ''">update_username = #{updateUsername},</if>
+        </trim>
+        where sp_oper_id = #{spOperId}
+    </update>
+
+    <delete id="deleteSpOperById" parameterType="Long">
+        delete from sp_oper where sp_oper_id = #{spOperId}
+    </delete>
+
+    <delete id="deleteSpOperByIds" parameterType="String">
+        delete from sp_oper where sp_oper_id in 
+        <foreach item="spOperId" collection="array" open="(" separator="," close=")">
+            #{spOperId}
+        </foreach>
+    </delete>
+
+</mapper>

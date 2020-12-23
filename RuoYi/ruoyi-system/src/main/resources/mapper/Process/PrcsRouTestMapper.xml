@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.process.mapper.PrcsRouTestMapper">
+    
+    <resultMap type="PrcsRouTest" id="PrcsRouTestResult">
+        <result property="spFlowId"    column="sp_flow_id"    />
+        <result property="flow"    column="flow"    />
+        <result property="flowDesc"    column="flow_desc"    />
+        <result property="process"    column="process"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createUsername"    column="create_username"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateUsername"    column="update_username"    />
+    </resultMap>
+
+    <sql id="selectPrcsRouTestVo">
+        select sp_flow_id, flow, flow_desc, process, create_time, create_username, update_time, update_username from sp_flow
+    </sql>
+
+    <select id="selectPrcsRouTestList" parameterType="PrcsRouTest" resultMap="PrcsRouTestResult">
+        <include refid="selectPrcsRouTestVo"/>
+        <where>  
+            <if test="flow != null  and flow != ''"> and flow = #{flow}</if>
+            <if test="flowDesc != null  and flowDesc != ''"> and flow_desc = #{flowDesc}</if>
+            <if test="process != null  and process != ''"> and process = #{process}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createUsername != null  and createUsername != ''"> and create_username like concat('%', #{createUsername}, '%')</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="updateUsername != null  and updateUsername != ''"> and update_username like concat('%', #{updateUsername}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectPrcsRouTestById" parameterType="Long" resultMap="PrcsRouTestResult">
+        <include refid="selectPrcsRouTestVo"/>
+        where sp_flow_id = #{spFlowId}
+    </select>
+        
+    <insert id="insertPrcsRouTest" parameterType="PrcsRouTest" useGeneratedKeys="true" keyProperty="spFlowId">
+        insert into sp_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="flow != null and flow != ''">flow,</if>
+            <if test="flowDesc != null and flowDesc != ''">flow_desc,</if>
+            <if test="process != null">process,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createUsername != null and createUsername != ''">create_username,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateUsername != null and updateUsername != ''">update_username,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="flow != null and flow != ''">#{flow},</if>
+            <if test="flowDesc != null and flowDesc != ''">#{flowDesc},</if>
+            <if test="process != null">#{process},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createUsername != null and createUsername != ''">#{createUsername},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateUsername != null and updateUsername != ''">#{updateUsername},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePrcsRouTest" parameterType="PrcsRouTest">
+        update sp_flow
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="flow != null and flow != ''">flow = #{flow},</if>
+            <if test="flowDesc != null and flowDesc != ''">flow_desc = #{flowDesc},</if>
+            <if test="process != null">process = #{process},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createUsername != null and createUsername != ''">create_username = #{createUsername},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUsername != null and updateUsername != ''">update_username = #{updateUsername},</if>
+        </trim>
+        where sp_flow_id = #{spFlowId}
+    </update>
+
+    <delete id="deletePrcsRouTestById" parameterType="Long">
+        delete from sp_flow where sp_flow_id = #{spFlowId}
+    </delete>
+
+    <delete id="deletePrcsRouTestByIds" parameterType="String">
+        delete from sp_flow where sp_flow_id in 
+        <foreach item="spFlowId" collection="array" open="(" separator="," close=")">
+            #{spFlowId}
+        </foreach>
+    </delete>
+
+</mapper>

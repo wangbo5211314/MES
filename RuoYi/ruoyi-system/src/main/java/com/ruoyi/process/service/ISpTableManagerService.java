@@ -6,8 +6,8 @@ import com.ruoyi.process.domain.SpTableManager;
 /**
  * 基础数据配置平台Service接口
  * 
- * @author ruoyi
- * @date 2020-12-14
+ * @author wangbo
+ * @date 2020-12-22
  */
 public interface ISpTableManagerService 
 {
@@ -17,7 +17,7 @@ public interface ISpTableManagerService
      * @param id 基础数据配置平台ID
      * @return 基础数据配置平台
      */
-    public SpTableManager selectSpTableManagerById(String id);
+    public SpTableManager selectSpTableManagerById(Long id);
 
     /**
      * 查询基础数据配置平台列表
@@ -57,5 +57,5 @@ public interface ISpTableManagerService
      * @param id 基础数据配置平台ID
      * @return 结果
      */
-    public int deleteSpTableManagerById(String id);
+    public int deleteSpTableManagerById(Long id);
 }
