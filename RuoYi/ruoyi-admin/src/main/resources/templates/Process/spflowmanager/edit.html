@@ -3,6 +3,13 @@
 <head>
     <th:block th:include="include :: header('修改工艺路线管理')" />
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .check-box>*{
+             pointer-events:none;
+        }
+
+
+    </style>
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -23,58 +30,17 @@
 
             <div class="form-group">    
                 <label class="col-sm-3 control-label">流程绘制：</label>
-                <div    class="col-sm-8" th:with="type=${@dict.getType('process_spoper')}">
-                    <input    class="haha" type="text" value="">
+                <div class="col-sm-8" th:with="type=${@dict.getType('process_spoper')}">
+                    <input class="haha form-control" name="process" type="text" th:field="*{process}">
 
-                    <label th:each="dict : ${type}" class="check-box">
-                        <input name="process" type="checkbox" th:value="${dict.dictValue}" th:text="${dict.dictLabel}" th:attr="checked=${spFlowManager.process.contains(dict.dictValue)?true:false}">
+                    <label th:each="dict : ${type}" class="check-box" >
+
+                        <input  class="check-input"  name="process2"  type="checkbox" th:value="${dict.dictValue}" th:text="${dict.dictLabel}" th:attr="checked=${spFlowManager.process.contains(dict.dictValue)?true:false}">
                     </label>
                 </div>
-
-            <!--左右互选-->
-           <!-- <input type="text" class="haha" value=""></input><br>
-            ASY-01:
-            <input class="check" type="checkbox" name="vehicle" value="ASY-01"><br>
-            TST-02:
-            <input class="check" type="checkbox" name="vehicle" value="TST-02"><br>
-            APK-01:
-            <input class="check" type="checkbox" name="vehicle" value="APK-01"><br>
-            TST-01:
-            <input class="check" type="checkbox" name="vehicle" value="TST-01"><br>
-            HJ-01:
-            <input class="check" type="checkbox" name="vehicle" value="HJ-01"><br>
-            FJ-01:
-            <input class="check" type="checkbox" name="vehicle" value="FJ-01"><br>-->
-            <button>
-                重置
-            </button>
+                <button class="cz btn btn-warning btn-rounded btn-sm"><i class="fa fa-refresh"></i>&nbsp;重置</button>
             </div>
-            <script>
-                var checkID = []
-                $('check-box').click(function () {
-                    alert('选中')
-                    var str = ''
-                    if ($(this).children().prop('checked') === true) {
-                        checkID.push($(this).val())
-                        $.each(checkID, function (index, value) {
-                            if (index === checkID.length - 1) {
-                                str = str + value
-                            }
-                            else {
-                                str = str + value + '-->'
-                            }
-                        })
-                        $('.haha').attr('value', str)
-                    }
 
-
-                })
-                $('button').click(function () {
-                    $('input[type=checkbox]').prop('checked', false);
-                    $('.haha').attr('value', '')
-                    checkID = []
-                })
-            </script>
             <!---->
             <div class="form-group">    
                 <label class="col-sm-3 control-label is-required">创建人：</label>
@@ -92,6 +58,7 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
+
         var prefix = ctx + "Process/spflowmanager";
         $("#form-spflowmanager-edit").validate({
             focusCleanup: true
@@ -102,6 +69,37 @@
                 $.operate.save(prefix + "/edit", $('#form-spflowmanager-edit').serialize());
             }
         }
+
+        var checkID = []
+        $('input[name="process2"]:checked').each(function(i){
+            checkID[i]=$(this).val()
+        })
+        $('.check-box').click(
+            function (e){
+                var gongxu = e.target.innerText+''
+                console.log(gongxu,checkID)
+                console.log(checkID.indexOf(gongxu))
+                if(checkID.indexOf(gongxu) !== -1){
+                    checkID.splice(checkID.indexOf(gongxu),1)
+                }else{
+                    checkID.push(gongxu)
+                }
+                console.log(checkID)
+                var str = ''
+                $.each(checkID, function (index, value) {
+                    if (index === checkID.length - 1) {
+                        str = str + value
+                    }
+                    else {
+                        str = str + value + '-->'
+                    }
+                })
+                $('.haha').attr('value', str)
+            }
+        )
+        $(".cz").click(function(){
+            window.location.reload()
+        })
     </script>
 </body>
 </html>
