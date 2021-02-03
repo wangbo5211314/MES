@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改设备故障管理')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content"  th:with="edList=${@equipdaily.selectEquipDailyList(EquipDaily)}">
+        <form class="form-horizontal m" id="form-equipfault-edit" th:object="${equipFault}">
+            <input name="sbgzbId" th:field="*{sbgzbId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备编号：</label>
+                <!--<div class="col-sm-8">
+                    <input name="equipNum" th:field="*{equipNum}" class="form-control" type="text">
+                </div>-->
+                <div class="col-sm-8">
+                    <select name="equipNum" class="form-control m-b equipNumSelect" required>
+
+                        <option th:field="*{equipNum}" th:each="ed : ${edList}" th:text="${ed.getEquipNum()}" th:value="${ed.getEquipNum()}" th:sbmc="${ed.getEquipName()}" th:sbcj="${ed.getEquipCj()}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备名称：</label>
+                <div class="col-sm-8">
+                    <input name="equipName" th:field="*{equipName}" class="form-control equipName" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备厂家：</label>
+                <div class="col-sm-8">
+                    <input name="equipCj" th:field="*{equipCj}" class="form-control equipCj" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">故障原因：</label>
+                <div class="col-sm-8">
+                    <input name="faultReason" th:field="*{faultReason}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">故障开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="faultStartTime" th:value="${#dates.format(equipFault.faultStartTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">维修结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="repairEndTime" th:value="${#dates.format(equipFault.repairEndTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">维修人：</label>
+                <div class="col-sm-8">
+                    <input name="repairBy" th:field="*{repairBy}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="note" th:field="*{note}" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl" th:field="*{yl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" th:field="*{yl2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" th:field="*{yl3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" th:field="*{yl4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" th:field="*{yl5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留int：</label>
+                <div class="col-sm-8">
+                    <input name="ylint1" th:field="*{ylint1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留int：</label>
+                <div class="col-sm-8">
+                    <input name="ylint2" th:field="*{ylint2}" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "EquipMan/equipfault";
+        $("#form-equipfault-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-equipfault-edit').serialize());
+            }
+        }
+
+        $("input[name='faultStartTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='repairEndTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        /*获取select里设备编号的值显示至出来*/
+        $(".equipNumSelect").change(function(){
+            var sbmc = $(this).children('option:selected').attr('sbmc')
+            var sbcj = $(this).children('option:selected').attr('sbcj')
+
+            $(".equipName").val(sbmc)
+            $(".equipCj").val(sbcj)
+
+        })
+    </script>
+</body>
+</html>

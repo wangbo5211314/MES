@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stock.mapper.StockOutMapper">
+    
+    <resultMap type="StockOut" id="StockOutResult">
+        <result property="ckId"    column="ck_id"    />
+        <result property="stockoNum"    column="stocko_num"    />
+        <result property="stockoName"    column="stocko_name"    />
+        <result property="stockoMateName"    column="stocko_mate_name"    />
+        <result property="stockoMateNum"    column="stocko_mate_num"    />
+        <result property="stockoMateUnit"    column="stocko_mate_unit"    />
+        <result property="scOrderNum"    column="sc_order_num"    />
+        <result property="scOrderName"    column="sc_order_name"    />
+        <result property="cgddNum"    column="cgdd_num"    />
+        <result property="cgddName"    column="cgdd_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="bomYlId"    column="bom_yl_id"    />
+        <result property="bomMatName"    column="bom_mat_name"    />
+        <result property="bomModelType"    column="bom_model_type"    />
+        <result property="bomColorNum"    column="bom_color_num"    />
+        <result property="bomMaterial"    column="bom_material"    />
+        <result property="bomSpetUnits"    column="bom_spet_units"    />
+        <result property="bomPudtUseNum"    column="bom_pudt_use_num"    />
+        <result property="bomValuUnits"    column="bom_valu_units"    />
+        <result property="supplyUnit"    column="supply_unit"    />
+        <result property="supplyDate"    column="supply_date"    />
+        <result property="deliveryDate"    column="delivery_date"    />
+        <result property="supplyPerple"    column="supply_perple"    />
+        <result property="supplyPhoneNum"    column="supply_phone_num"    />
+        <result property="receiptAddress"    column="receipt_address"    />
+        <result property="saleOrderNum"    column="sale_order_num"    />
+        <result property="saleOrderName"    column="sale_order_name"    />
+        <result property="note"    column="note"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+        <result property="ylint"    column="ylint"    />
+        <result property="ylint2"    column="ylint2"    />
+    </resultMap>
+
+    <sql id="selectStockOutVo">
+        select ck_id, stocko_num, stocko_name, stocko_mate_name, stocko_mate_num, stocko_mate_unit, sc_order_num, sc_order_name, cgdd_num, cgdd_name, create_by, create_time, update_time, bom_yl_id, bom_mat_name, bom_model_type, bom_color_num, bom_material, bom_spet_units, bom_pudt_use_num, bom_valu_units, supply_unit, supply_date, delivery_date, supply_perple, supply_phone_num, receipt_address, sale_order_num, sale_order_name, note, yl, yl2, yl3, yl4, yl5, ylint, ylint2 from stock_out
+    </sql>
+
+    <select id="selectStockOutList" parameterType="StockOut" resultMap="StockOutResult">
+        <include refid="selectStockOutVo"/>
+        <where>  
+            <if test="stockoNum != null  and stockoNum != ''"> and stocko_num = #{stockoNum}</if>
+            <if test="stockoName != null  and stockoName != ''"> and stocko_name like concat('%', #{stockoName}, '%')</if>
+            <if test="stockoMateName != null  and stockoMateName != ''"> and stocko_mate_name like concat('%', #{stockoMateName}, '%')</if>
+            <if test="stockoMateNum != null "> and stocko_mate_num = #{stockoMateNum}</if>
+            <if test="stockoMateUnit != null  and stockoMateUnit != ''"> and stocko_mate_unit = #{stockoMateUnit}</if>
+            <if test="scOrderNum != null  and scOrderNum != ''"> and sc_order_num = #{scOrderNum}</if>
+            <if test="scOrderName != null  and scOrderName != ''"> and sc_order_name like concat('%', #{scOrderName}, '%')</if>
+            <if test="cgddNum != null  and cgddNum != ''"> and cgdd_num = #{cgddNum}</if>
+            <if test="cgddName != null  and cgddName != ''"> and cgdd_name like concat('%', #{cgddName}, '%')</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="bomYlId != null  and bomYlId != ''"> and bom_yl_id = #{bomYlId}</if>
+            <if test="bomMatName != null  and bomMatName != ''"> and bom_mat_name like concat('%', #{bomMatName}, '%')</if>
+            <if test="bomModelType != null  and bomModelType != ''"> and bom_model_type = #{bomModelType}</if>
+            <if test="bomColorNum != null  and bomColorNum != ''"> and bom_color_num = #{bomColorNum}</if>
+            <if test="bomMaterial != null  and bomMaterial != ''"> and bom_material = #{bomMaterial}</if>
+            <if test="bomSpetUnits != null  and bomSpetUnits != ''"> and bom_spet_units = #{bomSpetUnits}</if>
+            <if test="bomPudtUseNum != null "> and bom_pudt_use_num = #{bomPudtUseNum}</if>
+            <if test="bomValuUnits != null  and bomValuUnits != ''"> and bom_valu_units = #{bomValuUnits}</if>
+            <if test="supplyUnit != null  and supplyUnit != ''"> and supply_unit = #{supplyUnit}</if>
+            <if test="supplyDate != null "> and supply_date = #{supplyDate}</if>
+            <if test="deliveryDate != null "> and delivery_date = #{deliveryDate}</if>
+            <if test="supplyPerple != null  and supplyPerple != ''"> and supply_perple = #{supplyPerple}</if>
+            <if test="supplyPhoneNum != null  and supplyPhoneNum != ''"> and supply_phone_num = #{supplyPhoneNum}</if>
+            <if test="receiptAddress != null  and receiptAddress != ''"> and receipt_address = #{receiptAddress}</if>
+            <if test="saleOrderNum != null  and saleOrderNum != ''"> and sale_order_num = #{saleOrderNum}</if>
+            <if test="saleOrderName != null  and saleOrderName != ''"> and sale_order_name like concat('%', #{saleOrderName}, '%')</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+            <if test="ylint != null "> and ylint = #{ylint}</if>
+            <if test="ylint2 != null "> and ylint2 = #{ylint2}</if>
+        </where>
+    </select>
+    
+    <select id="selectStockOutById" parameterType="Long" resultMap="StockOutResult">
+        <include refid="selectStockOutVo"/>
+        where ck_id = #{ckId}
+    </select>
+        
+    <insert id="insertStockOut" parameterType="StockOut" useGeneratedKeys="true" keyProperty="ckId">
+        insert into stock_out
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stockoNum != null">stocko_num,</if>
+            <if test="stockoName != null">stocko_name,</if>
+            <if test="stockoMateName != null">stocko_mate_name,</if>
+            <if test="stockoMateNum != null">stocko_mate_num,</if>
+            <if test="stockoMateUnit != null">stocko_mate_unit,</if>
+            <if test="scOrderNum != null">sc_order_num,</if>
+            <if test="scOrderName != null">sc_order_name,</if>
+            <if test="cgddNum != null">cgdd_num,</if>
+            <if test="cgddName != null">cgdd_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="bomYlId != null">bom_yl_id,</if>
+            <if test="bomMatName != null">bom_mat_name,</if>
+            <if test="bomModelType != null">bom_model_type,</if>
+            <if test="bomColorNum != null">bom_color_num,</if>
+            <if test="bomMaterial != null">bom_material,</if>
+            <if test="bomSpetUnits != null">bom_spet_units,</if>
+            <if test="bomPudtUseNum != null">bom_pudt_use_num,</if>
+            <if test="bomValuUnits != null">bom_valu_units,</if>
+            <if test="supplyUnit != null">supply_unit,</if>
+            <if test="supplyDate != null">supply_date,</if>
+            <if test="deliveryDate != null">delivery_date,</if>
+            <if test="supplyPerple != null">supply_perple,</if>
+            <if test="supplyPhoneNum != null">supply_phone_num,</if>
+            <if test="receiptAddress != null">receipt_address,</if>
+            <if test="saleOrderNum != null">sale_order_num,</if>
+            <if test="saleOrderName != null">sale_order_name,</if>
+            <if test="note != null">note,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+            <if test="ylint != null">ylint,</if>
+            <if test="ylint2 != null">ylint2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stockoNum != null">#{stockoNum},</if>
+            <if test="stockoName != null">#{stockoName},</if>
+            <if test="stockoMateName != null">#{stockoMateName},</if>
+            <if test="stockoMateNum != null">#{stockoMateNum},</if>
+            <if test="stockoMateUnit != null">#{stockoMateUnit},</if>
+            <if test="scOrderNum != null">#{scOrderNum},</if>
+            <if test="scOrderName != null">#{scOrderName},</if>
+            <if test="cgddNum != null">#{cgddNum},</if>
+            <if test="cgddName != null">#{cgddName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="bomYlId != null">#{bomYlId},</if>
+            <if test="bomMatName != null">#{bomMatName},</if>
+            <if test="bomModelType != null">#{bomModelType},</if>
+            <if test="bomColorNum != null">#{bomColorNum},</if>
+            <if test="bomMaterial != null">#{bomMaterial},</if>
+            <if test="bomSpetUnits != null">#{bomSpetUnits},</if>
+            <if test="bomPudtUseNum != null">#{bomPudtUseNum},</if>
+            <if test="bomValuUnits != null">#{bomValuUnits},</if>
+            <if test="supplyUnit != null">#{supplyUnit},</if>
+            <if test="supplyDate != null">#{supplyDate},</if>
+            <if test="deliveryDate != null">#{deliveryDate},</if>
+            <if test="supplyPerple != null">#{supplyPerple},</if>
+            <if test="supplyPhoneNum != null">#{supplyPhoneNum},</if>
+            <if test="receiptAddress != null">#{receiptAddress},</if>
+            <if test="saleOrderNum != null">#{saleOrderNum},</if>
+            <if test="saleOrderName != null">#{saleOrderName},</if>
+            <if test="note != null">#{note},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+            <if test="ylint != null">#{ylint},</if>
+            <if test="ylint2 != null">#{ylint2},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockOut" parameterType="StockOut">
+        update stock_out
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stockoNum != null">stocko_num = #{stockoNum},</if>
+            <if test="stockoName != null">stocko_name = #{stockoName},</if>
+            <if test="stockoMateName != null">stocko_mate_name = #{stockoMateName},</if>
+            <if test="stockoMateNum != null">stocko_mate_num = #{stockoMateNum},</if>
+            <if test="stockoMateUnit != null">stocko_mate_unit = #{stockoMateUnit},</if>
+            <if test="scOrderNum != null">sc_order_num = #{scOrderNum},</if>
+            <if test="scOrderName != null">sc_order_name = #{scOrderName},</if>
+            <if test="cgddNum != null">cgdd_num = #{cgddNum},</if>
+            <if test="cgddName != null">cgdd_name = #{cgddName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="bomYlId != null">bom_yl_id = #{bomYlId},</if>
+            <if test="bomMatName != null">bom_mat_name = #{bomMatName},</if>
+            <if test="bomModelType != null">bom_model_type = #{bomModelType},</if>
+            <if test="bomColorNum != null">bom_color_num = #{bomColorNum},</if>
+            <if test="bomMaterial != null">bom_material = #{bomMaterial},</if>
+            <if test="bomSpetUnits != null">bom_spet_units = #{bomSpetUnits},</if>
+            <if test="bomPudtUseNum != null">bom_pudt_use_num = #{bomPudtUseNum},</if>
+            <if test="bomValuUnits != null">bom_valu_units = #{bomValuUnits},</if>
+            <if test="supplyUnit != null">supply_unit = #{supplyUnit},</if>
+            <if test="supplyDate != null">supply_date = #{supplyDate},</if>
+            <if test="deliveryDate != null">delivery_date = #{deliveryDate},</if>
+            <if test="supplyPerple != null">supply_perple = #{supplyPerple},</if>
+            <if test="supplyPhoneNum != null">supply_phone_num = #{supplyPhoneNum},</if>
+            <if test="receiptAddress != null">receipt_address = #{receiptAddress},</if>
+            <if test="saleOrderNum != null">sale_order_num = #{saleOrderNum},</if>
+            <if test="saleOrderName != null">sale_order_name = #{saleOrderName},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+            <if test="ylint != null">ylint = #{ylint},</if>
+            <if test="ylint2 != null">ylint2 = #{ylint2},</if>
+        </trim>
+        where ck_id = #{ckId}
+    </update>
+
+    <delete id="deleteStockOutById" parameterType="Long">
+        delete from stock_out where ck_id = #{ckId}
+    </delete>
+
+    <delete id="deleteStockOutByIds" parameterType="String">
+        delete from stock_out where ck_id in 
+        <foreach item="ckId" collection="array" open="(" separator="," close=")">
+            #{ckId}
+        </foreach>
+    </delete>
+
+</mapper>

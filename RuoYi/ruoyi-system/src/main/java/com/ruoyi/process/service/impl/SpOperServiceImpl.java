@@ -15,7 +15,7 @@ import com.ruoyi.common.core.text.Convert;
  * @author wangbo
  * @date 2020-12-23
  */
-@Service
+@Service("spoper")
 public class SpOperServiceImpl implements ISpOperService 
 {
     @Autowired

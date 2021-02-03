@@ -16,15 +16,15 @@ public class SalesOrder extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 销售订单ID */
+    /** 子合同ID */
     private Long salesOrderId;
 
-    /** 采购方总部编码 */
-    @Excel(name = "采购方总部编码")
+    /** 合同编号 */
+    @Excel(name = "合同编号")
     private String buyerHqCode;
 
-    /** 销售订单号 */
-    @Excel(name = "销售订单号")
+    /** 子合同编号 */
+    @Excel(name = "子合同编号")
     private String saleOrderNum;
 
     /** 供应商编码 */
@@ -52,7 +52,7 @@ public class SalesOrder extends BaseEntity
     private String kindCode;
 
     /** 销售订单状态 */
-    @Excel(name = "销售订单状态")
+    @Excel(name = "子合同状态")
     private String saleOrderStatus;
 
     /** 销售订单行项目号 */
@@ -95,12 +95,12 @@ public class SalesOrder extends BaseEntity
     @Excel(name = "来源数据创建时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date datasourceCreateTime;
 
-    /** 预留 */
-    @Excel(name = "预留")
+    /** 子合同名称 */
+    @Excel(name = "子合同名称")
     private String yl;
 
-    /** 预留 */
-    @Excel(name = "预留")
+    /** 合同名称 */
+    @Excel(name = "合同名称")
     private String yl2;
 
     /** 预留 */
@@ -282,11 +282,11 @@ public class SalesOrder extends BaseEntity
         this.dataSource = dataSource;
     }
 
-    public String getDataSource() 
+    public String getDataSource()
     {
         return dataSource;
     }
-    public void setDatasourceCreateTime(Date datasourceCreateTime) 
+    public void setDatasourceCreateTime(Date datasourceCreateTime)
     {
         this.datasourceCreateTime = datasourceCreateTime;
     }

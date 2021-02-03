@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.purcmanage.mapper.PurcOrderMapper">
+    
+    <resultMap type="PurcOrder" id="PurcOrderResult">
+        <result property="id"    column="id"    />
+        <result property="purOrderNum"    column="pur_order_num"    />
+        <result property="purOrderName"    column="pur_order_name"    />
+        <result property="bomYlId"    column="bom_yl_id"    />
+        <result property="bomMatName"    column="bom_mat_name"    />
+        <result property="bomModelType"    column="bom_model_type"    />
+        <result property="bomColorNum"    column="bom_color_num"    />
+        <result property="bomMaterial"    column="bom_material"    />
+        <result property="bomSpetUnits"    column="bom_spet_units"    />
+        <result property="bomPudtUseNum"    column="bom_pudt_use_num"    />
+        <result property="bomValuUnits"    column="bom_valu_units"    />
+        <result property="xcgNum"    column="xcg_num"    />
+        <result property="supplyUnit"    column="supply_unit"    />
+        <result property="supplyDate"    column="supply_date"    />
+        <result property="deliveryDate"    column="delivery_date"    />
+        <result property="supplyPerple"    column="supply_perple"    />
+        <result property="supplyPhoneNum"    column="supply_phone_num"    />
+        <result property="receiptAddress"    column="receipt_address"    />
+        <result property="saleOrderNum"    column="sale_order_num"    />
+        <result property="saleOrderName"    column="sale_order_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="note"    column="note"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectPurcOrderVo">
+        select id, pur_order_num, pur_order_name, bom_yl_id, bom_mat_name, bom_model_type, bom_color_num, bom_material, bom_spet_units, bom_pudt_use_num, bom_valu_units, xcg_num, supply_unit, supply_date, delivery_date, supply_perple, supply_phone_num, receipt_address, sale_order_num, sale_order_name, create_time, create_by, update_time, note, yl, yl2, yl3, yl4, yl5 from purc_order
+    </sql>
+
+    <select id="selectPurcOrderList" parameterType="PurcOrder" resultMap="PurcOrderResult">
+        <include refid="selectPurcOrderVo"/>
+        <where>  
+            <if test="purOrderNum != null  and purOrderNum != ''"> and pur_order_num = #{purOrderNum}</if>
+            <if test="purOrderName != null  and purOrderName != ''"> and pur_order_name like concat('%', #{purOrderName}, '%')</if>
+            <if test="bomYlId != null  and bomYlId != ''"> and bom_yl_id = #{bomYlId}</if>
+            <if test="bomMatName != null  and bomMatName != ''"> and bom_mat_name like concat('%', #{bomMatName}, '%')</if>
+            <if test="bomModelType != null  and bomModelType != ''"> and bom_model_type = #{bomModelType}</if>
+            <if test="bomColorNum != null  and bomColorNum != ''"> and bom_color_num = #{bomColorNum}</if>
+            <if test="bomMaterial != null  and bomMaterial != ''"> and bom_material = #{bomMaterial}</if>
+            <if test="bomSpetUnits != null  and bomSpetUnits != ''"> and bom_spet_units = #{bomSpetUnits}</if>
+            <if test="bomPudtUseNum != null "> and bom_pudt_use_num = #{bomPudtUseNum}</if>
+            <if test="bomValuUnits != null  and bomValuUnits != ''"> and bom_valu_units = #{bomValuUnits}</if>
+            <if test="xcgNum != null "> and xcg_num = #{xcgNum}</if>
+            <if test="supplyUnit != null  and supplyUnit != ''"> and supply_unit = #{supplyUnit}</if>
+            <if test="supplyDate != null "> and supply_date = #{supplyDate}</if>
+            <if test="deliveryDate != null "> and delivery_date = #{deliveryDate}</if>
+            <if test="supplyPerple != null  and supplyPerple != ''"> and supply_perple = #{supplyPerple}</if>
+            <if test="supplyPhoneNum != null  and supplyPhoneNum != ''"> and supply_phone_num = #{supplyPhoneNum}</if>
+            <if test="receiptAddress != null  and receiptAddress != ''"> and receipt_address = #{receiptAddress}</if>
+            <if test="saleOrderNum != null  and saleOrderNum != ''"> and sale_order_num = #{saleOrderNum}</if>
+            <if test="saleOrderName != null  and saleOrderName != ''"> and sale_order_name like concat('%', #{saleOrderName}, '%')</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectPurcOrderById" parameterType="Long" resultMap="PurcOrderResult">
+        <include refid="selectPurcOrderVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPurcOrder" parameterType="PurcOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into purc_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="purOrderNum != null">pur_order_num,</if>
+            <if test="purOrderName != null">pur_order_name,</if>
+            <if test="bomYlId != null">bom_yl_id,</if>
+            <if test="bomMatName != null">bom_mat_name,</if>
+            <if test="bomModelType != null">bom_model_type,</if>
+            <if test="bomColorNum != null">bom_color_num,</if>
+            <if test="bomMaterial != null">bom_material,</if>
+            <if test="bomSpetUnits != null">bom_spet_units,</if>
+            <if test="bomPudtUseNum != null">bom_pudt_use_num,</if>
+            <if test="bomValuUnits != null">bom_valu_units,</if>
+            <if test="xcgNum != null">xcg_num,</if>
+            <if test="supplyUnit != null">supply_unit,</if>
+            <if test="supplyDate != null">supply_date,</if>
+            <if test="deliveryDate != null">delivery_date,</if>
+            <if test="supplyPerple != null">supply_perple,</if>
+            <if test="supplyPhoneNum != null">supply_phone_num,</if>
+            <if test="receiptAddress != null">receipt_address,</if>
+            <if test="saleOrderNum != null">sale_order_num,</if>
+            <if test="saleOrderName != null">sale_order_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="note != null">note,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="purOrderNum != null">#{purOrderNum},</if>
+            <if test="purOrderName != null">#{purOrderName},</if>
+            <if test="bomYlId != null">#{bomYlId},</if>
+            <if test="bomMatName != null">#{bomMatName},</if>
+            <if test="bomModelType != null">#{bomModelType},</if>
+            <if test="bomColorNum != null">#{bomColorNum},</if>
+            <if test="bomMaterial != null">#{bomMaterial},</if>
+            <if test="bomSpetUnits != null">#{bomSpetUnits},</if>
+            <if test="bomPudtUseNum != null">#{bomPudtUseNum},</if>
+            <if test="bomValuUnits != null">#{bomValuUnits},</if>
+            <if test="xcgNum != null">#{xcgNum},</if>
+            <if test="supplyUnit != null">#{supplyUnit},</if>
+            <if test="supplyDate != null">#{supplyDate},</if>
+            <if test="deliveryDate != null">#{deliveryDate},</if>
+            <if test="supplyPerple != null">#{supplyPerple},</if>
+            <if test="supplyPhoneNum != null">#{supplyPhoneNum},</if>
+            <if test="receiptAddress != null">#{receiptAddress},</if>
+            <if test="saleOrderNum != null">#{saleOrderNum},</if>
+            <if test="saleOrderName != null">#{saleOrderName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="note != null">#{note},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePurcOrder" parameterType="PurcOrder">
+        update purc_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="purOrderNum != null">pur_order_num = #{purOrderNum},</if>
+            <if test="purOrderName != null">pur_order_name = #{purOrderName},</if>
+            <if test="bomYlId != null">bom_yl_id = #{bomYlId},</if>
+            <if test="bomMatName != null">bom_mat_name = #{bomMatName},</if>
+            <if test="bomModelType != null">bom_model_type = #{bomModelType},</if>
+            <if test="bomColorNum != null">bom_color_num = #{bomColorNum},</if>
+            <if test="bomMaterial != null">bom_material = #{bomMaterial},</if>
+            <if test="bomSpetUnits != null">bom_spet_units = #{bomSpetUnits},</if>
+            <if test="bomPudtUseNum != null">bom_pudt_use_num = #{bomPudtUseNum},</if>
+            <if test="bomValuUnits != null">bom_valu_units = #{bomValuUnits},</if>
+            <if test="xcgNum != null">xcg_num = #{xcgNum},</if>
+            <if test="supplyUnit != null">supply_unit = #{supplyUnit},</if>
+            <if test="supplyDate != null">supply_date = #{supplyDate},</if>
+            <if test="deliveryDate != null">delivery_date = #{deliveryDate},</if>
+            <if test="supplyPerple != null">supply_perple = #{supplyPerple},</if>
+            <if test="supplyPhoneNum != null">supply_phone_num = #{supplyPhoneNum},</if>
+            <if test="receiptAddress != null">receipt_address = #{receiptAddress},</if>
+            <if test="saleOrderNum != null">sale_order_num = #{saleOrderNum},</if>
+            <if test="saleOrderName != null">sale_order_name = #{saleOrderName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePurcOrderById" parameterType="Long">
+        delete from purc_order where id = #{id}
+    </delete>
+
+    <delete id="deletePurcOrderByIds" parameterType="String">
+        delete from purc_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

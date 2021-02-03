@@ -5,6 +5,7 @@ import java.util.List;
 import com.ruoyi.order.domain.SalesOrder;
 import com.ruoyi.order.mapper.SalesOrderMapper;
 import com.ruoyi.order.service.ISalesOrderService;
+import com.ruoyi.tecsche.domain.TecScheBom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import com.ruoyi.common.core.text.Convert;
  * @author wangbo
  * @date 2020-12-08
  */
-@Service
+@Service("salesorder")
 public class SalesOrderServiceImpl implements ISalesOrderService
 {
     @Autowired
@@ -43,6 +44,7 @@ public class SalesOrderServiceImpl implements ISalesOrderService
     @Override
     public List<SalesOrder> selectSalesOrderList(SalesOrder salesOrder)
     {
+
         return salesOrderMapper.selectSalesOrderList(salesOrder);
     }
 
@@ -93,4 +95,9 @@ public class SalesOrderServiceImpl implements ISalesOrderService
     {
         return salesOrderMapper.deleteSalesOrderById(salesOrderId);
     }
+
+
+
+
+
 }

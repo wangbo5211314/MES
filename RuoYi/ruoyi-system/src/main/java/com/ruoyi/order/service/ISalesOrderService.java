@@ -1,6 +1,7 @@
 package com.ruoyi.order.service;
 
 import com.ruoyi.order.domain.SalesOrder;
+import com.ruoyi.tecsche.domain.TecScheBom;
 
 import java.util.List;
 
@@ -60,4 +61,6 @@ public interface ISalesOrderService
      * @return 结果
      */
     public int deleteSalesOrderById(Long salesOrderId);
+
+
 }

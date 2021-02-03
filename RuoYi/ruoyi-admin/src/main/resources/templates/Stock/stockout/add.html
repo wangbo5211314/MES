@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增出库单')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-stockout-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出库单号：</label>
+                <div class="col-sm-8">
+                    <input name="stockoNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出库单名称：</label>
+                <div class="col-sm-8">
+                    <input name="stockoName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出库材料名称：</label>
+                <div class="col-sm-8">
+                    <input name="stockoMateName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出库材料数量：</label>
+                <div class="col-sm-8">
+                    <input name="stockoMateNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计量单位：</label>
+                <div class="col-sm-8">
+                    <input name="stockoMateUnit" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产订单编号：</label>
+                <div class="col-sm-8">
+                    <input name="scOrderNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产订单名称：</label>
+                <div class="col-sm-8">
+                    <input name="scOrderName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单编号：</label>
+                <div class="col-sm-8">
+                    <input name="cgddNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单名称：</label>
+                <div class="col-sm-8">
+                    <input name="cgddName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">BOM编号：</label>
+                <div class="col-sm-8">
+                    <input name="bomYlId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom物料名称：</label>
+                <div class="col-sm-8">
+                    <input name="bomMatName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom规格型号：</label>
+                <div class="col-sm-8">
+                    <input name="bomModelType" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom色号：</label>
+                <div class="col-sm-8">
+                    <input name="bomColorNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom材质：</label>
+                <div class="col-sm-8">
+                    <input name="bomMaterial" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom规格单位：</label>
+                <div class="col-sm-8">
+                    <input name="bomSpetUnits" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom生产用量：</label>
+                <div class="col-sm-8">
+                    <input name="bomPudtUseNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom计价单位：</label>
+                <div class="col-sm-8">
+                    <input name="bomValuUnits" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货单位：</label>
+                <div class="col-sm-8">
+                    <input name="supplyUnit" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="supplyDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">交货日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="deliveryDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货联系人：</label>
+                <div class="col-sm-8">
+                    <input name="supplyPerple" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货商联系电话：</label>
+                <div class="col-sm-8">
+                    <input name="supplyPhoneNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收货地址：</label>
+                <div class="col-sm-8">
+                    <input name="receiptAddress" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">销售订单号：</label>
+                <div class="col-sm-8">
+                    <input name="saleOrderNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">销售订单名称：</label>
+                <div class="col-sm-8">
+                    <input name="saleOrderName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="note" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" class="form-control" type="text">
+                </div>
+            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总库存数量：</label>
+                <div class="col-sm-8">
+                    <input name="ylint" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">预留int：</label>
+                <div class="col-sm-8">
+                    <input name="ylint2" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "Stock/stockout"
+        $("#form-stockout-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-stockout-add').serialize());
+            }
+        }
+
+        $("input[name='supplyDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='deliveryDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

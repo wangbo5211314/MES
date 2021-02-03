@@ -10,15 +10,15 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
-                            <li>
+                            <li hidden>
                                 <label>采购方总部编码：</label>
                                 <input type="text" name="buyerHqCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>供应商编码：</label>
                                 <input type="text" name="vendorCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>供应商名称：</label>
                                 <input type="text" name="vendorName"/>
                             </li>
@@ -30,15 +30,15 @@
                                 <label>原材料编码：</label>
                                 <input type="text" name="materiCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>原材料库存数量：</label>
                                 <input type="text" name="materiStockNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>原材料单位：</label>
                                 <input type="text" name="materiUnit"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>原材料描述：</label>
                                 <input type="text" name="materiDesc"/>
                             </li>
@@ -56,50 +56,50 @@
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endBuyTime]"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购数量：</label>
                                 <input type="text" name="buyNum"/>
                             </li>
-                            <li class="select-time">
+                        <!--    <li class="select-time">
                                 <label>到货时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginArrivalTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endArrivalTime]"/>
-                            </li>
-                            <li>
+                            </li>-->
+                            <li hidden>
                                 <label>国网侧需求数量：</label>
                                 <input type="text" name="gwNeedNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>品类：</label>
                                 <input type="text" name="category"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>种类：</label>
                                 <input type="text" name="type"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据来源：</label>
                                 <select name="dataSour" th:with="type=${@dict.getType('stock_key_datasour')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li class="select-time">
+                        <!--    <li class="select-time"  hidden>
                                 <label>来源数据创建时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDatasourCretTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDatasourCretTime]"/>
-                            </li>
-                            <li>
+                            </li>-->
+                            <li hidden>
                                 <label>备注：</label>
                                 <input type="text" name="note"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据拥有方：</label>
                                 <input type="text" name="dataOwner"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据可见方：</label>
                                 <input type="text" name="dataVisible"/>
                             </li>

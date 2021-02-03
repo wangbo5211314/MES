@@ -1,50 +1,69 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改销售订单')" />
+    <th:block th:include="include :: header('修改子合同')" />
     <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content"  th:with="htManList=${@htManage.selectGwOrdersReturnList(GwOrdersReturn)}">
         <form class="form-horizontal m" id="form-saleorder-edit" th:object="${salesOrder}">
             <input name="salesOrderId" th:field="*{salesOrderId}" type="hidden">
-            <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">采购方总部编码：</label>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">合同编号：</label>
+                <!--<div class="col-sm-8">
+                    <input name="buyerHqCode" th:field="*{buyerHqCode}" class="form-control" type="text">
+                </div>-->
                 <div class="col-sm-8">
-                    <input name="buyerHqCode" th:field="*{buyerHqCode}" class="form-control" type="text" required>
+                    <select name="buyerHqCode" class="form-control m-b buyerHqCodeSelect" required>
+
+                        <option  th:field="*{buyerHqCode}" th:each="htMan : ${htManList}" th:text="${htMan.getContractName()+'的合同编号为：'+htMan.getContractNum()}" th:value="${htMan.getContractNum()}"  th:htmc="${htMan.getContractName()}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">合同名称：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" th:field="*{yl2}" class="form-control yl2" type="text"readonly>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">销售订单号：</label>
+                <label class="col-sm-3 control-label is-required">子合同编号：</label>
                 <div class="col-sm-8">
-                    <input name="saleOrderNum" th:field="*{saleOrderNum}" class="form-control" type="text" required>
+                    <input name="saleOrderNum" th:field="*{saleOrderNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">子合同名称：</label>
+                <div class="col-sm-8">
+                    <input name="yl" th:field="*{yl}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">供应商编码：</label>
+                <label class="col-sm-3 control-label">供应商编码：</label>
                 <div class="col-sm-8">
-                    <input name="vendorCode" th:field="*{vendorCode}" class="form-control" type="text" required>
+                    <input name="vendorCode" th:field="*{vendorCode}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <!--<div class="form-group">
                 <label class="col-sm-3 control-label">采购方公司编码：</label>
                 <div class="col-sm-8">
                     <input name="buyerCompanyCode" th:field="*{buyerCompanyCode}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label is-required">采购方公司名称：</label>
                 <div class="col-sm-8">
                     <input name="buyerCompanyName" th:field="*{buyerCompanyName}" class="form-control" type="text" required>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label is-required">采购方公司省份：</label>
                 <div class="col-sm-8">
                     <input name="buyerCompanyProvince" th:field="*{buyerCompanyProvince}" class="form-control" type="text" required>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label is-required">品类编码：</label>
                 <div class="col-sm-8">
                     <input name="categoryCode" th:field="*{categoryCode}" class="form-control" type="text" required>
@@ -55,14 +74,14 @@
                 <div class="col-sm-8">
                     <input name="kindCode" th:field="*{kindCode}" class="form-control" type="text" required>
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">    
-                <label class="col-sm-3 control-label">销售订单状态：</label>
+                <label class="col-sm-3 control-label">子合同状态：</label>
                 <div class="col-sm-8">
                     <input name="saleOrderStatus" th:field="*{saleOrderStatus}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <!--<div class="form-group">
                 <label class="col-sm-3 control-label is-required">销售订单行项目号：</label>
                 <div class="col-sm-8">
                     <input name="saleOrderitemNum" th:field="*{saleOrderitemNum}" class="form-control" type="text" required>
@@ -73,34 +92,34 @@
                 <div class="col-sm-8">
                     <input name="purchaseOrderitemId" th:field="*{purchaseOrderitemId}" class="form-control" type="text" required>
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">物资编码：</label>
+                <label class="col-sm-3 control-label">物资编码：</label>
                 <div class="col-sm-8">
-                    <input name="meterialCode" th:field="*{meterialCode}" class="form-control" type="text" required>
+                    <input name="meterialCode" th:field="*{meterialCode}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">物资名称：</label>
+                <label class="col-sm-3 control-label">物资名称：</label>
                 <div class="col-sm-8">
-                    <input name="meterialName" th:field="*{meterialName}" class="form-control" type="text" required>
+                    <input name="meterialName" th:field="*{meterialName}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">物资单位：</label>
+                <label class="col-sm-3 control-label">物资单位：</label>
                 <div class="col-sm-8">
-                    <select name="meterialUnit" class="form-control m-b" th:with="type=${@dict.getType('order_meterial_unit')}" required>
+                    <select name="meterialUnit" class="form-control m-b" th:with="type=${@dict.getType('order_meterial_unit')}">
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{meterialUnit}"></option>
                     </select>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">物资数量：</label>
+                <label class="col-sm-3 control-label">物资数量：</label>
                 <div class="col-sm-8">
-                    <input name="meterialNum" th:field="*{meterialNum}" class="form-control" type="text" required>
+                    <input name="meterialNum" th:field="*{meterialNum}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+           <!-- <div class="form-group">
                 <label class="col-sm-3 control-label">数据拥有方：</label>
                 <div class="col-sm-8">
                     <input name="dataOwner" th:field="*{dataOwner}" class="form-control" type="text">
@@ -119,28 +138,20 @@
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{dataSource}"></option>
                     </select>
                 </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">来源数据创建时间：</label>
+            </div>-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">来源数据创建时间：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
-                        <input name="datasourceCreateTime" th:value="${#dates.format(salesOrder.datasourceCreateTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                        <!--<input name="datasourceCreateTime"  class="form-control"  placeholder="yyyy-MM-dd" type="text" required>-->
+                        <input name="datasourceCreateTime" th:value="${#dates.format(salesOrder.datasourceCreateTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
-           <!-- <div class="form-group">
-                <label class="col-sm-3 control-label">预留：</label>
-                <div class="col-sm-8">
-                    <input name="yl" th:field="*{yl}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">预留：</label>
-                <div class="col-sm-8">
-                    <input name="yl2" th:field="*{yl2}" class="form-control" type="text">
-                </div>
-            </div>
+           <!--
+
+
             <div class="form-group">    
                 <label class="col-sm-3 control-label">预留：</label>
                 <div class="col-sm-8">
@@ -175,11 +186,48 @@
             }
         }
 
-        $("input[name='datasourceCreateTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+         $("input[name='datasourceCreateTime']").datetimepicker({
+           format: "yyyy-mm-dd hh:ii",
+             minView: "month",
+             autoclose: true
+         });
+
+        /*获取select里编号的值显示至出来*/
+        $(".buyerHqCodeSelect").change(function(){
+            var htmc = $(this).children('option:selected').attr('htmc')
+
+            $(".yl2").val(htmc)
+
+        })
+        /*$("input[name='datasourceCreateTime']").click(function () {
+            console.log('点击了输入框')
+            var date=new Date();
+            var year=date.getFullYear(); //获取当前年份
+            var mon=date.getMonth()+1; //获取当前月份
+            var da=date.getDate(); //获取当前日
+            var h=date.getHours(); //获取小时
+            var m=date.getMinutes(); //获取分钟
+            var s=date.getSeconds(); //获取秒
+            var d=document.getElementById('Date');
+            console.log(year+'-'+mon+'-'+da+'-'+h+':'+m+':'+s)
+            $(this).attr({"value": year+'-'+mon+'-'+da+'-'+h+':'+m+':'+s});
+            // this.innerText = year+'-'+mon+'-'+da+'-'+h+':'+m+':'+s
+        })*/
+
+
+
+        // window.onload=function(){
+        //
+        //     var date=new Date();
+        //     var year=date.getFullYear(); //获取当前年份
+        //     var mon=date.getMonth()+1; //获取当前月份
+        //     var da=date.getDate(); //获取当前日
+        //
+        //     var h=date.getHours(); //获取小时
+        //     var m=date.getMinutes(); //获取分钟
+        //     var s=date.getSeconds(); //获取秒
+        //     var d=document.getElementById('Date');
+        //     console.log(year+'-'+mon+'-'+da+'-'+h+':'+m+':'+s) }
     </script>
 </body>
 </html>

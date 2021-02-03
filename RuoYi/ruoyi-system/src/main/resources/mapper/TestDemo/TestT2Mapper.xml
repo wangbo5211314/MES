@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.testdemo.mapper.TestT2Mapper">
+    
+    <resultMap type="TestT2" id="TestT2Result">
+        <result property="id"    column="id"    />
+        <result property="biaoId"    column="biao_id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="daily"    column="daily"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="beizhu"    column="beizhu"    />
+    </resultMap>
+
+    <sql id="selectTestT2Vo">
+        select id, biao_id, create_by, create_time, daily, update_by, update_time, beizhu from test_t2
+    </sql>
+
+    <select id="selectTestT2List" parameterType="TestT2" resultMap="TestT2Result">
+        <include refid="selectTestT2Vo"/>
+        <where>  
+            <if test="biaoId != null "> and biao_id = #{biaoId}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="daily != null  and daily != ''"> and daily = #{daily}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+        </where>
+    </select>
+    
+    <select id="selectTestT2ById" parameterType="Long" resultMap="TestT2Result">
+        <include refid="selectTestT2Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTestT2" parameterType="TestT2" useGeneratedKeys="true" keyProperty="id">
+        insert into test_t2
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="biaoId != null">biao_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="daily != null">daily,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="beizhu != null">beizhu,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="biaoId != null">#{biaoId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="daily != null">#{daily},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="beizhu != null">#{beizhu},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTestT2" parameterType="TestT2">
+        update test_t2
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="biaoId != null">biao_id = #{biaoId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="daily != null">daily = #{daily},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="beizhu != null">beizhu = #{beizhu},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTestT2ById" parameterType="Long">
+        delete from test_t2 where id = #{id}
+    </delete>
+
+    <delete id="deleteTestT2ByIds" parameterType="String">
+        delete from test_t2 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

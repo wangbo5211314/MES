@@ -20,6 +20,7 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 国网采购订单-返回Controller
@@ -54,6 +55,30 @@ public class GwOrdersReturnController extends BaseController
         startPage();
         List<GwOrdersReturn> list = gwOrdersReturnService.selectGwOrdersReturnList(gwOrdersReturn);
         return getDataTable(list);
+    }
+
+    /**导入国网订单返回
+     */
+    @RequiresPermissions("Order:orderreturn:import")
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<GwOrdersReturn> util = new ExcelUtil<GwOrdersReturn>(GwOrdersReturn.class);
+        List<GwOrdersReturn> gwOrdersReturnList = util.importExcel(file.getInputStream());
+
+        String message = gwOrdersReturnService.importGwordersreturn(gwOrdersReturnList, updateSupport);
+        return AjaxResult.success(message);
+    }
+
+    // 下载模板
+    @RequiresPermissions("Order:orderreturn:view")
+    @GetMapping("/importTemplate")
+    @ResponseBody
+    public AjaxResult importTemplate()
+    {
+        ExcelUtil<GwOrdersReturn> util = new ExcelUtil<GwOrdersReturn>(GwOrdersReturn.class);
+        return util.importTemplateExcel("国网订单-返回");
     }
 
     /**

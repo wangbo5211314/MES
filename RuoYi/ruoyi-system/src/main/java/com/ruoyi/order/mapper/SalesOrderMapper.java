@@ -60,4 +60,12 @@ public interface SalesOrderMapper
      * @return 结果
      */
     public int deleteSalesOrderByIds(String[] salesOrderIds);
+
+    /**
+     * 查询销售订单的订单编号
+     *
+     * @param
+     * @return 销售订单
+     */
+
 }

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改采购订单')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content"  th:with="type=${@BOMList.selectTecScheBomList(tecschebom, salesorder)}">
+        <form class="form-horizontal m" id="form-purcorder-edit" th:object="${purcOrder}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购单号：</label>
+                <div class="col-sm-8">
+                    <input name="purOrderNum" th:field="*{purOrderNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购单名称：</label>
+                <div class="col-sm-8">
+                    <input name="purOrderName" th:field="*{purOrderName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">BOM编号：</label>
+                <div class="col-sm-8">
+                    <!--<input name="bomYlId" th:field="*{bomYlId}" class="form-control" type="text">-->
+                    <select name="bomYlId" class="form-control m-b bombh">
+                        <option  th:field="*{bomYlId}"  th:each="BOMIDList : ${type}" th:text="${BOMIDList.getYl()}" th:value="${BOMIDList.getYl()}"  th:xsddbh="${BOMIDList.getSaleOrderNum()}" th:xsddmc="${BOMIDList.getSaleOrderName()}" th:wlmc="${BOMIDList.getMatName()}" th:ggxh="${BOMIDList.getModelType()}" th:cz="${BOMIDList.getMaterial()}" th:sh="${BOMIDList.getColorNum()}" th:ggdw="${BOMIDList.getSpetUnits()}" th:scyl="${BOMIDList.getPudtUseNum()}" th:jjdw="${BOMIDList.getValuUnits()}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom物料名称：</label>
+                <div class="col-sm-8">
+                    <input name="bomMatName" th:field="*{bomMatName}" class="form-control bomMatName" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom规格型号：</label>
+                <div class="col-sm-8">
+                    <input name="bomModelType" th:field="*{bomModelType}" class="form-control bomModelType" type="text" readonly>
+                </div>
+                <!--<div class="col-sm-8">
+                    <select name="bomModelType" class="form-control m-b" th:with="type=${@dict.getType('tec_sche_bom_ggxh')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{bomModelType}"></option>
+                    </select>
+                </div>-->
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom色号：</label>
+                <div class="col-sm-8">
+                    <input name="bomColorNum" th:field="*{bomColorNum}" class="form-control bomColorNum" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom材质：</label>
+                <div class="col-sm-8">
+                    <input name="bomMaterial" th:field="*{bomMaterial}" class="form-control bomMaterial" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom规格单位：</label>
+                <div class="col-sm-8">
+                    <input name="bomSpetUnits" th:field="*{bomSpetUnits}" class="form-control bomSpetUnits" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom生产用量：</label>
+                <div class="col-sm-8">
+                    <input name="bomPudtUseNum" th:field="*{bomPudtUseNum}" class="form-control bomPudtUseNum" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom计价单位：</label>
+                <div class="col-sm-8">
+                    <input name="bomValuUnits" th:field="*{bomValuUnits}" class="form-control bomValuUnits" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">需采购数量：</label>
+                <div class="col-sm-8">
+                    <input name="xcgNum" th:field="*{xcgNum}" class="form-control " type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货单位：</label>
+                <div class="col-sm-8">
+                    <input name="supplyUnit" th:field="*{supplyUnit}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预计交货日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="supplyDate" th:value="${#dates.format(purcOrder.supplyDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">交货日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="deliveryDate" th:value="${#dates.format(purcOrder.deliveryDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货联系人：</label>
+                <div class="col-sm-8">
+                    <input name="supplyPerple" th:field="*{supplyPerple}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货商联系电话：</label>
+                <div class="col-sm-8">
+                    <input name="supplyPhoneNum" th:field="*{supplyPhoneNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收货地址：</label>
+                <div class="col-sm-8">
+                    <input name="receiptAddress" th:field="*{receiptAddress}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">子合同编号：</label>
+                <div class="col-sm-8">
+                    <input name="saleOrderNum" th:field="*{saleOrderNum}" class="form-control saleOrderNum" type="text"  readonly>
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">子合同名称：</label>
+                <div class="col-sm-8">
+                    <input name="saleOrderName" th:field="*{saleOrderName}" class="form-control saleOrderName" type="text"  readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">创建人：</label>
+                <div class="col-sm-8">
+                    <input name="createBy" th:field="*{createBy}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">更新人：</label>
+                <div class="col-sm-8">
+                    <input name="yl" th:field="*{yl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="note" th:field="*{note}" class="form-control" type="text">
+                </div>
+            </div>
+            <!--
+            <div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" th:field="*{yl2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" th:field="*{yl3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" th:field="*{yl4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" th:field="*{yl5}" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "PurcManage/purcorder";
+        $("#form-purcorder-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-purcorder-edit').serialize());
+            }
+        }
+
+        $("input[name='supplyDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='deliveryDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        $(".bombh").change(function () {
+            var wlmc = $(this).children('option:selected').attr('wlmc')
+            var ggxh = $(this).children('option:selected').attr('ggxh')
+            var sh = $(this).children('option:selected').attr('sh')
+            var cz = $(this).children('option:selected').attr('cz')
+            var ggdw = $(this).children('option:selected').attr('ggdw')
+            var scyl = $(this).children('option:selected').attr('scyl')
+            var jjdw = $(this).children('option:selected').attr('jjdw')
+            var xsddbh = $(this).children('option:selected').attr('xsddbh')
+            var xsddmc = $(this).children('option:selected').attr('xsddmc')
+            $(".bomMatName").val(wlmc)
+            $(".bomModelType").val(ggxh)
+            $(".bomColorNum").val(sh)
+            $(".bomMaterial").val(cz)
+            $(".bomSpetUnits").val(ggdw)
+            $(".bomPudtUseNum").val(scyl)
+            $(".bomValuUnits").val(jjdw)
+            $(".saleOrderNum").val(xsddbh)
+            $(".saleOrderName").val(xsddmc)
+
+        })
+    </script>
+</body>
+</html>

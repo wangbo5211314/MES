@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('设备故障管理列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>设备编号：</label>
+                                <input type="text" name="equipNum"/>
+                            </li>
+                            <li>
+                                <label>设备名称：</label>
+                                <input type="text" name="equipName"/>
+                            </li>
+                            <li>
+                                <label>设备厂家：</label>
+                                <input type="text" name="equipCj"/>
+                            </li>
+                            <li>
+                                <label>故障原因：</label>
+                                <input type="text" name="faultReason"/>
+                            </li>
+                            <li class="select-time" hidden>
+                                <label>故障开始时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginFaultStartTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endFaultStartTime]"/>
+                            </li>
+                            <li class="select-time" hidden>
+                                <label>维修结束时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginRepairEndTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endRepairEndTime]"/>
+                            </li>
+                            <li hidden>
+                                <label>维修人：</label>
+                                <input type="text" name="repairBy"/>
+                            </li>
+                            <li hidden>
+                                <label>备注：</label>
+                                <input type="text" name="note"/>
+                            </li>
+                            <li class="select-time">
+                                <label>创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreateTime]"/>
+                            </li>
+                            <li hidden>
+                                <label>创建人：</label>
+                                <input type="text" name="createBy"/>
+                            </li>
+                            <li class="select-time" hidden>
+                                <label>更新时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginUpdateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endUpdateTime]"/>
+                            </li>
+                            <li hidden>
+                                <label>更新人：</label>
+                                <input type="text" name="updateBy"/>
+                            </li>
+                            <!--<li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>
+                            <li>
+                                <label>预留int：</label>
+                                <input type="text" name="ylint1"/>
+                            </li>
+                            <li>
+                                <label>预留int：</label>
+                                <input type="text" name="ylint2"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="EquipMan:equipfault:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="EquipMan:equipfault:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="EquipMan:equipfault:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="EquipMan:equipfault:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('EquipMan:equipfault:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('EquipMan:equipfault:remove')}]];
+        var prefix = ctx + "EquipMan/equipfault";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "设备故障管理",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'sbgzbId',
+                    title: '表id',
+                    visible: false
+                },
+                {
+                    field: 'equipNum',
+                    title: '设备编号'
+                },
+                {
+                    field: 'equipName',
+                    title: '设备名称'
+                },
+                {
+                    field: 'equipCj',
+                    title: '设备厂家'
+                },
+                {
+                    field: 'faultReason',
+                    title: '故障原因'
+                },
+                {
+                    field: 'faultStartTime',
+                    title: '故障开始时间'
+                },
+                {
+                    field: 'repairEndTime',
+                    title: '维修结束时间'
+                },
+                {
+                    field: 'repairBy',
+                    title: '维修人'
+                },
+                {
+                    field: 'note',
+                    title: '备注'
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间'
+                },
+                {
+                    field: 'createBy',
+                    title: '创建人'
+                },
+                {
+                    field: 'updateTime',
+                    title: '更新时间'
+                },
+                {
+                    field: 'updateBy',
+                    title: '更新人'
+                },
+                /*{
+                    field: 'yl',
+                    title: '预留'
+                },
+                {
+                    field: 'yl2',
+                    title: '预留'
+                },
+                {
+                    field: 'yl3',
+                    title: '预留'
+                },
+                {
+                    field: 'yl4',
+                    title: '预留'
+                },
+                {
+                    field: 'yl5',
+                    title: '预留'
+                },
+                {
+                    field: 'ylint1',
+                    title: '预留int'
+                },
+                {
+                    field: 'ylint2',
+                    title: '预留int'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.sbgzbId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.sbgzbId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

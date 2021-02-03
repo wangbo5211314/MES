@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.equipman.mapper.EquipFaultMapper">
+    
+    <resultMap type="EquipFault" id="EquipFaultResult">
+        <result property="sbgzbId"    column="sbgzb_id"    />
+        <result property="equipNum"    column="equip_num"    />
+        <result property="equipName"    column="equip_name"    />
+        <result property="equipCj"    column="equip_cj"    />
+        <result property="faultReason"    column="fault_reason"    />
+        <result property="faultStartTime"    column="fault_start_time"    />
+        <result property="repairEndTime"    column="repair_end_time"    />
+        <result property="repairBy"    column="repair_by"    />
+        <result property="note"    column="note"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+        <result property="ylint1"    column="ylint1"    />
+        <result property="ylint2"    column="ylint2"    />
+    </resultMap>
+
+    <sql id="selectEquipFaultVo">
+        select sbgzb_id, equip_num, equip_name, equip_cj, fault_reason, fault_start_time, repair_end_time, repair_by, note, create_time, create_by, update_time, update_by, yl, yl2, yl3, yl4, yl5, ylint1, ylint2 from equip_fault
+    </sql>
+
+    <select id="selectEquipFaultList" parameterType="EquipFault" resultMap="EquipFaultResult">
+        <include refid="selectEquipFaultVo"/>
+        <where>  
+            <if test="equipNum != null  and equipNum != ''"> and equip_num = #{equipNum}</if>
+            <if test="equipName != null  and equipName != ''"> and equip_name like concat('%', #{equipName}, '%')</if>
+            <if test="equipCj != null  and equipCj != ''"> and equip_cj = #{equipCj}</if>
+            <if test="faultReason != null  and faultReason != ''"> and fault_reason = #{faultReason}</if>
+            <if test="faultStartTime != null "> and fault_start_time = #{faultStartTime}</if>
+            <if test="repairEndTime != null "> and repair_end_time = #{repairEndTime}</if>
+            <if test="repairBy != null  and repairBy != ''"> and repair_by = #{repairBy}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+            <if test="ylint1 != null "> and ylint1 = #{ylint1}</if>
+            <if test="ylint2 != null "> and ylint2 = #{ylint2}</if>
+        </where>
+    </select>
+    
+    <select id="selectEquipFaultById" parameterType="Long" resultMap="EquipFaultResult">
+        <include refid="selectEquipFaultVo"/>
+        where sbgzb_id = #{sbgzbId}
+    </select>
+        
+    <insert id="insertEquipFault" parameterType="EquipFault" useGeneratedKeys="true" keyProperty="sbgzbId">
+        insert into equip_fault
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="equipNum != null">equip_num,</if>
+            <if test="equipName != null">equip_name,</if>
+            <if test="equipCj != null">equip_cj,</if>
+            <if test="faultReason != null">fault_reason,</if>
+            <if test="faultStartTime != null">fault_start_time,</if>
+            <if test="repairEndTime != null">repair_end_time,</if>
+            <if test="repairBy != null">repair_by,</if>
+            <if test="note != null">note,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+            <if test="ylint1 != null">ylint1,</if>
+            <if test="ylint2 != null">ylint2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="equipNum != null">#{equipNum},</if>
+            <if test="equipName != null">#{equipName},</if>
+            <if test="equipCj != null">#{equipCj},</if>
+            <if test="faultReason != null">#{faultReason},</if>
+            <if test="faultStartTime != null">#{faultStartTime},</if>
+            <if test="repairEndTime != null">#{repairEndTime},</if>
+            <if test="repairBy != null">#{repairBy},</if>
+            <if test="note != null">#{note},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+            <if test="ylint1 != null">#{ylint1},</if>
+            <if test="ylint2 != null">#{ylint2},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEquipFault" parameterType="EquipFault">
+        update equip_fault
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="equipNum != null">equip_num = #{equipNum},</if>
+            <if test="equipName != null">equip_name = #{equipName},</if>
+            <if test="equipCj != null">equip_cj = #{equipCj},</if>
+            <if test="faultReason != null">fault_reason = #{faultReason},</if>
+            <if test="faultStartTime != null">fault_start_time = #{faultStartTime},</if>
+            <if test="repairEndTime != null">repair_end_time = #{repairEndTime},</if>
+            <if test="repairBy != null">repair_by = #{repairBy},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+            <if test="ylint1 != null">ylint1 = #{ylint1},</if>
+            <if test="ylint2 != null">ylint2 = #{ylint2},</if>
+        </trim>
+        where sbgzb_id = #{sbgzbId}
+    </update>
+
+    <delete id="deleteEquipFaultById" parameterType="Long">
+        delete from equip_fault where sbgzb_id = #{sbgzbId}
+    </delete>
+
+    <delete id="deleteEquipFaultByIds" parameterType="String">
+        delete from equip_fault where sbgzb_id in 
+        <foreach item="sbgzbId" collection="array" open="(" separator="," close=")">
+            #{sbgzbId}
+        </foreach>
+    </delete>
+
+</mapper>

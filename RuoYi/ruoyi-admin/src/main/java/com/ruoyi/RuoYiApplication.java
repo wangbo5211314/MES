@@ -16,15 +16,15 @@ public class RuoYiApplication
     {
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(RuoYiApplication.class, args);
-        System.out.println("(♥◠‿◠)ﾉﾞ  EMSE系统启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
-                " .-------.       ____     __        \n" +
-                " |  _ _   \\      \\   \\   /  /    \n" +
-                " | ( ' )  |       \\  _. /  '       \n" +
-                " |(_ o _) /        _( )_ .'         \n" +
-                " | (_,_).' __  ___(_ o _)'          \n" +
-                " |  |\\ \\  |  ||   |(_,_)'         \n" +
-                " |  | \\ `'   /|   `-'  /           \n" +
-                " |  |  \\    /  \\      /           \n" +
-                " ''-'   `'-'    `-..-'              ");
+        System.out.println("(♥◠‿◠)ﾉﾞ  MSE系统启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
+                "   __      __ ______  _____     \n" +
+                "  |  \\    /  |  ____|/ ____|    \n" +
+                "  |   \\  /   | |__  | (___      \n" +
+                "  |  | \\/ |  |  __|  \\__  \\     \n" +
+                "  |  |    |  | |____ ____) |    \n" +
+                "  |__|    |__|______|_____/    "
+               );
+
+
     }
 }

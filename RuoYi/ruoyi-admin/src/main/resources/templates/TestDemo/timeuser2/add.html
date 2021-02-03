@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增测试时间与人2')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-timeuser2-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">编码：</label>
+                <div class="col-sm-8">
+                    <input name="biaoId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">日常：</label>
+                <div class="col-sm-8">
+                    <!--<input name="daily" class="form-control" type="text">-->
+                    <select name="daily" class="form-control" th:with="sd=${@salesorder.selectSalesOrderId()}">
+
+                        <option th:each="sdvalue : ${sd}" th:text="${sd}" th:value="${sd}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="beizhu" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "TestDemo/timeuser2"
+        $("#form-timeuser2-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-timeuser2-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

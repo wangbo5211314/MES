@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.beancodecom.mapper.ActDataSourceMapper">
+    
+    <resultMap type="ActDataSource" id="ActDataSourceResult">
+        <result property="id"    column="id"    />
+        <result property="plateName"    column="plateName"    />
+        <result property="qrLeft"    column="qrLeft"    />
+        <result property="qrRight"    column="qrRight"    />
+        <result property="plateNum"    column="plateNum"    />
+        <result property="date"    column="date"    />
+    </resultMap>
+
+    <sql id="selectActDataSourceVo">
+        select id, plateName, qrLeft, qrRight, plateNum, date from shanghai1101
+    </sql>
+
+    <select id="selectActDataSourceList" parameterType="ActDataSource" resultMap="ActDataSourceResult">
+        <include refid="selectActDataSourceVo"/>
+        <where>  
+            <if test="plateName != null  and plateName != ''"> and plateName like concat('%', #{plateName}, '%')</if>
+            <if test="qrLeft != null  and qrLeft != ''"> and qrLeft = #{qrLeft}</if>
+            <if test="qrRight != null  and qrRight != ''"> and qrRight = #{qrRight}</if>
+            <if test="plateNum != null  and plateNum != ''"> and plateNum = #{plateNum}</if>
+            <if test="date != null "> and date = #{date}</if>
+        </where>
+    </select>
+    
+    <select id="selectActDataSourceById" parameterType="Long" resultMap="ActDataSourceResult">
+        <include refid="selectActDataSourceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertActDataSource" parameterType="ActDataSource" useGeneratedKeys="true" keyProperty="id">
+        insert into shanghai1101
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="plateName != null">plateName,</if>
+            <if test="qrLeft != null">qrLeft,</if>
+            <if test="qrRight != null">qrRight,</if>
+            <if test="plateNum != null">plateNum,</if>
+            <if test="date != null">date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="plateName != null">#{plateName},</if>
+            <if test="qrLeft != null">#{qrLeft},</if>
+            <if test="qrRight != null">#{qrRight},</if>
+            <if test="plateNum != null">#{plateNum},</if>
+            <if test="date != null">#{date},</if>
+         </trim>
+    </insert>
+
+    <update id="updateActDataSource" parameterType="ActDataSource">
+        update shanghai1101
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="plateName != null">plateName = #{plateName},</if>
+            <if test="qrLeft != null">qrLeft = #{qrLeft},</if>
+            <if test="qrRight != null">qrRight = #{qrRight},</if>
+            <if test="plateNum != null">plateNum = #{plateNum},</if>
+            <if test="date != null">date = #{date},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteActDataSourceById" parameterType="Long">
+        delete from shanghai1101 where id = #{id}
+    </delete>
+
+    <delete id="deleteActDataSourceByIds" parameterType="String">
+        delete from shanghai1101 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

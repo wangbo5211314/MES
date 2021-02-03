@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.beancodecom.mapper.BeanCodeScsjMapper">
+    
+    <resultMap type="BeanCodeScsj" id="BeanCodeScsjResult">
+        <result property="id"    column="id"    />
+        <result property="plateName"    column="plateName"    />
+        <result property="qrLeft"    column="qrLeft"    />
+        <result property="qrRight"    column="qrRight"    />
+    </resultMap>
+
+    <sql id="selectBeanCodeScsjVo">
+        select id, plateName, qrLeft, qrRight from bean_code_scsj
+    </sql>
+
+    <!--已实现，暂时不用此方法-->
+    <sql id="selectBeanCodeScsjJg">
+        select plateName
+        from  bean_code_scsj
+        where not exists (
+        select plateName
+        from bean_code_jf
+        where bean_code_scsj.plateName = bean_code_jf.plateName)
+    </sql>
+
+    <!--对比结果-->
+    <select id="selectBeanCodeScsjJgList" parameterType="BeanCodeScsj" resultMap="BeanCodeScsjResult">
+        <include refid="selectBeanCodeScsjJg"/>
+    </select>
+
+    <select id="selectBeanCodeScsjList" parameterType="BeanCodeScsj" resultMap="BeanCodeScsjResult">
+        <include refid="selectBeanCodeScsjVo"/>
+        <where>  
+            <if test="plateName != null  and plateName != ''"> and plateName like concat('%', #{plateName}, '%')</if>
+            <if test="qrLeft != null  and qrLeft != ''"> and qrLeft = #{qrLeft}</if>
+            <if test="qrRight != null  and qrRight != ''"> and qrRight = #{qrRight}</if>
+        </where>
+    </select>
+    
+    <select id="selectBeanCodeScsjById" parameterType="Long" resultMap="BeanCodeScsjResult">
+        <include refid="selectBeanCodeScsjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBeanCodeScsj" parameterType="BeanCodeScsj" useGeneratedKeys="true" keyProperty="id">
+        insert into bean_code_scsj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="plateName != null">plateName,</if>
+            <if test="qrLeft != null">qrLeft,</if>
+            <if test="qrRight != null">qrRight,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="plateName != null">#{plateName},</if>
+            <if test="qrLeft != null">#{qrLeft},</if>
+            <if test="qrRight != null">#{qrRight},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBeanCodeScsj" parameterType="BeanCodeScsj">
+        update bean_code_scsj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="plateName != null">plateName = #{plateName},</if>
+            <if test="qrLeft != null">qrLeft = #{qrLeft},</if>
+            <if test="qrRight != null">qrRight = #{qrRight},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBeanCodeScsjById" parameterType="Long">
+        delete from bean_code_scsj where id = #{id}
+    </delete>
+
+    <delete id="deleteBeanCodeScsjByIds" parameterType="String">
+        delete from bean_code_scsj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--王博：一键删除全部-->
+    <delete id="deleteAllscsjBeanCode" parameterType="BeanCodeScsj">
+    delete from bean_code_scsj
+    where 1=1
+    </delete>
+
+</mapper>

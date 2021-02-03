@@ -36,6 +36,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select sales_order_id, buyer_hq_code, sale_order_num, vendor_code, buyer_company_code, buyer_company_name, buyer_company_province, category_code, kind_code, sale_order_status, sale_orderitem_num, purchase_orderitem_id, meterial_code, meterial_name, meterial_unit, meterial_num, data_owner, data_visible, data_source, datasource_create_time, yl, yl2, yl3, yl4, yl5 from sales_order
     </sql>
 
+    <sql id="selectSalesOrderID">
+        select sale_order_num
+        from sales_order
+    </sql>
+
+    <!--查询销售订单编号-->
+    <select id="selectSalesOrderId" parameterType="SalesOrder" resultMap="SalesOrderResult">
+        <include refid="selectSalesOrderID"/>
+    </select>
+
+
+
     <select id="selectSalesOrderList" parameterType="SalesOrder" resultMap="SalesOrderResult">
         <include refid="selectSalesOrderVo"/>
         <where>  

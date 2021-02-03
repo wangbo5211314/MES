@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('采购订单列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>采购单号：</label>
+                                <input type="text" name="purOrderNum"/>
+                            </li>
+                            <li>
+                                <label>采购单名：</label>
+                                <input type="text" name="purOrderName"/>
+                            </li>
+                            <li hidden>
+                                <label>BOM编号：</label>
+                                <input type="text" name="bomYlId"/>
+                            </li>
+                            <li hidden>
+                                <label>bom物料名称：</label>
+                                <input type="text" name="bomMatName"/>
+                            </li>
+                            <li hidden>
+                                <label>bom规格型号：</label>
+                                <select name="bomModelType" th:with="type=${@dict.getType('tec_sche_bom_ggxh')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li hidden>
+                                <label>bom色号：</label>
+                                <input type="text" name="bomColorNum"/>
+                            </li>
+                            <li hidden>
+                                <label>bom材质：</label>
+                                <input type="text" name="bomMaterial"/>
+                            </li>
+                            <li hidden>
+                                <label>bom规格单位：</label>
+                                <input type="text" name="bomSpetUnits"/>
+                            </li>
+                            <li hidden>
+                                <label>bom生产用量：</label>
+                                <input type="text" name="bomPudtUseNum"/>
+                            </li>
+                            <li hidden>
+                                <label>bom计价单位：</label>
+                                <input type="text" name="bomValuUnits"/>
+                            </li>
+                            <li hidden>
+                                <label>需采购数量：</label>
+                                <input type="text" name="xcgNum"/>
+                            </li>
+                            <li hidden>
+                                <label>供货单位：</label>
+                                <input type="text" name="supplyUnit"/>
+                            </li>
+                           <li class="select-time">
+                                <label>预计交货日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginSupplyDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endSupplyDate]"/>
+                            </li>
+                            <!--<li class="select-time">
+                                <label>交货日期：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDeliveryDate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDeliveryDate]"/>
+                            </li>-->
+                            <li hidden>
+                                <label>供货联系人：</label>
+                                <input type="text" name="supplyPerple"/>
+                            </li>
+                            <li hidden>
+                                <label>供货商联系电话：</label>
+                                <input type="text" name="supplyPhoneNum"/>
+                            </li>
+                            <li hidden>
+                                <label>收货地址：</label>
+                                <input type="text" name="receiptAddress"/>
+                            </li>
+                            <li hidden>
+                                <label>子合同编号：</label>
+                                <input type="text" name="saleOrderNum"/>
+                            </li>
+                            <li hidden>
+                                <label>子合同名称：</label>
+                                <input type="text" name="saleOrderName"/>
+                            </li>
+                           <!-- <li class="select-time"  hidden>
+                                <label>创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreateTime]"/>
+                            </li>-->
+                            <li hidden>
+                                <label>创建人：</label>
+                                <input type="text" name="createBy"/>
+                            </li>
+                            <!--<li class="select-time"  hidden>
+                                <label>更新时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginUpdateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endUpdateTime]"/>
+                            </li>-->
+                            <li hidden>
+                                <label>备注：</label>
+                                <input type="text" name="note"/>
+                            </li>
+                            <li hidden>
+                                <label>更新人：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li hidden>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li hidden>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li hidden>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li hidden>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="PurcManage:purcorder:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="PurcManage:purcorder:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="PurcManage:purcorder:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="PurcManage:purcorder:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('PurcManage:purcorder:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('PurcManage:purcorder:remove')}]];
+        var bomModelTypeDatas = [[${@dict.getType('tec_sche_bom_ggxh')}]];
+        var prefix = ctx + "PurcManage/purcorder";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "采购订单",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'id',
+                    title: '采购订单ID',
+                    visible: false
+                },
+                {
+                    field: 'purOrderNum',
+                    title: '采购单号'
+                },
+                {
+                    field: 'purOrderName',
+                    title: '采购单名称'
+                },
+                {
+                    field: 'bomYlId',
+                    title: 'BOM编号'
+                },
+                {
+                    field: 'bomMatName',
+                    title: 'bom物料名称'
+                },
+                {
+                    field: 'bomModelType',
+                    title: 'bom规格型号',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(bomModelTypeDatas, value);
+                    }
+                },
+                {
+                    field: 'bomColorNum',
+                    title: 'bom色号'
+                },
+                {
+                    field: 'bomMaterial',
+                    title: 'bom材质'
+                },
+                {
+                    field: 'bomSpetUnits',
+                    title: 'bom规格单位'
+                },
+                {
+                    field: 'bomPudtUseNum',
+                    title: 'bom生产用量'
+                },
+                {
+                    field: 'bomValuUnits',
+                    title: 'bom计价单位'
+                },
+                {
+                    field: 'xcgNum',
+                    title: '需采购数量'
+                },
+                {
+                    field: 'supplyUnit',
+                    title: '供货单位'
+                },
+                {
+                    field: 'supplyDate',
+                    title: '预计交货日期'
+                },
+                /*{
+                    field: 'deliveryDate',
+                    title: '交货日期'
+                },*/
+                {
+                    field: 'supplyPerple',
+                    title: '供货联系人'
+                },
+                {
+                    field: 'supplyPhoneNum',
+                    title: '供货商联系电话'
+                },
+                {
+                    field: 'receiptAddress',
+                    title: '收货地址'
+                },
+                {
+                    field: 'saleOrderNum',
+                    title: '子合同编号'
+                },
+                {
+                    field: 'saleOrderName',
+                    title: '子合同名称'
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间'
+                },
+                {
+                    field: 'createBy',
+                    title: '创建人'
+                },
+                {
+                    field: 'updateTime',
+                    title: '更新时间'
+                },
+                {
+                    field: 'yl',
+                    title: '更新人',
+                },
+                {
+                    field: 'note',
+                    title: '备注'
+                },
+
+                {
+                    field: 'yl2',
+                    title: '预留',
+                    visible: false
+                },
+                {
+                    field: 'yl3',
+                    title: '预留',
+                    visible: false
+                },
+                {
+                    field: 'yl4',
+                    title: '预留',
+                    visible: false
+                },
+                {
+                    field: 'yl5',
+                    title: '预留',
+                    visible: false
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

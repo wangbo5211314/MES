@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tecsche.mapper.TecScheBomMapper">
+    
+    <resultMap type="TecScheBom" id="TecScheBomResult">
+        <result property="bomId"    column="Bom_id"    />
+        <result property="saleOrderNum"    column="sale_order_num"    />
+        <result property="saleOrderName"    column="sale_order_name"    />
+        <result property="matName"    column="mat_name"    />
+        <result property="modelType"    column="model_type"    />
+        <result property="material"    column="material"    />
+        <result property="colorNum"    column="color_num"    />
+        <result property="spetUnits"    column="spet_units"    />
+        <result property="pudtUseNum"    column="pudt_use_num"    />
+        <result property="valuUnits"    column="valu_units"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+    </resultMap>
+
+    <sql id="selectTecScheBomVo">
+        select Bom_id, sale_order_num, sale_order_name, mat_name, model_type, material, color_num, spet_units, pudt_use_num, valu_units, yl, yl2, yl3, yl4, yl5 from tec_sche_bom
+    </sql>
+
+    <select id="selectTecScheBomList" parameterType="TecScheBom" resultMap="TecScheBomResult">
+        <include refid="selectTecScheBomVo"/>
+        <where>  
+            <if test="saleOrderNum != null  and saleOrderNum != ''"> and sale_order_num = #{saleOrderNum}</if>
+            <if test="saleOrderName != null  and saleOrderName != ''"> and sale_order_name like concat('%', #{saleOrderName}, '%')</if>
+            <if test="matName != null  and matName != ''"> and mat_name like concat('%', #{matName}, '%')</if>
+            <if test="modelType != null  and modelType != ''"> and model_type = #{modelType}</if>
+            <if test="material != null  and material != ''"> and material = #{material}</if>
+            <if test="colorNum != null  and colorNum != ''"> and color_num = #{colorNum}</if>
+            <if test="spetUnits != null  and spetUnits != ''"> and spet_units = #{spetUnits}</if>
+            <if test="pudtUseNum != null "> and pudt_use_num = #{pudtUseNum}</if>
+            <if test="valuUnits != null  and valuUnits != ''"> and valu_units = #{valuUnits}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+        </where>
+    </select>
+    
+    <select id="selectTecScheBomById" parameterType="Long" resultMap="TecScheBomResult">
+        <include refid="selectTecScheBomVo"/>
+        where Bom_id = #{bomId}
+    </select>
+        
+    <insert id="insertTecScheBom" parameterType="TecScheBom" useGeneratedKeys="true" keyProperty="bomId">
+        insert into tec_sche_bom
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="saleOrderNum != null">sale_order_num,</if>
+            <if test="saleOrderName != null">sale_order_name,</if>
+            <if test="matName != null">mat_name,</if>
+            <if test="modelType != null">model_type,</if>
+            <if test="material != null">material,</if>
+            <if test="colorNum != null">color_num,</if>
+            <if test="spetUnits != null">spet_units,</if>
+            <if test="pudtUseNum != null">pudt_use_num,</if>
+            <if test="valuUnits != null">valu_units,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="saleOrderNum != null">#{saleOrderNum},</if>
+            <if test="saleOrderName != null">#{saleOrderName},</if>
+            <if test="matName != null">#{matName},</if>
+            <if test="modelType != null">#{modelType},</if>
+            <if test="material != null">#{material},</if>
+            <if test="colorNum != null">#{colorNum},</if>
+            <if test="spetUnits != null">#{spetUnits},</if>
+            <if test="pudtUseNum != null">#{pudtUseNum},</if>
+            <if test="valuUnits != null">#{valuUnits},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTecScheBom" parameterType="TecScheBom">
+        update tec_sche_bom
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="saleOrderNum != null">sale_order_num = #{saleOrderNum},</if>
+            <if test="saleOrderName != null">sale_order_name = #{saleOrderName},</if>
+            <if test="matName != null">mat_name = #{matName},</if>
+            <if test="modelType != null">model_type = #{modelType},</if>
+            <if test="material != null">material = #{material},</if>
+            <if test="colorNum != null">color_num = #{colorNum},</if>
+            <if test="spetUnits != null">spet_units = #{spetUnits},</if>
+            <if test="pudtUseNum != null">pudt_use_num = #{pudtUseNum},</if>
+            <if test="valuUnits != null">valu_units = #{valuUnits},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+        </trim>
+        where Bom_id = #{bomId}
+    </update>
+
+    <delete id="deleteTecScheBomById" parameterType="Long">
+        delete from tec_sche_bom where Bom_id = #{bomId}
+    </delete>
+
+    <delete id="deleteTecScheBomByIds" parameterType="String">
+        delete from tec_sche_bom where Bom_id in 
+        <foreach item="bomId" collection="array" open="(" separator="," close=")">
+            #{bomId}
+        </foreach>
+    </delete>
+
+</mapper>

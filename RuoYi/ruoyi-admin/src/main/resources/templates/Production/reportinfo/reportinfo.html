@@ -10,23 +10,23 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
-                            <li>
+                            <li hidden>
                                 <label>采购方总部编码：</label>
                                 <input type="text" name="buyerHqCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>供应商编码：</label>
                                 <input type="text" name="suplCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>生产订单编号：</label>
                                 <input type="text" name="prdtOrderNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>产品内部ID号：</label>
                                 <input type="text" name="prdtInsidNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>设备编号：</label>
                                 <input type="text" name="eqmtNum"/>
                             </li>
@@ -34,27 +34,27 @@
                                 <label>生产批次号：</label>
                                 <input type="text" name="prdtBatchNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>工序名称：</label>
                                 <input type="text" name="prcesName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>品类编码：</label>
                                 <input type="text" name="categCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>种类编码：</label>
                                 <input type="text" name="typeCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>工序编码：</label>
                                 <input type="text" name="prcesCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>生产工艺路线编码：</label>
                                 <input type="text" name="prdtRouteCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>生产车间id：</label>
                                 <input type="text" name="prdtShopId"/>
                             </li>
@@ -70,63 +70,63 @@
                                 <label>生产工单编号：</label>
                                 <input type="text" name="prdtWorderNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>实物id：</label>
                                 <input type="text" name="pyscId"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据来源：</label>
                                 <select name="dataSour" th:with="type=${@dict.getType('prdt_repo_datasource')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li class="select-time">
+                            <li class="select-time" hidden>
                                 <label>来源数据创建时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginSourdataCretTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endSourdataCretTime]"/>
                             </li>
-                            <li class="select-time">
+                            <li class="select-time" hidden>
                                 <label>计划开始时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanStartTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanStartTime]"/>
                             </li>
-                            <li class="select-time">
+                            <li class="select-time" hidden>
                                 <label>计划结束时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginPlanEndTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endPlanEndTime]"/>
                             </li>
-                            <li class="select-time">
+                            <li class="select-time" hidden>
                                 <label>实际开始时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuStartTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuStartTime]"/>
                             </li>
-                            <li class="select-time">
+                            <li class="select-time" hidden>
                                 <label>实际结束时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginActuEndTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endActuEndTime]"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>订单状态：</label>
                                 <input type="text" name="orderStatus"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>客户所属省份：</label>
                                 <select name="cstmProvince" th:with="type=${@dict.getType('prdt_repo_cusprov')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据拥有方：</label>
                                 <input type="text" name="dataOwner"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据可见方：</label>
                                 <input type="text" name="dataVisible"/>
                             </li>

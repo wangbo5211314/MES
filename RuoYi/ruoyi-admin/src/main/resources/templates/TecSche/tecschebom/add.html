@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增BOM清单')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content" th:with="sodlist=${@salesorder.selectSalesOrderList(salesOrder)}">
+        <form class="form-horizontal m" id="form-tecschebom-add">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">BOM编号：</label>
+                <div class="col-sm-8">
+                    <input name="yl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">子合同编号：</label>
+                <!--<div class="col-sm-8">
+                    <input name="saleOrderNum" class="form-control" type="text">
+                </div>-->
+                <div class="col-sm-8">
+                    <select name="saleOrderNum" class="form-control m-b saleSelect" required>
+                    <option value="">《---请选择---》</option>
+                    <option th:each="sd : ${sodlist}" th:text="${'子合同编号为：'+sd.getSaleOrderNum()+'，对应的子合同名称为：'+sd.getYl()}" th:value="${sd.getSaleOrderNum()}" th:haha="${sd.getYl()}"></option>
+                </select>
+                </div>
+
+
+            </div>
+          <div class="form-group">
+                <label class="col-sm-3 control-label">自合同名称：</label>
+                <div class="col-sm-8"  >
+                    <input name="saleOrderName" class="form-control saleName" readonly="readonly" >
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">物料名称：</label>
+                <div class="col-sm-8">
+                    <input name="matName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">规格型号：</label>
+                <div class="col-sm-8">
+                    <select name="modelType" class="form-control m-b" th:with="type=${@dict.getType('tec_sche_bom_ggxh')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">材质：</label>
+                <div class="col-sm-8">
+                    <input name="material" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">色号：</label>
+                <div class="col-sm-8">
+                    <input name="colorNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">规格单位：</label>
+                <div class="col-sm-8">
+                    <input name="spetUnits" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生产用量：</label>
+                <div class="col-sm-8">
+                    <input name="pudtUseNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计价单位：</label>
+                <div class="col-sm-8">
+                    <input name="valuUnits" class="form-control" type="text">
+                </div>
+            </div>
+            <!--
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "TecSche/tecschebom"
+        $("#form-tecschebom-add").validate({
+            focusCleanup: true
+        });
+
+        /*获取select里销售订单号的值显示至出来*/
+        $(".saleSelect").change(function(){
+            var xx = $(this).children('option:selected').val()
+            var bb = $(this).children('option:selected').attr('haha')
+            console.log(bb)
+            $(".saleName").val(bb)
+
+
+        })
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-tecschebom-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

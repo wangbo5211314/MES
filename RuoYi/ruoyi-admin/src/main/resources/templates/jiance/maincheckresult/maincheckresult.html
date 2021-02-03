@@ -18,19 +18,19 @@
                                 <label>设备编号：</label>
                                 <input type="text" name="device"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>条码：</label>
                                 <input type="text" name="barcode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>工位号：</label>
                                 <input type="text" name="gw"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>结论：</label>
                                 <input type="text" name="result"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>不合格原因：</label>
                                 <input type="text" name="veryReason"/>
                             </li>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <!--<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="jiance:maincheckresult:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="jiance:maincheckresult:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
                 <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="jiance:maincheckresult:edit">
@@ -58,7 +58,7 @@
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="jiance:maincheckresult:remove">
                     <i class="fa fa-remove"></i> 删除
-                </a>-->
+                </a>
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="jiance:maincheckresult:export">
                     <i class="fa fa-download"></i> 导出
                 </a>

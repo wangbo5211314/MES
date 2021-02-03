@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.order.domain.SalesOrder;
 import com.ruoyi.order.service.ISalesOrderService;
+import com.ruoyi.tecsche.domain.TecScheBom;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,9 +53,37 @@ public class SalesOrderController extends BaseController
     public TableDataInfo list(SalesOrder salesOrder)
     {
         startPage();
+
         List<SalesOrder> list = salesOrderService.selectSalesOrderList(salesOrder);
+
+        /*测试list里的数据*/
+        for (SalesOrder sod1:list
+             ) {
+
+            System.out.println("销售订单号："+sod1.getSaleOrderNum());
+        }
+
         return getDataTable(list);
     }
+
+    /**
+     * 查询销售订单列表
+     */
+   /* @RequiresPermissions("Order:saleorder:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public SalesOrder list(SalesOrder salesOrder)
+    {
+
+        List<SalesOrder> list = salesOrderService.selectSalesOrderList(salesOrder);
+        //System.out.println(list);
+
+        for (SalesOrder sod:list
+             ) {
+            System.out.println("销售订单号："+sod.getSaleOrderNum());
+        }
+        return salesOrder;
+    }*/
 
     /**
      * 导出销售订单列表

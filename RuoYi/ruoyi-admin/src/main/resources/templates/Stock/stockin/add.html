@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增入库单')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content" th:with="cgddlist=${@cgddList.selectPurcOrderList(purcOrder)}">
+        <form class="form-horizontal m" id="form-stockin-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">入库单号：</label>
+                <div class="col-sm-8">
+                    <input name="stockNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">入库单名称：</label>
+                <div class="col-sm-8">
+                    <input name="stockName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">入库材料名称：</label>
+                <div class="col-sm-8">
+                    <input name="stockMateName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">入库材料数量：</label>
+                <div class="col-sm-8">
+                    <input name="stockMateNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">总库存数量：</label>
+                <div class="col-sm-8">
+                    <input name="ylint" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计量单位：</label>
+                <div class="col-sm-8">
+                    <input name="stockMateUnit" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单编号：</label>
+                <!--<div class="col-sm-8">
+                    <input name="cgddNum" class="form-control" type="text">
+                </div>-->
+                <div class="col-sm-8">
+                    <select  name="cgddNum" class="form-control m-b cgddbh" required>
+                        <!--<option value="">《-&#45;&#45;请选择-&#45;&#45;》</option>-->
+                        <option  th:each="cgdd : ${cgddlist}" th:text="${cgdd.getPurOrderNum()}" th:value="${cgdd.getPurOrderNum()}" th:cgddmc="${cgdd.getPurOrderName()}" th:bombh="${cgdd.getBomYlId()}" th:bomwlmc="${cgdd.getBomMatName()}" th:ghdw="${cgdd.getSupplyUnit()}" th:ghrq="${cgdd.getSupplyDate()}" th:jhrq="${cgdd.getDeliveryDate()}" th:ghlxr="${cgdd.getSupplyPerple()}" th:ghslxdh="${cgdd.getSupplyPhoneNum()}" th:shdz="${cgdd.getReceiptAddress()}" th:xsddh="${cgdd.getSaleOrderNum()}" th:xsddmc="${cgdd.getSaleOrderName()}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">采购订单名称：</label>
+                <div class="col-sm-8">
+                    <input name="cgddName" class="form-control cgddName" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">BOM编号：</label>
+                <div class="col-sm-8">
+                    <input name="bomYlId" class="form-control bomYlId" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom物料名称：</label>
+                <div class="col-sm-8">
+                    <input name="bomMatName" class="form-control bomMatName" type="text" readonly>
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">bom规格型号：</label>
+                <div class="col-sm-8">
+                    <input name="bomModelType" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom色号：</label>
+                <div class="col-sm-8">
+                    <input name="bomColorNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom材质：</label>
+                <div class="col-sm-8">
+                    <input name="bomMaterial" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom规格单位：</label>
+                <div class="col-sm-8">
+                    <input name="bomSpetUnits" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom生产用量：</label>
+                <div class="col-sm-8">
+                    <input name="bomPudtUseNum" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">bom计价单位：</label>
+                <div class="col-sm-8">
+                    <input name="bomValuUnits" class="form-control" type="text">
+                </div>
+            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货单位：</label>
+                <div class="col-sm-8">
+                    <input name="supplyUnit" class="form-control supplyUnit" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="supplyDate" class="form-control supplyDate"  placeholder="yyyy-MM-dd" type="text" readonly>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">交货日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="deliveryDate" class="form-control deliveryDate" placeholder="yyyy-MM-dd" type="text" readonly>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货联系人：</label>
+                <div class="col-sm-8">
+                    <input name="supplyPerple" class="form-control supplyPerple" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供货商联系电话：</label>
+                <div class="col-sm-8">
+                    <input name="supplyPhoneNum" class="form-control supplyPhoneNum" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收货地址：</label>
+                <div class="col-sm-8">
+                    <input name="receiptAddress" class="form-control receiptAddress" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">销售订单号：</label>
+                <div class="col-sm-8">
+                    <input name="saleOrderNum" class="form-control saleOrderNum" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">销售订单名称：</label>
+                <div class="col-sm-8">
+                    <input name="saleOrderName" class="form-control saleOrderName" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="note" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="yl5" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留int：</label>
+                <div class="col-sm-8">
+                    <input name="ylint2" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "Stock/stockin"
+        $("#form-stockin-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-stockin-add').serialize());
+            }
+        }
+
+        $("input[name='supplyDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='deliveryDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        /*获取日期之后格式化*/
+        Date.prototype.format = function(formatStr){
+            var str = formatStr;
+            str=str.replace(/yyyy|YYYY/,this.getFullYear());
+            str=str.replace(/MM/,(this.getMonth()+1)>9?(this.getMonth()+1).toString():'0' + (this.getMonth()+1));
+            str=str.replace(/dd|DD/,this.getDate()>9?this.getDate().toString():'0' + this.getDate());
+            return str;
+        }
+        /*选择采购订单后，对零列表的值自动获取到*/
+        $(".cgddbh").change(function () {
+            var cgddmc = $(this).children('option:selected').attr('cgddmc')
+            var bombh = $(this).children('option:selected').attr('bombh')
+            var bomwlmc = $(this).children('option:selected').attr('bomwlmc')
+            var ghdw = $(this).children('option:selected').attr('ghdw')
+            var ghrq = $(this).children('option:selected').attr('ghrq')
+            var jhrq = $(this).children('option:selected').attr('jhrq')
+            var ghlxr = $(this).children('option:selected').attr('ghlxr')
+            var ghslxdh = $(this).children('option:selected').attr('ghslxdh')
+            var shdz = $(this).children('option:selected').attr('shdz')
+            var xsddh = $(this).children('option:selected').attr('xsddh')
+            var xsddmc = $(this).children('option:selected').attr('xsddmc')
+
+            var jhrg2 =new Date(jhrq).format('yyyy-MM-dd')
+            var ghrq2 =new Date(ghrq).format('yyyy-MM-dd')
+            $(".cgddName").val(cgddmc)
+            $(".bomYlId").val(bombh)
+            $(".bomMatName").val(bomwlmc)
+            $(".supplyUnit").val(ghdw)
+            $(".supplyDate").val(ghrq2)
+            $(".deliveryDate").val(jhrg2)
+            $(".supplyPerple").val(ghlxr)
+            $(".supplyPhoneNum").val(ghslxdh)
+            $(".receiptAddress").val(shdz)
+            $(".saleOrderNum").val(xsddh)
+            $(".saleOrderName").val(xsddmc)
+
+        })
+    </script>
+</body>
+</html>

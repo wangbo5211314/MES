@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('BOM清单列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>子合同号：</label>
+                                <input type="text" name="saleOrderNum"/>
+                            </li>
+                           <!-- <li>
+                                <label>销售订单编号：</label>
+                                <select name="saleOrderNum" th:with="type=${@SalesOrder.selectSalesOrderById('tec_sche_bom_ggxh')}">
+                                    <option value="">所有</option>
+                                    <option th:each="SalesOrder : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>-->
+                            <li>
+                                <label>子合同名：</label>
+                                <input type="text" name="saleOrderName"/>
+                            </li>
+                            <li>
+                                <label>物料名称：</label>
+                                <input type="text" name="matName"/>
+                            </li>
+                            <li>
+                                <label>规格型号：</label>
+                                <select name="modelType" th:with="type=${@dict.getType('tec_sche_bom_ggxh')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>材质：</label>
+                                <input type="text" name="material"/>
+                            </li>
+                            <!-- <li>
+                                <label>色号：</label>
+                                <input type="text" name="colorNum"/>
+                            </li>
+                           <li>
+                                <label>规格单位：</label>
+                                <input type="text" name="spetUnits"/>
+                            </li>
+                            <li>
+                                <label>生产用量：</label>
+                                <input type="text" name="pudtUseNum"/>
+                            </li>
+                            <li>
+                                <label>计价单位：</label>
+                                <input type="text" name="valuUnits"/>
+                            </li>-->
+                            <!--<li>
+                                <label>预留：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl2"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl3"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl4"/>
+                            </li>
+                            <li>
+                                <label>预留：</label>
+                                <input type="text" name="yl5"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="TecSche:tecschebom:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="TecSche:tecschebom:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="TecSche:tecschebom:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="TecSche:tecschebom:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('TecSche:tecschebom:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('TecSche:tecschebom:remove')}]];
+        var modelTypeDatas = [[${@dict.getType('tec_sche_bom_ggxh')}]];
+        var prefix = ctx + "TecSche/tecschebom";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "BOM清单",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'bomId',
+                    title: '表id',
+                    visible: false
+                },
+                {
+                    field: 'yl',
+                    title: 'BOM编号'
+                },
+                {
+                    field: 'saleOrderNum',
+                    title: '子合同编号'
+                },
+                {
+                    field: 'saleOrderName',
+                    title: '子合同名称'
+                },
+                {
+                    field: 'matName',
+                    title: '物料名称'
+                },
+                {
+                    field: 'modelType',
+                    title: '规格型号',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(modelTypeDatas, value);
+                    }
+                },
+                {
+                    field: 'material',
+                    title: '材质'
+                },
+                {
+                    field: 'colorNum',
+                    title: '色号'
+                },
+                {
+                    field: 'spetUnits',
+                    title: '规格单位'
+                },
+                {
+                    field: 'pudtUseNum',
+                    title: '生产用量'
+                },
+                {
+                    field: 'valuUnits',
+                    title: '计价单位'
+                },
+
+                    /*{
+                        field: 'yl2',
+                        title: '预留'
+                    },
+                    {
+                        field: 'yl3',
+                        title: '预留'
+                    },
+                    {
+                        field: 'yl4',
+                        title: '预留'
+                    },
+                    {
+                        field: 'yl5',
+                        title: '预留'
+                    },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.bomId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.bomId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

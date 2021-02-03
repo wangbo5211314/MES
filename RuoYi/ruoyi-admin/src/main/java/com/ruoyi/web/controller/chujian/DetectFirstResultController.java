@@ -46,7 +46,7 @@ public class DetectFirstResultController extends BaseController
     /**
      * 查询初校列表
      */
-    @RequiresPermissions("chujian:firstresult:list")
+    /*@RequiresPermissions("chujian:firstresult:list")*/
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(DetectFirstResult detectFirstResult)

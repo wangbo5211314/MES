@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.jcfinprdt.mapper.JcFinPrdtMapper">
+    
+    <resultMap type="JcFinPrdt" id="JcFinPrdtResult">
+        <result property="cpjcbId"    column="cpjcb_id"    />
+        <result property="cpjcNum"    column="cpjc_num"    />
+        <result property="cpjcName"    column="cpjc_name"    />
+        <result property="cpNum"    column="cp_num"    />
+        <result property="cpName"    column="cp_name"    />
+        <result property="saleOrderNum"    column="sale_order_num"    />
+        <result property="saleOrderName"    column="sale_order_name"    />
+        <result property="pcdNum"    column="pcd_num"    />
+        <result property="pcdName"    column="pcd_name"    />
+        <result property="badPrdtName"    column="bad_prdt_name"    />
+        <result property="note"    column="note"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+        <result property="ylint1"    column="ylint1"    />
+        <result property="ylint2"    column="ylint2"    />
+    </resultMap>
+
+    <sql id="selectJcFinPrdtVo">
+        select cpjcb_id, cpjc_num, cpjc_name, cp_num, cp_name, sale_order_num, sale_order_name, pcd_num, pcd_name, bad_prdt_name, note, create_time, create_by, update_time, update_by, yl, yl2, yl3, yl4, yl5, ylint1, ylint2 from jc_fin_prdt
+    </sql>
+
+    <select id="selectJcFinPrdtList" parameterType="JcFinPrdt" resultMap="JcFinPrdtResult">
+        <include refid="selectJcFinPrdtVo"/>
+        <where>  
+            <if test="cpjcNum != null  and cpjcNum != ''"> and cpjc_num = #{cpjcNum}</if>
+            <if test="cpjcName != null  and cpjcName != ''"> and cpjc_name like concat('%', #{cpjcName}, '%')</if>
+            <if test="cpNum != null  and cpNum != ''"> and cp_num = #{cpNum}</if>
+            <if test="cpName != null  and cpName != ''"> and cp_name like concat('%', #{cpName}, '%')</if>
+            <if test="saleOrderNum != null  and saleOrderNum != ''"> and sale_order_num = #{saleOrderNum}</if>
+            <if test="saleOrderName != null  and saleOrderName != ''"> and sale_order_name like concat('%', #{saleOrderName}, '%')</if>
+            <if test="pcdNum != null  and pcdNum != ''"> and pcd_num = #{pcdNum}</if>
+            <if test="pcdName != null  and pcdName != ''"> and pcd_name like concat('%', #{pcdName}, '%')</if>
+            <if test="badPrdtName != null  and badPrdtName != ''"> and bad_prdt_name like concat('%', #{badPrdtName}, '%')</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+            <if test="ylint1 != null "> and ylint1 = #{ylint1}</if>
+            <if test="ylint2 != null "> and ylint2 = #{ylint2}</if>
+        </where>
+    </select>
+    
+    <select id="selectJcFinPrdtById" parameterType="Long" resultMap="JcFinPrdtResult">
+        <include refid="selectJcFinPrdtVo"/>
+        where cpjcb_id = #{cpjcbId}
+    </select>
+        
+    <insert id="insertJcFinPrdt" parameterType="JcFinPrdt" useGeneratedKeys="true" keyProperty="cpjcbId">
+        insert into jc_fin_prdt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cpjcNum != null">cpjc_num,</if>
+            <if test="cpjcName != null">cpjc_name,</if>
+            <if test="cpNum != null">cp_num,</if>
+            <if test="cpName != null">cp_name,</if>
+            <if test="saleOrderNum != null">sale_order_num,</if>
+            <if test="saleOrderName != null">sale_order_name,</if>
+            <if test="pcdNum != null">pcd_num,</if>
+            <if test="pcdName != null">pcd_name,</if>
+            <if test="badPrdtName != null">bad_prdt_name,</if>
+            <if test="note != null">note,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+            <if test="ylint1 != null">ylint1,</if>
+            <if test="ylint2 != null">ylint2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cpjcNum != null">#{cpjcNum},</if>
+            <if test="cpjcName != null">#{cpjcName},</if>
+            <if test="cpNum != null">#{cpNum},</if>
+            <if test="cpName != null">#{cpName},</if>
+            <if test="saleOrderNum != null">#{saleOrderNum},</if>
+            <if test="saleOrderName != null">#{saleOrderName},</if>
+            <if test="pcdNum != null">#{pcdNum},</if>
+            <if test="pcdName != null">#{pcdName},</if>
+            <if test="badPrdtName != null">#{badPrdtName},</if>
+            <if test="note != null">#{note},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+            <if test="ylint1 != null">#{ylint1},</if>
+            <if test="ylint2 != null">#{ylint2},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJcFinPrdt" parameterType="JcFinPrdt">
+        update jc_fin_prdt
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cpjcNum != null">cpjc_num = #{cpjcNum},</if>
+            <if test="cpjcName != null">cpjc_name = #{cpjcName},</if>
+            <if test="cpNum != null">cp_num = #{cpNum},</if>
+            <if test="cpName != null">cp_name = #{cpName},</if>
+            <if test="saleOrderNum != null">sale_order_num = #{saleOrderNum},</if>
+            <if test="saleOrderName != null">sale_order_name = #{saleOrderName},</if>
+            <if test="pcdNum != null">pcd_num = #{pcdNum},</if>
+            <if test="pcdName != null">pcd_name = #{pcdName},</if>
+            <if test="badPrdtName != null">bad_prdt_name = #{badPrdtName},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+            <if test="ylint1 != null">ylint1 = #{ylint1},</if>
+            <if test="ylint2 != null">ylint2 = #{ylint2},</if>
+        </trim>
+        where cpjcb_id = #{cpjcbId}
+    </update>
+
+    <delete id="deleteJcFinPrdtById" parameterType="Long">
+        delete from jc_fin_prdt where cpjcb_id = #{cpjcbId}
+    </delete>
+
+    <delete id="deleteJcFinPrdtByIds" parameterType="String">
+        delete from jc_fin_prdt where cpjcb_id in 
+        <foreach item="cpjcbId" collection="array" open="(" separator="," close=")">
+            #{cpjcbId}
+        </foreach>
+    </delete>
+
+</mapper>

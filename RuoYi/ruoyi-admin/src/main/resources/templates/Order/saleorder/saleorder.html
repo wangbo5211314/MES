@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('销售订单列表')" />
+    <th:block th:include="include :: header('子合同列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -10,94 +10,95 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
-                            <li>
+                            <li hidden>
                                 <label>采购方总部编码：</label>
                                 <input type="text" name="buyerHqCode"/>
                             </li>
                             <li>
-                                <label>销售订单号：</label>
+                                <label>子合同号：</label>
                                 <input type="text" name="saleOrderNum"/>
                             </li>
                             <li>
+                                <label>子合同名：</label>
+                                <input type="text" name="yl"/>
+                            </li>
+                            <li hidden>
                                 <label>供应商编码：</label>
                                 <input type="text" name="vendorCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购方公司编码：</label>
                                 <input type="text" name="buyerCompanyCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购方公司名称：</label>
                                 <input type="text" name="buyerCompanyName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购方公司省份：</label>
                                 <input type="text" name="buyerCompanyProvince"/>
                             </li>
-                            <li>
-                                <label>品类编码：</label>
+                            <li hidden>
+                                <label hidden>品类编码：</label>
                                 <input type="text" name="categoryCode"/>
                             </li>
-                            <li>
-                                <label>种类编码：</label>
+                            <li hidden>
+                                <label hidden>种类编码：</label>
                                 <input type="text" name="kindCode"/>
                             </li>
-                            <li>
+                            <!--<li>
                                 <label>销售订单状态：</label>
                                 <input type="text" name="saleOrderStatus"/>
-                            </li>
-                            <li>
+                            </li>-->
+                            <li hidden>
                                 <label>销售订单行项目号：</label>
                                 <input type="text" name="saleOrderitemNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购订单行项目ID：</label>
                                 <input type="text" name="purchaseOrderitemId"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资编码：</label>
                                 <input type="text" name="meterialCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资名称：</label>
                                 <input type="text" name="meterialName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资单位：</label>
                                 <select name="meterialUnit" th:with="type=${@dict.getType('order_meterial_unit')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资数量：</label>
                                 <input type="text" name="meterialNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据拥有方：</label>
                                 <input type="text" name="dataOwner"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据可见方：</label>
                                 <input type="text" name="dataVisible"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>数据来源：</label>
                                 <select name="dataSource" th:with="type=${@dict.getType('order_date_source')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li class="select-time">
+                            <li class="select-time"  hidden>
                                 <label>来源数据创建时间：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDatasourceCreateTime]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDatasourceCreateTime]"/>
                             </li>
-                            <!--<li>
-                                <label>预留：</label>
-                                <input type="text" name="yl"/>
-                            </li>
+                            <!--
                             <li>
                                 <label>预留：</label>
                                 <input type="text" name="yl2"/>
@@ -146,8 +147,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('Order:saleorder:edit')}]];
         var removeFlag = [[${@permission.hasPermi('Order:saleorder:remove')}]];
-        var meterialUnitDatas = [[${@dict.getType('order_meterial_unit')}]];
-        var dataSourceDatas = [[${@dict.getType('order_date_source')}]];
+       var meterialUnitDatas = [[${@dict.getType('order_meterial_unit')}]];
+       var dataSourceDatas = [[${@dict.getType('order_date_source')}]];
         var prefix = ctx + "Order/saleorder";
 
         $(function() {
@@ -157,28 +158,36 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "销售订单",
+                modalName: "子合同",
                 columns: [{
                     checkbox: true
                 },
                 {
                     field: 'salesOrderId',
-                    title: '销售订单ID',
+                    title: '子合同ID',
                     visible: false
                 },
                 {
                     field: 'buyerHqCode',
-                    title: '采购方总部编码'
+                    title: '合同编号'
+                },
+                {
+                    field: 'yl2',
+                    title: '合同名称'
                 },
                 {
                     field: 'saleOrderNum',
-                    title: '销售订单号'
+                    title: '子合同编号'
+                },
+                {
+                    field: 'yl',
+                    title: '子合同名称'
                 },
                 {
                     field: 'vendorCode',
                     title: '供应商编码'
                 },
-                {
+                /*{
                     field: 'buyerCompanyCode',
                     title: '采购方公司编码'
                 },
@@ -189,27 +198,27 @@
                 {
                     field: 'buyerCompanyProvince',
                     title: '采购方公司省份'
-                },
-                {
+                },*/
+                /*{
                     field: 'categoryCode',
                     title: '品类编码'
                 },
                 {
                     field: 'kindCode',
                     title: '种类编码'
-                },
+                },*/
                 {
                     field: 'saleOrderStatus',
-                    title: '销售订单状态'
+                    title: '子合同状态'
                 },
-                {
+                /*{
                     field: 'saleOrderitemNum',
                     title: '销售订单行项目号'
-                },
-                {
+                },*/
+                /*{
                     field: 'purchaseOrderitemId',
                     title: '采购订单行项目ID'
-                },
+                },*/
                 {
                     field: 'meterialCode',
                     title: '物资编码'
@@ -229,7 +238,7 @@
                     field: 'meterialNum',
                     title: '物资数量'
                 },
-                {
+                /*{
                     field: 'dataOwner',
                     title: '数据拥有方'
                 },
@@ -243,19 +252,13 @@
                     formatter: function(value, row, index) {
                        return $.table.selectDictLabel(dataSourceDatas, value);
                     }
-                },
+                },*/
                 {
                     field: 'datasourceCreateTime',
                     title: '来源数据创建时间'
                 },
-                /*{
-                    field: 'yl',
-                    title: '预留'
-                },
-                {
-                    field: 'yl2',
-                    title: '预留'
-                },
+
+                /*
                 {
                     field: 'yl3',
                     title: '预留'

@@ -10,15 +10,15 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
-                            <li>
+                            <li hidden>
                                 <label>采购订单编码：</label>
                                 <input type="text" name="purchaseOrderCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购订单行项目号：</label>
                                 <input type="text" name="purchaseOrderItemNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购订单行项目id：</label>
                                 <input type="text" name="purchaseOrderItemId"/>
                             </li>
@@ -30,132 +30,133 @@
                                 <label>合同名称：</label>
                                 <input type="text" name="contractName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购方公司名称：</label>
                                 <input type="text" name="purchaserCompanyName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购方公司编码：</label>
                                 <input type="text" name="purchaserCompanyCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购方物料编码：</label>
                                 <input type="text" name="purchaserMaterialCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购方物料描述：</label>
                                 <input type="text" name="purchaserMaterialDescrip"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购数量：</label>
                                 <input type="text" name="purchaseNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>合同编号(国网经法)：</label>
                                 <input type="text" name="contractNumNn"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>技术规范流水号：</label>
                                 <input type="text" name="technicalFlowNum"/>
                             </li>
                             <li class="select-time">
-                                <label>合同签订日期：</label>
+                                <!--<label>合同签订日期：</label>-->
+                                <label>签订日期：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginContractSignedDate]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endContractSignedDate]"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>合同类型：</label>
                                 <input type="text" name="contractType"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>项目编号：</label>
                                 <input type="text" name="itemNum"/>
                             </li>
-                            <li>
-                                <label>工程项目名称：</label>
+                            <li hidden>
+                                <label>工程项目名：</label>
                                 <input type="text" name="projectName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资编码：</label>
                                 <input type="text" name="materialCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>采购技术固化ID：</label>
                                 <input type="text" name="purchaseTecCuringId"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>合同包号：</label>
                                 <input type="text" name="contractPackageNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>招标批次号：</label>
                                 <input type="text" name="tenderNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>固化ID描述：</label>
                                 <input type="text" name="curingidDescrip"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资大类编码：</label>
                                 <input type="text" name="materialBigCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资中类编码：</label>
                                 <input type="text" name="materialMidCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资小类编码：</label>
                                 <input type="text" name="materialSmallCode"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资大类名称：</label>
                                 <input type="text" name="materialBigName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资中类名称：</label>
                                 <input type="text" name="materialMidName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>物资小类名称：</label>
                                 <input type="text" name="materialSmallName"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>每页条数：</label>
                                 <input type="text" name="numBarsPerPage"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>当前页码：</label>
                                 <input type="text" name="curPageNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>页数：</label>
                                 <input type="text" name="pageNum"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>总记录数：</label>
                                 <input type="text" name="allRecordNum"/>
                             </li>
-                            <!--<li>
+                            <li hidden>
                                 <label>预留：</label>
                                 <input type="text" name="yl"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>预留：</label>
                                 <input type="text" name="yl2"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>预留：</label>
                                 <input type="text" name="yl3"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>预留：</label>
                                 <input type="text" name="yl4"/>
                             </li>
-                            <li>
+                            <li hidden>
                                 <label>预留：</label>
                                 <input type="text" name="yl5"/>
-                            </li>-->
+                            </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -174,6 +175,9 @@
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="Order:orderreturn:remove">
                     <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="Order:orderreturn:import">
+                    <i class="fa fa-upload"></i> 导入
                 </a>
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="Order:orderreturn:export">
                     <i class="fa fa-download"></i> 导出
@@ -197,6 +201,8 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
+                importUrl: prefix + "/importData",
+                importTemplateUrl: prefix + "/importTemplate",
                 modalName: "国网采购订单-返回",
                 columns: [{
                     checkbox: true
@@ -316,40 +322,49 @@
                 },
                 {
                     field: 'numBarsPerPage',
-                    title: '每页条数'
+                    title: '每页条数',
+                    visible: false
                 },
                 {
                     field: 'curPageNum',
-                    title: '当前页码'
+                    title: '当前页码',
+                    visible: false
                 },
                 {
                     field: 'pageNum',
-                    title: '页数'
+                    title: '页数',
+                    visible: false
                 },
                 {
                     field: 'allRecordNum',
-                    title: '总记录数'
+                    title: '总记录数',
+                    visible: false
                 },
-                /*{
+                {
                     field: 'yl',
-                    title: '预留'
+                    title: '预留',
+                    visible: false
                 },
                 {
                     field: 'yl2',
-                    title: '预留'
+                    title: '预留',
+                    visible: false
                 },
                 {
                     field: 'yl3',
-                    title: '预留'
+                    title: '预留',
+                    visible: false
                 },
                 {
                     field: 'yl4',
-                    title: '预留'
+                    title: '预留',
+                    visible: false
                 },
                 {
                     field: 'yl5',
-                    title: '预留'
-                },*/
+                    title: '预留',
+                    visible: false
+                },
                 {
                     title: '操作',
                     align: 'center',
@@ -364,5 +379,22 @@
             $.table.init(options);
         });
     </script>
+
 </body>
+
+<!-- 导入区域 -->
+<script id="importTpl" type="text/template">
+    <form enctype="multipart/form-data" class="mt20 mb10">
+        <div class="col-xs-offset-1">
+            <input type="file" id="file" name="file"/>
+            <div class="mt10 pt5">
+                <input type="checkbox" id="updateSupport" name="updateSupport" title="如果登录账户已经存在，更新这条数据。" hidden><!-- 是否更新已经存在的用户数据 &nbsp;	-->
+                <a onclick="$.table.importTemplate()" class="btn btn-default btn-xs"><i class="fa fa-file-excel-o"></i> 下载模板</a>
+            </div>
+            <font color="red" class="pull-left mt10">
+                提示：仅允许导入“xls”或“xlsx”格式文件！
+            </font>
+        </div>
+    </form>
+</script>
 </html>

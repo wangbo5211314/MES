@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.process.mapper.SpFlowBaseMapper">
+    
+    <resultMap type="SpFlowBase" id="SpFlowBaseResult">
+        <result property="spFlowId"    column="sp_flow_id"    />
+        <result property="flowNum"    column="flow_num"    />
+        <result property="flowName"    column="flow_name"    />
+        <result property="flowDesc"    column="flow_desc"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createUsername"    column="create_username"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateUsername"    column="update_username"    />
+        <result property="yl"    column="yl"    />
+        <result property="yl2"    column="yl2"    />
+        <result property="yl3"    column="yl3"    />
+        <result property="yl4"    column="yl4"    />
+        <result property="yl5"    column="yl5"    />
+        <result property="ylint"    column="ylint"    />
+    </resultMap>
+
+    <sql id="selectSpFlowBaseVo">
+        select sp_flow_id, flow_num, flow_name, flow_desc, create_time, create_username, update_time, update_username, yl, yl2, yl3, yl4, yl5, ylint from sp_flow_base
+    </sql>
+
+    <select id="selectSpFlowBaseList" parameterType="SpFlowBase" resultMap="SpFlowBaseResult">
+        <include refid="selectSpFlowBaseVo"/>
+        <where>  
+            <if test="flowNum != null  and flowNum != ''"> and flow_num = #{flowNum}</if>
+            <if test="flowName != null  and flowName != ''"> and flow_name like concat('%', #{flowName}, '%')</if>
+            <if test="flowDesc != null  and flowDesc != ''"> and flow_desc = #{flowDesc}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="createUsername != null  and createUsername != ''"> and create_username like concat('%', #{createUsername}, '%')</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="updateUsername != null  and updateUsername != ''"> and update_username like concat('%', #{updateUsername}, '%')</if>
+            <if test="yl != null  and yl != ''"> and yl = #{yl}</if>
+            <if test="yl2 != null  and yl2 != ''"> and yl2 = #{yl2}</if>
+            <if test="yl3 != null  and yl3 != ''"> and yl3 = #{yl3}</if>
+            <if test="yl4 != null  and yl4 != ''"> and yl4 = #{yl4}</if>
+            <if test="yl5 != null  and yl5 != ''"> and yl5 = #{yl5}</if>
+            <if test="ylint != null "> and ylint = #{ylint}</if>
+        </where>
+    </select>
+    
+    <select id="selectSpFlowBaseById" parameterType="Long" resultMap="SpFlowBaseResult">
+        <include refid="selectSpFlowBaseVo"/>
+        where sp_flow_id = #{spFlowId}
+    </select>
+        
+    <insert id="insertSpFlowBase" parameterType="SpFlowBase" useGeneratedKeys="true" keyProperty="spFlowId">
+        insert into sp_flow_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="flowNum != null and flowNum != ''">flow_num,</if>
+            <if test="flowName != null">flow_name,</if>
+            <if test="flowDesc != null">flow_desc,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createUsername != null">create_username,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateUsername != null">update_username,</if>
+            <if test="yl != null">yl,</if>
+            <if test="yl2 != null">yl2,</if>
+            <if test="yl3 != null">yl3,</if>
+            <if test="yl4 != null">yl4,</if>
+            <if test="yl5 != null">yl5,</if>
+            <if test="ylint != null">ylint,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="flowNum != null and flowNum != ''">#{flowNum},</if>
+            <if test="flowName != null">#{flowName},</if>
+            <if test="flowDesc != null">#{flowDesc},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createUsername != null">#{createUsername},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateUsername != null">#{updateUsername},</if>
+            <if test="yl != null">#{yl},</if>
+            <if test="yl2 != null">#{yl2},</if>
+            <if test="yl3 != null">#{yl3},</if>
+            <if test="yl4 != null">#{yl4},</if>
+            <if test="yl5 != null">#{yl5},</if>
+            <if test="ylint != null">#{ylint},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSpFlowBase" parameterType="SpFlowBase">
+        update sp_flow_base
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="flowNum != null and flowNum != ''">flow_num = #{flowNum},</if>
+            <if test="flowName != null">flow_name = #{flowName},</if>
+            <if test="flowDesc != null">flow_desc = #{flowDesc},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createUsername != null">create_username = #{createUsername},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUsername != null">update_username = #{updateUsername},</if>
+            <if test="yl != null">yl = #{yl},</if>
+            <if test="yl2 != null">yl2 = #{yl2},</if>
+            <if test="yl3 != null">yl3 = #{yl3},</if>
+            <if test="yl4 != null">yl4 = #{yl4},</if>
+            <if test="yl5 != null">yl5 = #{yl5},</if>
+            <if test="ylint != null">ylint = #{ylint},</if>
+        </trim>
+        where sp_flow_id = #{spFlowId}
+    </update>
+
+    <delete id="deleteSpFlowBaseById" parameterType="Long">
+        delete from sp_flow_base where sp_flow_id = #{spFlowId}
+    </delete>
+
+    <delete id="deleteSpFlowBaseByIds" parameterType="String">
+        delete from sp_flow_base where sp_flow_id in 
+        <foreach item="spFlowId" collection="array" open="(" separator="," close=")">
+            #{spFlowId}
+        </foreach>
+    </delete>
+
+</mapper>

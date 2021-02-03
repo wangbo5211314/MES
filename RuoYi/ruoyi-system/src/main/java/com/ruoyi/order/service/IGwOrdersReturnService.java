@@ -60,4 +60,7 @@ public interface IGwOrdersReturnService
      * @return 结果
      */
     public int deleteGwOrdersReturnById(Long nnReturnId);
+
+    public String importGwordersreturn(List<GwOrdersReturn> gwOrdersReturnsList, Boolean isUpdateSupport);
+
 }

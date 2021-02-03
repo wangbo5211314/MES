@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+
+<script type="text/javascript" src="echarts.min.js"></script>
+
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<div id="mainChart" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+<script type="text/javascript">
+    var dom = document.getElementById("mainChart");
+    var myChart = echarts.init(dom);
+    myChart.clear();
+
+
+    $.ajax({
+        method:'get',
+        url:'http://localhost:8888/wanglk_bds/bar-simple',
+        dataType:'json',
+        success:function(data){
+
+            var option = {
+                xAxis: {
+                    name: '日期',
+                    type: 'category',
+                    data: [data[0].date,
+                        data[1].date,
+                        data[2].date,
+                        data[3].date,
+                        data[4].date,
+                        data[5].date,
+                        data[6].date,
+                        data[7].date,
+                        data[8].date,
+                        data[9].date,
+                        data[10].date,
+                        data[11].date]
+                },
+                yAxis: {
+                    name:'访问量'
+                },
+                series: [{
+
+                    data: [data[0].total,
+                        data[1].total,
+                        data[2].total,
+                        data[3].total,
+                        data[4].total,
+                        data[5].total,
+                        data[6].total,
+                        data[7].total,
+                        data[8].total,
+                        data[9].total,
+                        data[10].total,
+                        data[11].total],
+                    type: 'bar'
+                }]
+            };
+
+
+            myChart.setOption(option, true);
+        }
+    });
+
+</script>
+
+
+</body>
+</html>
+
